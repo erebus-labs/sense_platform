@@ -1,7 +1,6 @@
 sense-platform
 ==============
 #Sensor Platform 
-
 + *Title:* A low-cost, low-power sensor platform with modular sensor addition and base station reprogramming/configuration
 + *Project Short Name:* Open Sensor Platform
 + *Sponsors:* 
