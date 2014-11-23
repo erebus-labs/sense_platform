@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Sense-platform : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Sense-platform</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/erebus-labs/sense-platform">View on GitHub</a>
+
+          <h1 id="project_title">Sense-platform</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/erebus-labs/sense-platform/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/erebus-labs/sense-platform/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="sense-platform" class="anchor" href="#sense-platform" aria-hidden="true"><span class="octicon octicon-link"></span></a>sense-platform</h1>
+
+<h1>
+<a id="sensor-platform" class="anchor" href="#sensor-platform" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sensor Platform</h1>
+
+<ul>
+<li>
+<em>Title:</em> A low-cost, low-power sensor platform with modular sensor addition and base station reprogramming/configuration</li>
+<li>
+<em>Project Short Name:</em> Open Sensor Platform</li>
+<li>
+<em>Sponsors:</em> 
+
+<ul>
+<li>
+<a href="https://www.linkedin.com/in/mborowczak">Dr. Mike Borowczak</a> @ <a href="www.erebuslabs.com">Erebus Labs</a>
+</li>
+<li>
+<a href="http://uwyo.academia.edu/AndreaBurrows">Dr. Andrea Burrows</a> @ <a href="http://www.uwyo.edu/seced/faculty-staff/andrea-burrows.html">University of Wyoming</a>
+</li>
+</ul>
+</li>
+<li>
+<em>Senior Design Team:</em> 
+
+<ul>
+<li>Colten Nye</li>
+<li>J Peirce</li>
+<li>Golriz Sedaghat</li>
+</ul>
+</li>
+<li>
+<em>PSU Academic Advisor:</em> <a href="http://web.cecs.pdx.edu/%7Ezurkl/">Dr. Lisa Zurk</a> </li>
+<li>
+<em>Targeted Users:</em> K-20 students (and families/communities) who want to know about their environment </li>
+</ul>
+
+<h2>
+<a id="problemtask" class="anchor" href="#problemtask" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem/Task</h2>
+
+<p>Current sensor platforms are either completed closed source and expensive or partially open, non-customizable, and trivial. The task at hand is to build a fully contained sensor platform / collection device for $25-$50 USD for at volume runs (development versions would be higher with short PCB runs).  The sensor platform must include the ability to add both sensors (physical components) as well as custom code in an intuitive (GUI?) programming environment.</p>
+
+<h2>
+<a id="background" class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h2>
+
+<p>Current hardware sensor solutions either require programming/electronics experience beyond the reach of many K12 (K20) students, parents, teachers and faculty – or they so turn-key that there is little to no “STEM” required to get a solution up and running. Furthermore, there are currently no “build it yourself” approaches to sensor design. The closest existing solutions revolve around the Arduino platform – though the short coming here is again the abstraction of many of the details as well as the barrier of entry for most K12 students, parents, faculty – especially in mid-large scale deployments in a classroom or a school (&gt;30-1000 units).</p>
+
+<p>In 2013/2014 a first revision Proof of Concept was developed and implemented – this can be used as a starting point once preliminary design investigation has concluded.</p>
+
+<h2>
+<a id="skill-requirements-order-of-importance" class="anchor" href="#skill-requirements-order-of-importance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Skill Requirements (Order of importance):</h2>
+
+<ul>
+<li>embedded System Design {Architecture, Programming}</li>
+<li>Platform Agnostic Program Development (e.g. crossplatform or web UI)</li>
+<li>PCB Layout and Design</li>
+<li>  Communication (BT, Serial, wifi?) </li>
+</ul>
+
+<h2>
+<a id="other-details" class="anchor" href="#other-details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Details:</h2>
+
+<ul>
+<li>  IP Ownership: Joint/”none”: The goal is to release an open hardware device and software; joint ownership of the original design, publicly available for reuse under similar attribution</li>
+<li>  Extension after End of Project: 50-100 parts run to distribute to high-needs schools as a mechanism to enhance/drive STEM as a college degree option.</li>
+<li>  Publication Opportunities: Conference and Journal Publication both in K20 Education, IEEE Spectrum, and/or others (joint ownership: ECE team and Sponsors) [resume/CV builder!]</li>
+<li>  No NDA required. </li>
+</ul>
+
+<h2>
+<a id="requirements-wish-list" class="anchor" href="#requirements-wish-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements (Wish List):</h2>
+
+<h3>
+<a id="must-have" class="anchor" href="#must-have" aria-hidden="true"><span class="octicon octicon-link"></span></a>Must Have</h3>
+
+<ul>
+<li>[ ]   Low hardware cost &lt;$50 per unit</li>
+<li>[ ]   Open Source Hardware Design &amp; Board (can use “closed source” components: ASICs, uC, etc.)
+
+<ul>
+<li>[ ] Must Have a Multi-Chip solution – e.g. no single SoC; split data store</li>
+</ul>
+</li>
+<li>[ ]   Open Software Repository (github)</li>
+<li>[ ]   Built-in basic sensor array (Oxygen, VoC, Accelerometer) + Ability to add at least one sensor</li>
+<li>[ ]   Power:
+
+<ul>
+<li>[ ] Low power operation (3 month duty-cycle; minimum 12 measurements per hour +sync)</li>
+<li>[ ] Built in power source / power pack</li>
+</ul>
+</li>
+<li>[ ]   External Device Tethering/Sync upon physical request</li>
+<li>[ ]Parameterized data collection mechanism
+
+<ul>
+<li>[ ] Set sensor Upper and Lower Thresholds</li>
+<li>[ ]Polling frequency</li>
+<li>[ ] Measurement to Physical Value Translation (they’re not all linear)</li>
+</ul>
+</li>
+<li>[ ] Set of units for each team member and two sponsors</li>
+</ul>
+
+<h3>
+<a id="like-to-have" class="anchor" href="#like-to-have" aria-hidden="true"><span class="octicon octicon-link"></span></a>Like to Have</h3>
+
+<ul>
+<li>[ ]   Hardware cost &lt;$30 per unit</li>
+<li>[ ]   High Humidity Operation</li>
+<li>[ ]   Swappable, Muxable Sensor array +software support</li>
+<li>[ ]   Power
+
+<ul>
+<li>[ ] Ultra-low power operation (6 month duty-cycle; minimum 12 measurements per hour +sync)</li>
+<li>[ ] Built in rechargeable power source / power pack</li>
+</ul>
+</li>
+<li>[ ] Device Tethering/Sync through Bluetooth/wifi in-range</li>
+<li>[ ] High Level API wrapper to control device functionality for novice programmers</li>
+<li>[ ] Partnership building with a local K-12 school; Flexible options include teacher conversations, lesson development, and/or helping with a lesson stemming from this research</li>
+<li>[ ] Set of units for each team member and two sponsors + 5 extra units</li>
+</ul>
+
+<h3>
+<a id="nice-to-have" class="anchor" href="#nice-to-have" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nice to Have</h3>
+
+<ul>
+<li>[ ] Hardware cost &lt;$15 per unit</li>
+<li>[ ] GUI based overlay for API suitable for use by K-8 students</li>
+<li>[ ] Power
+
+<ul>
+<li>[ ] Extremely-low power operation (12 month duty-cycle; minimum 12 measurements per hour +sync)</li>
+<li>[ ] Built in power source w/solar recharge</li>
+</ul>
+</li>
+<li>[ ] Set of units for each team member and two sponsors + 10 extra units (5 to sponsors; 5 to PSU)</li>
+</ul>
+
+<h2>
+<a id="milestones" class="anchor" href="#milestones" aria-hidden="true"><span class="octicon octicon-link"></span></a>Milestones:</h2>
+
+<h3>
+<a id="hardware-evaluation-to-satisfy-given-constraints" class="anchor" href="#hardware-evaluation-to-satisfy-given-constraints" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hardware Evaluation to satisfy given constraints</h3>
+
+<ul>
+<li>[ ] Main System: Modification of existing Open Hardware Design to create part or creation of custom PCB?</li>
+<li>[ ] Power System: Battery capacity + recharge + cycled usage + communication cost?</li>
+<li>[ ] Communication mechanisms: Effective low cost communication and sync (without taxing power source)</li>
+</ul>
+
+<h3>
+<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation</h3>
+
+<ul>
+<li>[ ] Development of full hardware solution (can you detect VoCs &gt; ~0.5 PPM)</li>
+<li>[ ] Develop a [G]UI to [re]program and sync data to/from remote sensing board </li>
+<li>[ ] Development of power system</li>
+<li>[ ] Development of communication system</li>
+<li>[ ] Develop the Android/iOS/PC software for receiving sync data, database/cloud upload, visualization</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Sense-platform maintained by <a href="https://github.com/erebus-labs">erebus-labs</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
