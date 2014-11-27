@@ -5,10 +5,10 @@ sense-platform
 + *Project Short Name:* Open Sensor Platform
 + *Sponsors:* 
   + [Dr. Mike Borowczak](https://www.linkedin.com/in/mborowczak) @ [Erebus Labs](www.erebuslabs.com)
-  + [Dr. Andrea Burrows] (http://uwyo.academia.edu/AndreaBurrows) @ [University of Wyoming] (http://www.uwyo.edu/seced/faculty-staff/andrea-burrows.html)
+  + [Dr. Andrea Burrows] (http://uwyo.academia.edu/AndreaBurrows) @ [University of Wyoming](http://www.uwyo.edu/seced/faculty-staff/andrea-burrows.html)
 + *Senior Design Team:* 
     + Colten Nye
-    + J Peirce
+    + Steve Pierce
     + Golriz Sedaghat
 + *PSU Academic Advisor:* [Dr. Lisa Zurk](http://web.cecs.pdx.edu/~zurkl/) 
 + *Targeted Users:* K-20 students (and families/communities) who want to know about their environment 
