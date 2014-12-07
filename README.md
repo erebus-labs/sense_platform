@@ -33,7 +33,7 @@ In 2013/2014 a first revision Proof of Concept was developed and implemented –
 +	Publication Opportunities: Conference and Journal Publication both in K20 Education, IEEE Spectrum, and/or others (joint ownership: ECE team and Sponsors) [resume/CV builder!]
 +	No NDA required. 
 
-##Requirements (Wish List):
+##Requirements (Wish List): **THIS SECTION SHOULD BE REPLACED BY PSU TEAM BEFORE DESIGN START**
 
 ###Must Have
 + [ ]	Low hardware cost <$50 per unit
@@ -45,9 +45,9 @@ In 2013/2014 a first revision Proof of Concept was developed and implemented –
   + [ ]	Low power operation (3 month duty-cycle; minimum 12 measurements per hour +sync)
   + [ ] Built in power source / power pack
 + [ ]	External Device Tethering/Sync upon physical request
-+ [ ]Parameterized data collection mechanism
++ [ ] Parameterized data collection mechanism
   + [ ] Set sensor Upper and Lower Thresholds
-  + [ ]Polling frequency
+  + [ ] Polling frequency
   + [ ] Measurement to Physical Value Translation (they’re not all linear)
 + [ ] Set of units for each team member and two sponsors
 
