@@ -1,0 +1,20 @@
+#!/bin/bash
+openocd -f /usr/share/openocd/scripts/interface/ftdi/olimex-arm-usb-ocd-h.cfg -f /usr/share/openocd/scripts/target/stm32f2x.cfg
+
+#/usr/share/openocd/scripts/target/stm32f2x_stlink.cfg
+#/usr/share/openocd/scripts/board/olimex_LPC2378STK.cfg
+#/usr/share/openocd/scripts/board/olimex_lpc_h2148.cfg
+#/usr/share/openocd/scripts/board/olimex_sam7_ex256.cfg
+#/usr/share/openocd/scripts/board/olimex_sam9_l9260.cfg
+#/usr/share/openocd/scripts/board/olimex_stm32_h103.cfg
+#/usr/share/openocd/scripts/board/olimex_stm32_h107.cfg
+#/usr/share/openocd/scripts/board/olimex_stm32_p107.cfg
+#/usr/share/openocd/scripts/interface/olimex-arm-usb-ocd-h.cfg
+#/usr/share/openocd/scripts/interface/olimex-arm-usb-ocd.cfg
+#/usr/share/openocd/scripts/interface/olimex-arm-usb-tiny-h.cfg
+#/usr/share/openocd/scripts/interface/olimex-jtag-tiny.cfg
+#/usr/share/openocd/scripts/interface/ftdi/olimex-arm-usb-ocd.cfg
+#/usr/share/openocd/scripts/interface/ftdi/olimex-arm-usb-tiny-h.cfg
+#/usr/share/openocd/scripts/interface/ftdi/olimex-jtag-tiny.cfg
+
+exit 0
