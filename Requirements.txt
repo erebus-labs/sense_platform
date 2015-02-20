@@ -1,0 +1,85 @@
+Erebus Labs
+Sense Platform
+Requirements
+
+By: Colten Nye, Steve Peirce, and Golriz Sedhagat
+
+General Project Description:
+	An inexpensive and accessible device used to collect data points of one or more sense-able physical attributes using one or more sensors.
+
+REQUIREMENTS:
+Function
+	Configuration
+		-  Must: Be able to configure device operating parameters
+			-  Must: Using low level capabilities (write the script)
+			-Should: Using  wrapper (command line functions)
+			-   May: Using High level (GUI)
+		-Should: Reconfigure parameters in the field using a portable computer with USB port.
+		Parameters:
+			-  Must: Polling frequency for each sensor
+			-  Must: Interrupt condition (to take a measurement) for each sensor
+			-Should: Out-of-range threshold(s) for each sensor
+			-Should: Low power indicator threshold
+			-Should: Low storage indicator threshold
+			-Should: Continuous recording Vs. End when out of memory (keep latest data vs. keep first data)
+			-   May: Conditional data logging parameters, e.g.
+				- time window
+				- repeating schedule
+				- conditional on sensor values
+				- conditional on battery level
+	
+	Feedback
+		Device must be able to give feedback for certain conditions
+			-Should: Low power
+			-  Must: Sensor read error
+			-Should: Low storage
+			-Should: Reading out-of-range
+			-  Must: IO busy (do not remove storage device)
+	
+	Data Collection
+		-  Must: Be able to collect values from sensors designed for this system.
+		Number of attached sensors
+			-  Must: 2
+			-Should: 4
+			-   May: 8
+		Storage
+			-  Must: 10 M samples
+			-Should: 100 M samples
+			-   May: 1  B samples
+		Maximum Frequency
+			-  Must: 100 / second
+			-Should: 1   / ms
+			-   May: 10  / ms
+		Minimum Frequency
+			No minimum.
+			
+	Data Retrieval
+		-  Must: Be able to retrieve data
+		-Should: Retrieve data without interrupting service (SD swap)
+		-   May: Be able to retrieve data without physical access to device  (wireless retrieval; note 1)
+		
+	Data Analysis
+		-Should: Translate retrieved values into meaningful values
+		-Should: Provide a simple tutorial on graphing the data in a spreadsheet.
+	
+Power
+	-  Must: be able to be powered by an external power source without risking damage to the device (Note 2)
+
+Unit cost (Unit being defined as the cost of the main device to the end consumer; no sensors or accessories.)
+	-  Must: <$50 per unit
+	-Should: <$30 per unit
+	-   May: <$15 per unit
+
+Misc
+	Open Source
+		-  Must: Open Source Hardware, firmware, and software.
+	Post-design availability
+		-  Must: Units for each team member and each sponsor (5)
+		-Should: +5
+		-   May: +10
+	Community Outreach
+		-Should: Partnership building with a local K-12 school; Flexible options include teacher conversations, lesson development, and/or helping with a lesson stemming from this research
+		
+		
+Note 1: Highly unlikely we will get around to wireless data retrieval by June, but this could be a later improvement.
+Note 2: Since we have decided to power the device externally, in order to set requirements, we would need to base it on using a particular source. 3200mAh battery sounds reasonable, but we need more information and research to come up with even a ballpark estimate of a duty cycle. We don't feel this should warrant obstructing progress at this point. Basically, if it doesn't last long enough in the field, get a bigger battery.
