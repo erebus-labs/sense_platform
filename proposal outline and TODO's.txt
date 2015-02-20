@@ -1,0 +1,105 @@
+Proposal
+	Summary
+		Gist of:
+			goals
+			deliverables
+			benefits (STEM)
+			Method
+			Timeline
+			Budget
+	Introduction
+		Problem description
+			No current solution that satisfies:
+				Inexpensive
+				Open source
+				Accessible (K-12)
+			Wanted for STEM purposes
+		background info
+			Erebus
+				Frackensense
+					Using nothing from it, starting from scratch
+						reasons for doing so
+	Project Statement
+		Goals and Deliverables
+	Methodology
+		Hardware
+			Main Board
+				STM
+				SD card
+				USB port
+				Power regulation
+				JTAG
+				SD eject request button
+				Indicator LEDs
+					Low power
+					Sensor read error
+					Low storage
+					Reading out-of-range
+					Safe to eject SD
+				Headers
+					Power / GND
+					TAPs
+					Sensors
+						ADC
+						TWI
+			Sensor
+				TWI
+					May be stacked/chained
+					Set sensor address with dip switches
+				ADC
+					One per channel
+				Sensing component
+		Firmware
+			
+		Software (Chrome extension)
+			Describe configuration
+				Which sensors
+				Addresses / ports
+			Describe system parameters
+				Low storage threshold
+				Record until full vs. Overwrite oldest data
+				Conditional data logging parameters, e.g.
+					time window
+					repeating schedule
+					conditional on sensor values
+					conditional on battery level
+			Describe parameters (per sensor)
+				Polling frequency
+				Interrupt condition (to take a measurement)
+				Out-of-range threshold(s)
+			Program the Hardware
+		Support
+			APIs
+			Manuals
+	Resource requirements
+		None?
+	Schedule
+		MS Project
+	Budget
+		Equipment
+			Dev Board
+		BOM (x number prototypes sponsors want) 
+			Parts / Components for prototyping
+			PCB costs
+	
+	
+TODO
+	fill out project schedule
+		MS Project 2013
+	Cannabalize UI FRD for proposal
+	Make Diagrams
+		Main Board
+		Sensor Board
+			ADC / I2C example
+		UI
+		Storyboard
+			Determine how to set up their experiment
+			describe that setup to the software
+			Connect the hardware the hardware the same way
+				Connect sensors
+				setting address switches
+			program the hardware
+			set up the hardware in place with a power supply
+			retrieve data log from SD card
+	finish Proposal document
+	Create PowerPoint
