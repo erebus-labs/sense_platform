@@ -68,11 +68,12 @@ Proposal
 				Interrupt condition (to take a measurement)
 				Out-of-range threshold(s)
 			Program the Hardware
+				Run a self check
+					Indicate any errors
 		Support
-			APIs
-			Manuals
+			Manuals, Wikis, Readmes
 	Resource requirements
-		None?
+		None, besides component reimbursement and professional input.
 	Schedule
 		MS Project
 	Budget
@@ -81,6 +82,10 @@ Proposal
 		BOM (x number prototypes sponsors want) 
 			Parts / Components for prototyping
 			PCB costs
+	
+	
+	
+	
 	
 	
 TODO
