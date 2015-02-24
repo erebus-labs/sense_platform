@@ -13,4 +13,8 @@ Test Plan						MS Excel 2010+			Verification tests for all "must have" requireme
 Diagrams:
 	Programmer_State_Diagram	PDF Viewer				Usage flow for initializing the firmware (generally one time)
 	User_State_Diagram			PDF Viewer				Usage flow from a user perspective (occurs every use)
-	UI mockup					Image Viewer			An idea of what the browser app could look like
+	UI mockup					Image Viewer			An idea of what the browser app could look like.
+	Multiple Diagrams			MS Visio 2013
+		Main board										Block diagram of the main circuit board
+		Sensor Interfacing								diagram illustrating interfacing to sensors
+		Sensor Mockup Options							Another mockup of the potential UI
