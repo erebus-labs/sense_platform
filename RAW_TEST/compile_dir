@@ -1,0 +1,4 @@
+arm-none-eabi-gcc -mthumb -mcpu=cortex-m3 -c -o raw.o raw.c
+arm-none-eabi-gcc -c -o startup_ARMCM3.o startup_ARMCM3.S
+arm-none-eabi-gcc -T link_script.ld -mthumb -mcpu=cortex-m3 raw.o startup_ARMCM3.o -o raw
+arm-none-eabi-objcopy -O binary raw raw.bin
