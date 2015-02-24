@@ -1,22 +1,10 @@
 #!/bin/sh
-#
-#     ###################
-#     ###################
-#     ###             ###
-#     ###             ###
-#     ###
-#     ######
-#     ######
-#     ###
-#     ###     ###     ###
-#     ###     ###     ###
-#     ###################
-#     ###################
-#
-#
-# Written by Michael Walton
-# Copyright 2014, Euler Works Inc.
-#
+###############################################################################
+#J.S. PEIRCE
+#CAPSTONE 2015
+#EREBUS LABS - SENSE PLATFORM
+#24 FEBRUARY 2015
+###############################################################################
 # This script is for starting an OpenOCD session for programming or debugging
 #
 # Make sure you have followed the proper steps for connecting via JTAG
