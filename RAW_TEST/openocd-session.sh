@@ -1,6 +1,7 @@
 #!/bin/sh
 ###############################################################################
-#J.S. PEIRCE
+#J.S. PEIRCE - CTO EULERWORKS INC
+#ADAPTED FROM SCRIPT BY MICHAEL WALTON
 #CAPSTONE 2015
 #EREBUS LABS - SENSE PLATFORM
 #24 FEBRUARY 2015
