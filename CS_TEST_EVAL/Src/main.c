@@ -111,7 +111,14 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-
+	uint32_t index;
+	//if(1==HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_10)){
+		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
+  	//}
+	//else HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);	
+		for(index; index<400000; index++)
+		asm("nop");
+		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);	
   }
   /* USER CODE END 3 */
 
