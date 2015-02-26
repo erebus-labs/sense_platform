@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : main.c
-  * Date               : 25/02/2015 22:11:21
+  * Date               : 26/02/2015 01:43:59
   * Description        : Main program body
   ******************************************************************************
   *
@@ -71,7 +71,7 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
- 
+
   /* Configure the system clock */
   SystemClock_Config();
 
@@ -100,9 +100,8 @@ int main(void)
   MX_USB_OTG_FS_USB_Init();
   MX_WWDG_Init();
 
- 
   /* USER CODE BEGIN 2 */
- // RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_PPPGPIO, ENABLE);
+
   /* USER CODE END 2 */
 
   /*## FatFS: Link the SD disk I/O driver ###############################*/
@@ -112,16 +111,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	uint32_t index;
-	//if(1==HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_10)){
-		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
-  	//}
-	//else HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);	
-		for(index; index<400000; index++)
-		asm("nop");
-		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);	
-		for(index; index<400000; index++)
-		asm("nop");
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
   }
   /* USER CODE END 3 */
 

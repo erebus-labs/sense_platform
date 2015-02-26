@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : RTC.c
-  * Date               : 25/02/2015 22:11:19
+  * Date               : 26/02/2015 01:43:57
   * Description        : This file provides code for the configuration
   *                      of the RTC instances.
   ******************************************************************************
@@ -56,7 +56,7 @@ void MX_RTC_Init(void)
   hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
   hrtc.Init.AsynchPrediv = 127;
   hrtc.Init.SynchPrediv = 255;
-  hrtc.Init.OutPut = RTC_OUTPUT_ALARMA;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
   hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
   hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
   HAL_RTC_Init(&hrtc);
@@ -75,7 +75,11 @@ void MX_RTC_Init(void)
   sDate.Year = 0;
   HAL_RTC_SetDate(&hrtc, &sDate, FORMAT_BCD);
 
-    /**Enable the Alarm A 
+    /**Enable Calibrartion 
+    */
+  HAL_RTCEx_SetCalibrationOutPut(&hrtc);
+
+    /**Enable the Alarm B 
     */
   sAlarm.AlarmTime.Hours = 0;
   sAlarm.AlarmTime.Minutes = 0;
@@ -86,11 +90,6 @@ void MX_RTC_Init(void)
   sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
   sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
   sAlarm.AlarmDateWeekDay = 1;
-  sAlarm.Alarm = RTC_ALARM_A;
-  HAL_RTC_SetAlarm(&hrtc, &sAlarm, FORMAT_BCD);
-
-    /**Enable the Alarm B 
-    */
   sAlarm.Alarm = RTC_ALARM_B;
   HAL_RTC_SetAlarm(&hrtc, &sAlarm, FORMAT_BCD);
 

@@ -3,7 +3,7 @@
   * @file    bsp_driver_sd.h (based on stm324x9i_eval_sd.h)
   * @author  MCD Teams
   * @version V1.0.0
-  * @date    25/02/2015 22:11:19
+  * @date    26/02/2015 01:43:57
   * @brief   This file contains the common defines and functions prototypes for 
   *          the stm32f4xx_sd.c driver.
   ******************************************************************************
