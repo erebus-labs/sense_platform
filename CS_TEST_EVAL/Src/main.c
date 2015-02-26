@@ -119,6 +119,8 @@ int main(void)
 		for(index; index<400000; index++)
 		asm("nop");
 		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);	
+		for(index; index<400000; index++)
+		asm("nop");
   }
   /* USER CODE END 3 */
 
