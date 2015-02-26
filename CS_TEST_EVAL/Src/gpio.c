@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : gpio.c
-  * Date               : 26/02/2015 01:43:56
+  * Date               : 26/02/2015 02:29:26
   * Description        : This file provides code for the configuration
   *                      of all used GPIO pins.
   ******************************************************************************
@@ -46,11 +46,12 @@
 
 /* USER CODE END 1 */
 
-/** Configure pins
-     PA12   ------> USB_OTG_FS_DP
-     PA11   ------> USB_OTG_FS_DM
-     PA10   ------> USB_OTG_FS_ID
-     PA9   ------> USB_OTG_FS_VBUS
+/** Configure pins as 
+        * Analog 
+        * Input 
+        * Output
+        * EVENT_OUT
+        * EXTI
 */
 void MX_GPIO_Init(void)
 {
@@ -60,26 +61,10 @@ void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __GPIOB_CLK_ENABLE();
   __GPIOC_CLK_ENABLE();
-  __GPIOA_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE();
   __GPIOD_CLK_ENABLE();
   __GPIOF_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
+  __GPIOA_CLK_ENABLE();
   __GPIOE_CLK_ENABLE();
-
-  /*Configure GPIO pins : PA12 PA11 PA10 */
-  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_11|GPIO_PIN_10;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PA9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_9;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PE10 */
   GPIO_InitStruct.Pin = GPIO_PIN_10;

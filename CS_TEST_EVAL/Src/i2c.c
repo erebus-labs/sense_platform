@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : I2C.c
-  * Date               : 26/02/2015 01:43:57
+  * Date               : 26/02/2015 02:29:27
   * Description        : This file provides code for the configuration
   *                      of the I2C instances.
   ******************************************************************************
@@ -45,7 +45,6 @@
 
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c2;
-I2C_HandleTypeDef hi2c3;
 DMA_HandleTypeDef hdma_i2c1_rx;
 DMA_HandleTypeDef hdma_i2c2_rx;
 
@@ -81,22 +80,6 @@ void MX_I2C2_Init(void)
   HAL_I2C_Init(&hi2c2);
 
 }
-/* I2C3 init function */
-void MX_I2C3_Init(void)
-{
-
-  hi2c3.Instance = I2C3;
-  hi2c3.Init.ClockSpeed = 100000;
-  hi2c3.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c3.Init.OwnAddress1 = 0;
-  hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLED;
-  hi2c3.Init.OwnAddress2 = 0;
-  hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLED;
-  hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLED;
-  HAL_I2C_Init(&hi2c3);
-
-}
 
 void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 {
@@ -129,19 +112,11 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     hdma_i2c1_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
     hdma_i2c1_rx.Init.Mode = DMA_NORMAL;
     hdma_i2c1_rx.Init.Priority = DMA_PRIORITY_LOW;
-    hdma_i2c1_rx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
-    hdma_i2c1_rx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_HALFFULL;
-    hdma_i2c1_rx.Init.MemBurst = DMA_MBURST_SINGLE;
-    hdma_i2c1_rx.Init.PeriphBurst = DMA_PBURST_SINGLE;
+    hdma_i2c1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
     HAL_DMA_Init(&hdma_i2c1_rx);
 
     __HAL_LINKDMA(hi2c,hdmarx,hdma_i2c1_rx);
 
-    /* Peripheral interrupt init*/
-    /* Sets the priority grouping field */
-    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_0);
-    HAL_NVIC_SetPriority(I2C1_EV_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
   }
   else if(hi2c->Instance==I2C2)
   {
@@ -152,14 +127,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     PF0     ------> I2C2_SDA
     PF1     ------> I2C2_SCL 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_0;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
-    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_1;
+    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
@@ -168,7 +136,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 
     /* Peripheral DMA init*/
   
-    hdma_i2c2_rx.Instance = DMA1_Stream3;
+    hdma_i2c2_rx.Instance = DMA1_Stream2;
     hdma_i2c2_rx.Init.Channel = DMA_CHANNEL_7;
     hdma_i2c2_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_i2c2_rx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -181,35 +149,6 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     HAL_DMA_Init(&hdma_i2c2_rx);
 
     __HAL_LINKDMA(hi2c,hdmarx,hdma_i2c2_rx);
-
-    /* Peripheral interrupt init*/
-    /* Sets the priority grouping field */
-    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_0);
-    HAL_NVIC_SetPriority(I2C2_EV_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(I2C2_EV_IRQn);
-  }
-  else if(hi2c->Instance==I2C3)
-  {
-    /* Peripheral clock enable */
-    __I2C3_CLK_ENABLE();
-  
-    /**I2C3 GPIO Configuration    
-    PA8     ------> I2C3_SCL
-    PH8     ------> I2C3_SDA 
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_8;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_8;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
-    HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
   }
 }
@@ -230,9 +169,6 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 
     /* Peripheral DMA DeInit*/
     HAL_DMA_DeInit(hi2c->hdmarx);
-
-    /* Peripheral interrupt Deinit*/
-    HAL_NVIC_DisableIRQ(I2C1_EV_IRQn);
   }
   else if(hi2c->Instance==I2C2)
   {
@@ -247,23 +183,6 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 
     /* Peripheral DMA DeInit*/
     HAL_DMA_DeInit(hi2c->hdmarx);
-
-    /* Peripheral interrupt Deinit*/
-    HAL_NVIC_DisableIRQ(I2C2_EV_IRQn);
-  }
-  else if(hi2c->Instance==I2C3)
-  {
-    /* Peripheral clock disable */
-    __I2C3_CLK_DISABLE();
-  
-    /**I2C3 GPIO Configuration    
-    PA8     ------> I2C3_SCL
-    PH8     ------> I2C3_SDA 
-    */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_8);
-
-    HAL_GPIO_DeInit(GPIOH, GPIO_PIN_8);
-
   }
 } 
 

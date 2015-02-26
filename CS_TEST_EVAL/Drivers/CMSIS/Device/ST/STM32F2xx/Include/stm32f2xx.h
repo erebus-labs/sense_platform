@@ -108,7 +108,6 @@
 /** @addtogroup Device_Included
   * @{
   */
-
   #include "stm32f207xx.h"
 
 /**

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : SDIO.c
-  * Date               : 26/02/2015 01:43:58
+  * Date               : 26/02/2015 02:29:27
   * Description        : This file provides code for the configuration
   *                      of the SDIO instances.
   ******************************************************************************
@@ -98,9 +98,9 @@ void HAL_SD_MspInit(SD_HandleTypeDef* hsd)
   
     hdma_sdio.Instance = DMA2_Stream3;
     hdma_sdio.Init.Channel = DMA_CHANNEL_4;
-    hdma_sdio.Init.Direction = DMA_MEMORY_TO_PERIPH;
-    hdma_sdio.Init.PeriphInc = DMA_PINC_ENABLE;
-    hdma_sdio.Init.MemInc = DMA_MINC_DISABLE;
+    hdma_sdio.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    hdma_sdio.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_sdio.Init.MemInc = DMA_MINC_ENABLE;
     hdma_sdio.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
     hdma_sdio.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
     hdma_sdio.Init.Mode = DMA_PFCTRL;
@@ -116,11 +116,6 @@ void HAL_SD_MspInit(SD_HandleTypeDef* hsd)
     __HAL_LINKDMA(hsd,hdmarx,hdma_sdio);
     __HAL_LINKDMA(hsd,hdmatx,hdma_sdio);
 
-    /* Peripheral interrupt init*/
-    /* Sets the priority grouping field */
-    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_0);
-    HAL_NVIC_SetPriority(SDIO_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(SDIO_IRQn);
   }
 }
 
@@ -148,9 +143,6 @@ void HAL_SD_MspDeInit(SD_HandleTypeDef* hsd)
     /* Peripheral DMA DeInit*/
     HAL_DMA_DeInit(hsd->hdmarx);
     HAL_DMA_DeInit(hsd->hdmatx);
-
-    /* Peripheral interrupt Deinit*/
-    HAL_NVIC_DisableIRQ(SDIO_IRQn);
   }
 } 
 

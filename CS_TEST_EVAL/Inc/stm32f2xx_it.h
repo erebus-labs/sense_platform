@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32f2xx_it.h
-  * @date    26/02/2015 01:43:59
+  * @date    26/02/2015 02:29:28
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   *
@@ -46,14 +46,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
-void SDIO_IRQHandler(void);
-void I2C2_EV_IRQHandler(void);
-void WWDG_IRQHandler(void);
 void SysTick_Handler(void);
-void I2C1_EV_IRQHandler(void);
-void ADC_IRQHandler(void);
-void TIM5_IRQHandler(void);
-void RCC_IRQHandler(void);
 
 #ifdef __cplusplus
 }

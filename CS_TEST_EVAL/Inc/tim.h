@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : TIM.h
-  * Date               : 26/02/2015 01:43:58
+  * Date               : 26/02/2015 02:29:28
   * Description        : This file provides code for the configuration
   *                      of the TIM instances.
   ******************************************************************************
@@ -42,11 +42,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f2xx_hal.h"
 
-extern TIM_HandleTypeDef htim4;
-extern TIM_HandleTypeDef htim5;
+extern TIM_HandleTypeDef htim1;
 
-void MX_TIM4_Init(void);
-void MX_TIM5_Init(void);
+void MX_TIM1_Init(void);
 
 #ifdef __cplusplus
 }

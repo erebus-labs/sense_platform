@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : main.c
-  * Date               : 26/02/2015 01:43:59
+  * Date               : 26/02/2015 02:29:28
   * Description        : Main program body
   ******************************************************************************
   *
@@ -44,8 +44,6 @@
 #include "sdio.h"
 #include "spi.h"
 #include "tim.h"
-#include "usb_otg.h"
-#include "wwdg.h"
 #include "gpio.h"
 
 /* Private variables ---------------------------------------------------------*/
@@ -79,10 +77,6 @@ int main(void)
   /* Sets the priority grouping field */
   HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_0);
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
-  /* Sets the priority grouping field */
-  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_0);
-  HAL_NVIC_SetPriority(RCC_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(RCC_IRQn);
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -91,14 +85,10 @@ int main(void)
   MX_ADC2_Init();
   MX_I2C1_Init();
   MX_I2C2_Init();
-  MX_I2C3_Init();
   MX_RTC_Init();
   MX_SDIO_SD_Init();
   MX_SPI1_Init();
-  MX_TIM4_Init();
-  MX_TIM5_Init();
-  MX_USB_OTG_FS_USB_Init();
-  MX_WWDG_Init();
+  MX_TIM1_Init();
 
   /* USER CODE BEGIN 2 */
 
@@ -111,7 +101,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
+
   }
   /* USER CODE END 3 */
 

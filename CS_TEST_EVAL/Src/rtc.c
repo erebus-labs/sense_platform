@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : RTC.c
-  * Date               : 26/02/2015 01:43:57
+  * Date               : 26/02/2015 02:29:27
   * Description        : This file provides code for the configuration
   *                      of the RTC instances.
   ******************************************************************************
@@ -79,7 +79,7 @@ void MX_RTC_Init(void)
     */
   HAL_RTCEx_SetCalibrationOutPut(&hrtc);
 
-    /**Enable the Alarm B 
+    /**Enable the Alarm A 
     */
   sAlarm.AlarmTime.Hours = 0;
   sAlarm.AlarmTime.Minutes = 0;
@@ -90,16 +90,13 @@ void MX_RTC_Init(void)
   sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
   sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
   sAlarm.AlarmDateWeekDay = 1;
-  sAlarm.Alarm = RTC_ALARM_B;
+  sAlarm.Alarm = RTC_ALARM_A;
   HAL_RTC_SetAlarm(&hrtc, &sAlarm, FORMAT_BCD);
 
-    /**Enable the TimeStamp 
+    /**Enable the Alarm B 
     */
-  HAL_RTCEx_SetTimeStamp(&hrtc, RTC_TIMESTAMPEDGE_RISING, RTC_TIMESTAMPPIN_PI8);
-
-    /**Enable the WakeUp 
-    */
-  HAL_RTCEx_SetWakeUpTimer(&hrtc, 0, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
+  sAlarm.Alarm = RTC_ALARM_B;
+  HAL_RTC_SetAlarm(&hrtc, &sAlarm, FORMAT_BCD);
 
 }
 

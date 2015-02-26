@@ -271,8 +271,6 @@ SRC = ./Src/main.c \
       ./Src/tim.c \
       ./Src/rtc.c \
       ./Src/spi.c \
-      ./Src/usb_otg.c \
-      ./Src/wwdg.c \
       ./Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rtc_ex.c \
       ./Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_flash_ex.c \
       ./Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_gpio.c \
@@ -699,39 +697,6 @@ Src/tim.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim.h
 Src/tim.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim_ex.h
 Src/tim.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_wwdg.h
 Src/tim.o: ./Inc/gpio.h ./Inc/dma.h
-Src/rtc.o: ./Inc/rtc.h ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal.h
-Src/rtc.o: ./Inc/stm32f2xx_hal_conf.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_def.h
-Src/rtc.o: ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
-Src/rtc.o: ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f207xx.h
-Src/rtc.o: ./Drivers/CMSIS/Include/core_cm3.h
-Src/rtc.o: /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint.h
-Src/rtc.o: /usr/lib/gcc/arm-none-eabi/4.9.2/include/stdint-gcc.h
-Src/rtc.o: ./Drivers/CMSIS/Include/core_cmInstr.h
-Src/rtc.o: ./Drivers/CMSIS/Include/core_cmFunc.h
-Src/rtc.o: ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/system_stm32f2xx.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_gpio.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_gpio_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_dma.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_dma_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_cortex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_adc.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_adc_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_flash.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_flash_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_i2c.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_pwr_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rtc.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rtc_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_sd.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_ll_sdmmc.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_spi.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_tim_ex.h
-Src/rtc.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_wwdg.h
 Src/spi.o: ./Inc/spi.h ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal.h
 Src/spi.o: ./Inc/stm32f2xx_hal_conf.h
 Src/spi.o: ./Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal_rcc.h

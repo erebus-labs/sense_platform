@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    stm32f2xx_it.c
-  * @date    26/02/2015 01:43:59
+  * @date    26/02/2015 02:29:28
   * @brief   Interrupt Service Routines.
   ******************************************************************************
   *
@@ -38,44 +38,9 @@
 
 /* External variables --------------------------------------------------------*/
 
-extern ADC_HandleTypeDef hadc1;
-extern ADC_HandleTypeDef hadc2;
-extern I2C_HandleTypeDef hi2c1;
-extern I2C_HandleTypeDef hi2c2;
-extern SD_HandleTypeDef hsd;
-extern TIM_HandleTypeDef htim5;
-extern WWDG_HandleTypeDef hwwdg;
-
 /******************************************************************************/
 /*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
-
-/**
-* @brief This function handles SDIO global interrupt.
-*/
-void SDIO_IRQHandler(void)
-{
-  HAL_NVIC_ClearPendingIRQ(SDIO_IRQn);
-  HAL_SD_IRQHandler(&hsd);
-}
-
-/**
-* @brief This function handles I2C2 event interrupt.
-*/
-void I2C2_EV_IRQHandler(void)
-{
-  HAL_NVIC_ClearPendingIRQ(I2C2_EV_IRQn);
-  HAL_I2C_EV_IRQHandler(&hi2c2);
-}
-
-/**
-* @brief This function handles Window Watchdog interrupt.
-*/
-void WWDG_IRQHandler(void)
-{
-  HAL_NVIC_ClearPendingIRQ(WWDG_IRQn);
-  HAL_WWDG_IRQHandler(&hwwdg);
-}
 
 /**
 * @brief This function handles System tick timer.
@@ -84,45 +49,6 @@ void SysTick_Handler(void)
 {
   HAL_IncTick();
   HAL_SYSTICK_IRQHandler();
-}
-
-/**
-* @brief This function handles I2C1 event interrupt.
-*/
-void I2C1_EV_IRQHandler(void)
-{
-  HAL_NVIC_ClearPendingIRQ(I2C1_EV_IRQn);
-  HAL_I2C_EV_IRQHandler(&hi2c1);
-}
-
-/**
-* @brief This function handles ADC1, ADC2 and ADC3 global interrupts.
-*/
-void ADC_IRQHandler(void)
-{
-  HAL_NVIC_ClearPendingIRQ(ADC_IRQn);
-  HAL_ADC_IRQHandler(&hadc1);
-  HAL_ADC_IRQHandler(&hadc2);
-}
-
-/**
-* @brief This function handles TIM5 global interrupt.
-*/
-void TIM5_IRQHandler(void)
-{
-  HAL_NVIC_ClearPendingIRQ(TIM5_IRQn);
-  HAL_TIM_IRQHandler(&htim5);
-}
-
-/**
-* @brief This function handles RCC global interrupt.
-*/
-void RCC_IRQHandler(void)
-{
-  HAL_NVIC_ClearPendingIRQ(RCC_IRQn);
-  /* USER CODE BEGIN 0 */
-
-  /* USER CODE END 0 */
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
