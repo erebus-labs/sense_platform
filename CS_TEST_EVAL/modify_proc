@@ -1,0 +1,36 @@
+#!/bin/bash
+
+echo enter corresponging device number
+echo 1 stmf205x 
+echo 2 stmf215x 
+echo 3 stmf207x 
+echo 4 stmf217x 
+
+read RESPONSE
+
+if [ $RESPONSE -eq 1 ]
+then
+head -111 ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h >/
+./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
+tail $(197-123) ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h >> /
+./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
+
+echo you chose stmf205x
+elif [ $RESPONSE -eq 2 ]
+then 
+head -111./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
+echo you chose stmf215x
+elif [ $RESPONSE -eq 2 ]
+then 
+head -111 ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
+echo you chose stmf207x
+elif [ $RESPONSE -eq 2 ]
+then 
+head -111 ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
+echo you chose stmf217x
+fi
+
+head -117 ./Drivers/CMSIS/Device/ST/STM32F2xx/Include/stm32f2xx.h
+
+
+exit 0
