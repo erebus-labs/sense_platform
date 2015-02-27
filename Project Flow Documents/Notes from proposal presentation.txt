@@ -1,0 +1,31 @@
+Tasks
+	Get Mike a copy of the schedule in a format linux can handle (PDF if nothing else)
+	
+	Clean up the proposal / plan
+		Reasons not to go with existing products
+		Document candidate uP's and reasons for choosing the one we did
+		Clarify/define terms
+		Capture definition of success
+			"We will have succeeded if we procure ..."
+		Define the sensors we will commit to
+			At least 2, 1 each of:
+				ADC
+				I2C
+		Pictues
+		Tables
+		Graphs
+		Etc..
+	
+	get updated proposal to M/A
+	
+	Get a sign off
+		
+		
+General things to keep in mind
+	Get sponsor approval on all expenses that you expect reimbursement for before committing
+	
+	Document EVERYTHING
+		Reasons for any decision / action
+		Keep consistent coding/documentation standards
+		
+	Give prep time between room scheduling and meetings to allow time to set up presentation resources
