@@ -8,12 +8,12 @@ Proposal
 			Timeline
 			Budget
 	Introduction
+		Wanted for STEM purposes
 		Problem description
 			No current solution that satisfies:
 				Inexpensive
 				Open source
 				Accessible (K-12)
-			Wanted for STEM purposes
 		background info
 			Erebus
 				Frackensense
