@@ -7598,59 +7598,75 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </deviceset>
 </devicesets>
 </library>
-<library name="smd-special">
-<description>&lt;b&gt;Special SMD Packages&lt;/b&gt;&lt;p&gt;
+<library name="special">
+<description>&lt;b&gt;Special Devices&lt;/b&gt;&lt;p&gt;
+7-segment displays, switches, heatsinks, crystals, transformers, etc.&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
-<package name="SMS-001">
+<package name="EDG-01">
 <description>&lt;b&gt;DIP SWITCH&lt;/b&gt;</description>
-<wire x1="-1.905" y1="-3.2004" x2="1.905" y2="-3.2004" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="3.2004" x2="1.905" y2="-3.2004" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="3.2004" x2="-1.905" y2="3.2004" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="-3.2004" x2="-1.905" y2="3.2004" width="0.1524" layer="21"/>
-<wire x1="-0.762" y1="2.032" x2="0.762" y2="2.032" width="0.1524" layer="21"/>
-<wire x1="0.762" y1="-2.032" x2="-0.762" y2="-2.032" width="0.1524" layer="21"/>
-<wire x1="0.762" y1="2.032" x2="0.762" y2="-2.032" width="0.1524" layer="21"/>
-<wire x1="-0.762" y1="-2.032" x2="-0.762" y2="2.032" width="0.1524" layer="21"/>
-<smd name="1" x="0" y="-4.4958" dx="1.0922" dy="2.0066" layer="1"/>
-<smd name="2" x="0" y="4.4958" dx="1.0922" dy="2.0066" layer="1"/>
-<text x="-0.127" y="-1.27" size="1.016" layer="21">1</text>
-<text x="-2.286" y="-3.175" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
-<text x="3.556" y="-3.175" size="1.27" layer="27" ratio="10" rot="R90">&gt;VALUE</text>
-<rectangle x1="-0.762" y1="0.508" x2="0.762" y2="2.032" layer="21"/>
-<rectangle x1="-0.7366" y1="-4.1148" x2="0.762" y2="-3.2004" layer="51"/>
-<rectangle x1="-0.3048" y1="-5.1816" x2="0.3048" y2="-4.1148" layer="51"/>
-<rectangle x1="-0.762" y1="3.2004" x2="0.7366" y2="4.1148" layer="51"/>
-<rectangle x1="-0.3048" y1="4.1148" x2="0.3048" y2="5.1816" layer="51"/>
+<wire x1="-1.905" y1="-4.953" x2="1.905" y2="-4.953" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="4.953" x2="-1.905" y2="4.953" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="4.953" x2="-1.905" y2="1.651" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-1.651" x2="-1.397" y2="-1.651" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="-1.651" x2="-1.397" y2="1.651" width="0.1524" layer="21"/>
+<wire x1="-1.397" y1="1.651" x2="-1.905" y2="1.651" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-1.651" x2="-1.905" y2="-4.953" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.651" x2="-1.905" y2="-1.651" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-4.953" x2="1.905" y2="-1.651" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.651" x2="1.397" y2="1.651" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="1.651" x2="1.397" y2="-1.651" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="-1.651" x2="1.905" y2="-1.651" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.651" x2="1.905" y2="4.953" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.651" x2="1.905" y2="1.651" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="1.905" x2="-0.762" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="1.905" x2="0.762" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-1.905" x2="0.762" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-1.905" x2="-0.762" y2="-1.905" width="0.1524" layer="21"/>
+<pad name="1" x="0" y="-3.81" drill="0.8128" shape="long" rot="R90"/>
+<pad name="2" x="0" y="3.81" drill="0.8128" shape="long" rot="R90"/>
+<text x="-0.254" y="-4.191" size="1.524" layer="51" ratio="10">1</text>
+<text x="-1.27" y="2.54" size="1.524" layer="51" ratio="10">ON</text>
+<text x="-1.905" y="-6.604" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-1.905" y="5.334" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<rectangle x1="-0.508" y1="-0.381" x2="0.508" y2="0" layer="21"/>
+<rectangle x1="-0.508" y1="-1.016" x2="0.508" y2="-0.635" layer="21"/>
+<rectangle x1="-0.508" y1="-1.651" x2="0.508" y2="-1.27" layer="21"/>
 </package>
 </packages>
 <symbols>
-<symbol name="DIP01">
-<wire x1="0.508" y1="0" x2="-0.508" y2="0" width="0.1524" layer="94"/>
-<wire x1="-0.508" y1="2.54" x2="0.508" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="0.508" y1="2.54" x2="0.508" y2="0" width="0.1524" layer="94"/>
-<wire x1="-0.508" y1="0" x2="-0.508" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="1.905" y1="5.08" x2="-1.905" y2="5.08" width="0.4064" layer="94"/>
-<wire x1="-1.905" y1="5.08" x2="-1.905" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="-1.905" y1="-2.54" x2="1.905" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="1.905" y1="-2.54" x2="1.905" y2="5.08" width="0.4064" layer="94"/>
-<text x="-2.54" y="-2.54" size="1.778" layer="95" rot="R90">&gt;NAME</text>
-<text x="4.445" y="-2.54" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<text x="-0.635" y="3.175" size="0.9906" layer="94" ratio="14">ON</text>
-<text x="-0.254" y="-1.651" size="0.9906" layer="94" ratio="14">1</text>
-<rectangle x1="-0.254" y1="0.254" x2="0.254" y2="1.27" layer="94"/>
-<pin name="2" x="0" y="7.62" visible="pad" length="short" direction="pas" rot="R270"/>
-<pin name="1" x="0" y="-5.08" visible="pad" length="short" direction="pas" rot="R90"/>
+<symbol name="SW_DIP-1">
+<wire x1="-3.302" y1="0.508" x2="0" y2="0.508" width="0.1524" layer="94"/>
+<wire x1="3.302" y1="0.508" x2="3.302" y2="-0.508" width="0.1524" layer="94"/>
+<wire x1="3.302" y1="-0.508" x2="0" y2="-0.508" width="0.1524" layer="94"/>
+<wire x1="-3.302" y1="-0.508" x2="-3.302" y2="0.508" width="0.1524" layer="94"/>
+<wire x1="0" y1="0.508" x2="0" y2="-0.508" width="0.1524" layer="94"/>
+<wire x1="0" y1="0.508" x2="3.302" y2="0.508" width="0.1524" layer="94"/>
+<wire x1="0" y1="-0.508" x2="-3.302" y2="-0.508" width="0.1524" layer="94"/>
+<wire x1="-5.08" y1="-2.54" x2="5.08" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="1.397" y1="0.254" x2="1.905" y2="0.254" width="0" layer="94"/>
+<wire x1="1.397" y1="-0.254" x2="1.905" y2="-0.254" width="0" layer="94"/>
+<wire x1="-5.08" y1="-2.54" x2="-5.08" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="-5.08" y1="2.54" x2="5.08" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="5.08" y1="-2.54" x2="5.08" y2="2.54" width="0.4064" layer="94"/>
+<text x="-5.08" y="3.175" size="1.778" layer="95">&gt;NAME</text>
+<text x="-5.08" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<text x="4.826" y="-0.127" size="1.27" layer="94" ratio="10" rot="R90">1</text>
+<text x="-3.556" y="-1.143" size="1.27" layer="94" ratio="10" rot="R90">ON</text>
+<rectangle x1="0.381" y1="-0.254" x2="1.397" y2="0.254" layer="94"/>
+<rectangle x1="1.905" y1="-0.254" x2="2.921" y2="0.254" layer="94"/>
+<pin name="2" x="-7.62" y="0" visible="pad" length="short" direction="pas" swaplevel="1"/>
+<pin name="1" x="7.62" y="0" visible="pad" length="short" direction="pas" swaplevel="1" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="SWS001" prefix="S">
-<description>&lt;b&gt;SMD Dip Switch 1 pol.&lt;/b&gt;</description>
+<deviceset name="SW_DIP-1" prefix="SW" uservalue="yes">
+<description>&lt;b&gt;DIP SWITCH&lt;/b&gt;</description>
 <gates>
-<gate name="G$1" symbol="DIP01" x="0" y="0"/>
+<gate name="G$1" symbol="SW_DIP-1" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="SMS-001">
+<device name="" package="EDG-01">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -7693,8 +7709,8 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <part name="F2" library="SparkFun-Connectors" deviceset="M02" device="PTH"/>
 <part name="M2" library="pinhead" deviceset="PINHD-1X2" device=""/>
 <part name="M1" library="pinhead" deviceset="PINHD-1X2" device=""/>
-<part name="S1" library="smd-special" deviceset="SWS001" device=""/>
 <part name="SUPPLY6" library="supply2" deviceset="GND" device=""/>
+<part name="SW1" library="special" deviceset="SW_DIP-1" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -7721,8 +7737,8 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <instance part="F2" gate="G$1" x="180.34" y="73.66"/>
 <instance part="M2" gate="G$1" x="177.8" y="88.9" rot="R180"/>
 <instance part="M1" gate="G$1" x="177.8" y="99.06" rot="R180"/>
-<instance part="S1" gate="G$1" x="134.62" y="78.74"/>
-<instance part="SUPPLY6" gate="GND" x="134.62" y="71.12"/>
+<instance part="SUPPLY6" gate="GND" x="134.62" y="66.04"/>
+<instance part="SW1" gate="G$1" x="134.62" y="78.74" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -7770,8 +7786,9 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <pinref part="SUPPLY5" gate="GND" pin="GND"/>
 </segment>
 <segment>
-<pinref part="S1" gate="G$1" pin="1"/>
+<pinref part="SW1" gate="G$1" pin="1"/>
 <pinref part="SUPPLY6" gate="GND" pin="GND"/>
+<wire x1="134.62" y1="68.58" x2="134.62" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SDA_ACC" class="0">
@@ -7855,11 +7872,11 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <junction x="129.54" y="109.22"/>
 <junction x="134.62" y="109.22"/>
 <pinref part="U2" gate="G$1" pin="SDO"/>
-<pinref part="S1" gate="G$1" pin="2"/>
 <wire x1="127" y1="93.98" x2="134.62" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="134.62" y1="93.98" x2="134.62" y2="86.36" width="0.1524" layer="91"/>
 <junction x="134.62" y="93.98"/>
 <wire x1="134.62" y1="93.98" x2="134.62" y2="109.22" width="0.1524" layer="91"/>
+<pinref part="SW1" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <wire x1="180.34" y1="88.9" x2="190.5" y2="88.9" width="0.1524" layer="91"/>
