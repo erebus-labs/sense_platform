@@ -1,7 +1,7 @@
 senseGui.controller("configController",['$scope',function($scope){
   $scope.maxAddress = 7;
   $scope.alerts = [];
-$scope.test = false;
+  $scope.test = false;
   $scope.portOptions = [
       {
         name:"A1",
@@ -28,16 +28,10 @@ $scope.test = false;
         type:"D"
       }
     ]
-  $scope.digAddressCount = 8;
   $scope.intervalOptions = ["second", "minute", "hour", "day", "week"];
-  $scope.types = [{
-    name:"Volatile Organic Compound",
-    connCode:'ADC'}
-    ,
-    {name:"Accelerometer",
-    connCode:'I2C'
-    }];
-
+  $scope.types = sensorTypes;
+  console.log($scope.types);
+	
   $scope.changePort = function(){
     angular.forEach($scope.portOptions,function(v,i){
       if($scope.sensor.type.connCode=="A" && v.name == "A1")
@@ -135,7 +129,7 @@ $scope.test = false;
     $scope.sensor = angular.copy(sensor);
 	$scope.sensor.name = tmpName;
     angular.forEach($scope.types,function(v,i){
-      if(v.name == sensor.type.name)
+      if(v.id == sensor.type.id)
         $scope.sensor.type = v;
     })
     angular.forEach($scope.portOptions,function(v,i){
@@ -154,21 +148,21 @@ $scope.test = false;
   }
 
   $scope.saveConfig = function(){
-	  var config = {type: 'saveFile', suggestedName: chosenEntry.name};
-	  chrome.fileSystem.chooseEntry(config, function(writableEntry) {
-		var blob = new Blob([textarea.value], {type: 'text/plain'});
-		writeFileEntry(writableEntry, blob, function(e) {
-		  output.textContent = 'Write complete :)';
+		var config = {type: 'saveFile'};
+		chrome.fileSystem.chooseEntry(config, function(writableEntry) {	
+			console.log('Begin Write');
+			if (!writableEntry) {
+				console.log("No entry");
+				return;
+			}
+			writableEntry.createWriter(function(writer) {
+				writer.onerror = function(e){console.error(e);};
+				writer.onwriteend = function(e) {console.log('Write complete');};
+				writer.seek(0);
+				writer.write("test");
+			});
 		});
-	  });
-  }
-  
-  $scope.loadConfig = function(){
-	  console.log("trying to load...");
-	$.getJSON("manifest.json", function(json) {
-		console.log(json); // this will show the info it in firebug console
-	});
-  }
+	}
 
 }]);
 
