@@ -86,7 +86,7 @@
       		<div class="form-group">
       			<label for="drpType" class="col-xs-3 col-lg-2 control-label">Sensor Type:</label>
       			 <div class="col-xs-9 col-lg-10">
-        			<select class="form-control" name="drpType" ng-model="sensor.type" ng-options="type as type.name for type in types" ng-change="changePort()">
+        			<select class="form-control" name="drpType" ng-model="sensor.type" ng-options="type as type.name + type.connCode for type in types" ng-change="changePort()">
         			</select>
       			</div>
       		</div>
@@ -106,26 +106,29 @@
 
       		<!-- Polling Frequency -->
       		<div class="form-group">
-            <label for="txtName" class="col-xs-3 col-lg-2 control-label">Sampling Rate:</label>
+            <label for="numSamples" class="col-xs-3 col-lg-2 control-label">Sampling Rate:</label>
               <div class="col-xs-9 col-lg-10">
                 <div class="col-xs-4 no-side-padding">
                   <input type="number" id="numSamples" ng-model="sensor.samples" class="form-control">
                 </div>
                 <div class="col-xs-4 text-center no-side-padding" style="padding-top:7px">
         			    samples per
-        			 </div>
-        			 <div class="col-xs-4 no-side-padding">
-            			<select name="drpInterval" ng-model="sensor.interval" class="form-control">
-            			  <option ng-repeat="interval in intervalOptions" value={{interval}}>{{interval}}</option>
-            			</select>
-          			</div>
-        			</div>
+        		</div>
+				<div class="col-xs-4 no-side-padding">
+					<select name="drpInterval" ng-model="sensor.interval" class="form-control">
+					  <option ng-repeat="interval in intervalOptions" value={{interval}}>{{interval}}</option>
+					</select>
+				</div>
+			  </div>
       		</div>
       </form>
-      <div class="btn btn-lg btn-primary col-xs-offset-5 col-xs-2" ng-click='addSensor()' style="min-width:70px">Save</div>
+      <div class="btn btn-primary col-xs-offset-5 col-xs-2" ng-click='addSensor()' style="min-width:70px">Save Sensor</div>
       </div>
-
     </div>
+	<div class="btn-group btn-group-lg" role="group" align="right "aria-label="...">
+	  <button type="button" class="btn btn-primary" ng-click='saveConfig()'>Save</button>
+	  <button type="button" class="btn btn-primary" ng-click='loadConfig()' >Load</button>
+	</div>
 
   </div>
 

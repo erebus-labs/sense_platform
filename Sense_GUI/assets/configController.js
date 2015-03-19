@@ -31,11 +31,11 @@ $scope.test = false;
   $scope.digAddressCount = 8;
   $scope.intervalOptions = ["second", "minute", "hour", "day", "week"];
   $scope.types = [{
-    name:"Temperature",
-    connCode:'A'}
+    name:"Volatile Organic Compound",
+    connCode:'ADC'}
     ,
     {name:"Accelerometer",
-    connCode:'D'
+    connCode:'I2C'
     }];
 
   $scope.changePort = function(){
@@ -70,6 +70,10 @@ $scope.test = false;
 	// No name
     if($scope.sensor.name == "")
       $scope.alerts.push("Please name the sensor.");
+  
+	// Invalid sampling rate
+	if($scope.sensor.samples <= 0)
+      $scope.alerts.push("Please enter a sampling rate.");
   
 	// Address
     if($scope.sensor.type.connCode == "D")
@@ -149,5 +153,37 @@ $scope.test = false;
       $scope.sensor.address = null;
   }
 
+  $scope.saveConfig = function(){
+	  var config = {type: 'saveFile', suggestedName: chosenEntry.name};
+	  chrome.fileSystem.chooseEntry(config, function(writableEntry) {
+		var blob = new Blob([textarea.value], {type: 'text/plain'});
+		writeFileEntry(writableEntry, blob, function(e) {
+		  output.textContent = 'Write complete :)';
+		});
+	  });
+  }
+  
+  $scope.loadConfig = function(){
+	  console.log("trying to load...");
+	$.getJSON("manifest.json", function(json) {
+		console.log(json); // this will show the info it in firebug console
+	});
+  }
 
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
