@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Sense_GUI",
+  "short_name": "Sense_GUI",
+  "description": "",
+  "version": "0.0.1",
+  "minimum_chrome_version": "38",
+
+  "icons": {
+  },
+
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+
+  "permissions": [
+    "serial",
+    "storage",
+    {"fileSystem":["write","retainEntries","directory"]}
+    ],
+
+  "file_handlers": {
+    "text": {
+      "types": [
+        "text/*"
+        ]
+    }
+  }
+}

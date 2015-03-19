@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="senseGui">
+<head>
+  <title>Sense GUI</title>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="assets/third-party/js/jquery-2.1.3.min.js"></script>
+  <script src="assets/third-party/js/angular.js"></script>
+  <script src="assets/baseController.js"></script>
+  <script src="assets/configController.js"></script>
+  <script src="main.js"></script>
+</head>
+
+<body>
+  <div class="container" ng-controller="configController">
+    <h3>SenseGUI Configuration Manager</h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="title">Sensors</div>
+      </div>
+      <div class="panel-body">
+		<!-- Shows all curent sensors -->
+		    <table class="table table-striped table-bordered">
+		      <tr>
+		        <th>Edit</th>
+		        <th>Name</th>
+		        <th>Type</th>
+		        <th>Port</th>
+		        <th>Sample Rate</th>
+		      </tr>
+
+        <tr ng-repeat="sensor in config.sensors track by sensor.id">
+          <td><div class="btn btn-link" ng-click="editSensor(sensor)">Edit</div></td>
+          <td>{{sensor.name}}</td>
+          <td>{{sensor.type.name}}</td>
+          <td>{{sensor.port.name}}
+		  </div ng-show="sensor.type.connCode=='D'"> : {{sensor.address}}</div></td>
+          <td>{{sensor.samples}} samples per {{sensor.interval}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+	<!--
+	Sensor parameters
+		txt		Name
+		drop	Type (from configs)
+		drop	Location
+					If analog
+						A{n}
+					If Digital
+						Port
+							D{1/2}.{n}
+				Poll freq
+		| num		times per
+		| drop		interval
+	-->
+	<!--  -->
+	<!-- Form for add/edditing sensors -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="title">
+          Sensor Options
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="alert alert-danger" ng-show="alerts.length > 0" >
+          <div ng-repeat="alert in alerts">
+            {{alert}}
+          </div>
+          </div>
+        <form class="form-horizontal" name="form">
+
+      		<!-- Sensor name -->
+          <div class="form-group" >
+            <label for="txtName" class="col-xs-3 col-lg-2 control-label">Sensor Name:</label>
+            <div class="col-xs-9 col-lg-10">
+              <input type="text" class="form-control" id="txtName" name="name" ng-model="sensor.name" required placeholder="Enter sensor name">
+            </div>
+          </div>
+
+      		<!-- Sensor Type (populated from config files) -->
+      		<div class="form-group">
+      			<label for="drpType" class="col-xs-3 col-lg-2 control-label">Sensor Type:</label>
+      			 <div class="col-xs-9 col-lg-10">
+        			<select class="form-control" name="drpType" ng-model="sensor.type" ng-options="type as type.name for type in types" ng-change="changePort()">
+        			</select>
+      			</div>
+      		</div>
+
+      		<!-- Sensor Location (conditional on sensor type) -->
+      		<div class="form-group">
+      			<label for="drpPort" class="col-xs-3 col-lg-2 control-label">Sensor Port:</label>
+      			<div class="col-xs-3 col-lg-4">
+        			<select name="drpPort" class="form-control danger" ng-model="sensor.port" ng-options="port.name for port in portOptions | filter:{type: sensor.type.connCode}">
+        			</select>
+      			</div>
+      			<label ng-show="sensor.type.connCode=='D'" class="col-xs-3 col-lg-2 control-label">Address:</label>
+      			<div ng-show="sensor.type.connCode=='D'" class="col-xs-3 col-lg-4">
+      			  <input type="text" class="form-control" ng-model="sensor.address" />
+      			</div>
+      		</div>
+
+      		<!-- Polling Frequency -->
+      		<div class="form-group">
+            <label for="txtName" class="col-xs-3 col-lg-2 control-label">Sampling Rate:</label>
+              <div class="col-xs-9 col-lg-10">
+                <div class="col-xs-4 no-side-padding">
+                  <input type="number" id="numSamples" ng-model="sensor.samples" class="form-control">
+                </div>
+                <div class="col-xs-4 text-center no-side-padding" style="padding-top:7px">
+        			    samples per
+        			 </div>
+        			 <div class="col-xs-4 no-side-padding">
+            			<select name="drpInterval" ng-model="sensor.interval" class="form-control">
+            			  <option ng-repeat="interval in intervalOptions" value={{interval}}>{{interval}}</option>
+            			</select>
+          			</div>
+        			</div>
+      		</div>
+      </form>
+      <div class="btn btn-lg btn-primary col-xs-offset-5 col-xs-2" ng-click='addSensor()' style="min-width:70px">Save</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

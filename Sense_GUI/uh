@@ -1,0 +1,34 @@
+<NotepadPlus>
+    <Project name="SenseGUI">
+        <Folder name="assets">
+            <Folder name="css">
+                <File name="assets\css\bootstrap-theme.min.css" />
+                <File name="assets\css\bootstrap.min.css" />
+            </Folder>
+            <Folder name="fonts">
+                <File name="assets\fonts\glyphicons-halflings-regular.eot" />
+                <File name="assets\fonts\glyphicons-halflings-regular.svg" />
+                <File name="assets\fonts\glyphicons-halflings-regular.ttf" />
+                <File name="assets\fonts\glyphicons-halflings-regular.woff" />
+                <File name="assets\fonts\glyphicons-halflings-regular.woff2" />
+            </Folder>
+            <Folder name="third-party">
+                <Folder name="js">
+                    <File name="assets\third-party\js\angular.js" />
+                    <File name="assets\third-party\js\angular.min.js" />
+                    <File name="assets\third-party\js\jquery-1.11.2.min.js" />
+                    <File name="assets\third-party\js\jquery-2.1.3.min.js" />
+                </Folder>
+            </Folder>
+            <File name="assets\baseController.js" />
+            <File name="assets\bootstrap.min.js" />
+            <File name="assets\configController.js" />
+        </Folder>
+        <File name="background.js" />
+        <File name="index - BS.html" />
+        <File name="index.html" />
+        <File name="main.js" />
+        <File name="manifest.json" />
+        <File name="styles.css" />
+    </Project>
+</NotepadPlus>
