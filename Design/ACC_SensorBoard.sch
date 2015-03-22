@@ -7699,7 +7699,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <part name="R1" library="rcl" deviceset="R-US_" device="R0805" value="4.7k"/>
 <part name="R2" library="rcl" deviceset="R-US_" device="R0805" value="4.7k"/>
 <part name="U$1" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
-<part name="U$2" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
+<part name="GND" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
 <part name="SUPPLY3" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY4" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY1" library="supply2" deviceset="GND" device=""/>
@@ -7727,7 +7727,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <instance part="R1" gate="G$1" x="149.86" y="101.6" rot="R270"/>
 <instance part="R2" gate="G$1" x="157.48" y="101.6" rot="R270"/>
 <instance part="U$1" gate="G$1" x="147.32" y="81.28" rot="R90"/>
-<instance part="U$2" gate="G$1" x="154.94" y="73.66" rot="R90"/>
+<instance part="GND" gate="G$1" x="154.94" y="73.66" rot="R90"/>
 <instance part="SUPPLY3" gate="GND" x="147.32" y="76.2"/>
 <instance part="SUPPLY4" gate="GND" x="154.94" y="68.58"/>
 <instance part="SUPPLY1" gate="GND" x="198.12" y="78.74"/>
@@ -7767,7 +7767,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <pinref part="SUPPLY3" gate="GND" pin="GND"/>
 </segment>
 <segment>
-<pinref part="U$2" gate="G$1" pin="1"/>
+<pinref part="GND" gate="G$1" pin="1"/>
 <pinref part="SUPPLY4" gate="GND" pin="GND"/>
 </segment>
 <segment>
@@ -7822,7 +7822,7 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="157.48" y1="88.9" x2="157.48" y2="96.52" width="0.1524" layer="91"/>
 <label x="157.48" y="88.9" size="1.778" layer="95" xref="yes"/>
 <pinref part="R2" gate="G$1" pin="2"/>
-<pinref part="U$2" gate="G$1" pin="2"/>
+<pinref part="GND" gate="G$1" pin="2"/>
 <wire x1="154.94" y1="78.74" x2="154.94" y2="88.9" width="0.1524" layer="91"/>
 <junction x="154.94" y="88.9"/>
 </segment>
