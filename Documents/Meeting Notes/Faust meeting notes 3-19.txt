@@ -1,0 +1,36 @@
+
+Mark suggestions
+	More frequent team meetings
+		no matter how to arrange meetings
+		should be regular
+			at least weekly
+			
+	meet with Zurk regularly
+	
+	kudos on document
+	
+	selection criteria on major components (compare table)
+		Sensors
+		MCU
+		GUI platform
+		
+	schedule needs reviewed by team ASAP
+		agreed to
+		keep it current
+		
+	requirements doc
+		use case
+		architectural block diagram
+		
+	test plan
+		scope
+		prerequisite tests
+		necessary preconditions
+		Who will do the testing?
+		
+	review docs before sending
+	have advisors review before sending to sponsors
+	
+	Alpha testing
+		find an end user to play with it
+		

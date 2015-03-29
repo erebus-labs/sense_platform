@@ -1,0 +1,25 @@
+PCB layout
+	looks like we need 4 layers
+		see if we have access to it
+			Wyoming campus
+			Faust
+			Phillip Wong
+			CAT
+			EPL
+			
+		sponsor pay for it
+			"Hobbyist Edition" $169
+			
+			
+Documentation
+	Alternative products
+		Table compare contrast
+	project statement
+		More details
+		what exactly are we doing?
+		
+next time
+	bring 3 docs
+		tasklist
+		proposal
+		requirements

@@ -1,0 +1,27 @@
+-WPR-
+	- more detail on the bullets
+		full sentence
+	- tasks by person
+
+where to be now
+	should have given proposal to Zurk
+	schedule for end of next week
+		
+wiki how to use the device
+
+each task should generate output
+
+*Document everything!!*
+
+test alongside development
+
+meet every other week with Zurk
+
+when is the poster presentation?
+	near the end of the project
+	make sure it all works by then
+
+agree internally on all non-trivial correspondences before sending
+ 
+create a WPR template
+
