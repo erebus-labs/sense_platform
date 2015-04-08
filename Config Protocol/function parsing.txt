@@ -1,0 +1,33 @@
+/*
+
+read(address, dest)
+
+*/
+
+
+int main(int argc, char** argv){
+	char *function;
+	while(statement = strtok(input, STATEMENT_TOK)){
+		function = strtok(statement, FUNCT_TOK);
+		switch(function)
+		{
+			case 'r':
+				arg0 = strtok(NULL, ARG_TOK);
+				arg1 = strtok(NULL, ARG_TOK);
+				break;
+			case 'w':
+				
+				break;
+			case 'r':
+				
+				break;
+			case 'r':
+				
+				break;
+			case 'r':
+				
+				break;
+			default: break;
+		}
+	}
+}

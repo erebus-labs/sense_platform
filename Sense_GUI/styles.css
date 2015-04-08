@@ -14,3 +14,7 @@ ng\:form {
   padding-left:0px;
   padding-right:0px;
 }
+
+.table>tbody>tr>td{
+	vertical-align:middle
+}

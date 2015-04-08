@@ -30,7 +30,6 @@ senseGui.controller("configController",['$scope',function($scope){
     ]
   $scope.intervalOptions = ["second", "minute", "hour", "day", "week"];
   $scope.types = sensorTypes;
-  console.log($scope.types);
 	
   $scope.changePort = function(){
     angular.forEach($scope.portOptions,function(v,i){
@@ -50,14 +49,23 @@ senseGui.controller("configController",['$scope',function($scope){
 		 samples:0,
 		interval:$scope.intervalOptions[0]
   }
+  
+	
 
   $scope.config = {
     id:null,
     name:"",
     overwrite:false,
-    sensors:[],
+    sensors:[]
   };
 
+  /*
+	
+	$scope.config.sensors.push({id:0,name:"thing1",type:$scope.types[0],port:$scope.portOptions[4],address:0,samples:1,interval:$scope.intervalOptions[0]});
+	$scope.config.sensors.push({id:3,name:"thing49",type:$scope.types[0],port:$scope.portOptions[4],address:0,samples:1,interval:$scope.intervalOptions[0]});
+	$scope.config.sensors.push({id:2,name:"thing3",type:$scope.types[0],port:$scope.portOptions[4],address:0,samples:1,interval:$scope.intervalOptions[0]});
+	*/
+	
   $scope.addSensor = function(){
 	  // VALIDATION
     $scope.alerts = [];
@@ -123,6 +131,10 @@ senseGui.controller("configController",['$scope',function($scope){
     }
   }
   
+  $scope.deleteSensor = function(index){
+	$scope.config.sensors.splice(index,1);
+  }
+  
   $scope.editSensor = function(sensor){
 	  var tmpName = sensor.name
 	  sensor.name = "*" + sensor.name;
@@ -148,9 +160,9 @@ senseGui.controller("configController",['$scope',function($scope){
   }
 
   $scope.saveConfig = function(){
-		var config = {type: 'saveFile'};
+	  console.log($scope.config);
+		var config = {type: 'saveFile',suggestedName:'config', accepts:[{extensions:["cfg"]}]};
 		chrome.fileSystem.chooseEntry(config, function(writableEntry) {	
-			console.log('Begin Write');
 			if (!writableEntry) {
 				console.log("No entry");
 				return;
@@ -158,25 +170,68 @@ senseGui.controller("configController",['$scope',function($scope){
 			writableEntry.createWriter(function(writer) {
 				writer.onerror = function(e){console.error(e);};
 				writer.onwriteend = function(e) {console.log('Write complete');};
-				writer.seek(0);
-				writer.write("test");
+				waitForIO(writer, function(){
+					writer.seek(0);
+					writer.write(new Blob([angular.toJson($scope.config)], {type:"text/plain"}));
+				});
 			});
 		});
 	}
+	
+  $scope.loadConfig = function(){
+	  
+		var config = {type: 'openFile'};
+		chrome.fileSystem.chooseEntry(config, function(readOnlyEntry) {
+
+		readOnlyEntry.file(function(file) {
+		  var reader = new FileReader();
+
+		  reader.onloadend = function(e) {
+			$scope.config = angular.fromJson(e.target.result);
+			console.log($scope.config);
+		  };
+
+		  var arg = reader.readAsText(file);
+		});
+  })};
+	
+	function waitForIO(writer, callback) {
+	  // set a watchdog to avoid eventual locking:
+	  var start = Date.now();
+	  // wait for a few seconds
+	  var reentrant = function() {
+		if (writer.readyState===writer.WRITING && Date.now()-start<4000) {
+		  setTimeout(reentrant, 100);
+		  return;
+		}
+		if (writer.readyState===writer.WRITING) {
+		  console.error("Write operation taking too long, aborting!"+
+			" (current writer readyState is "+writer.readyState+")");
+		  writer.abort();
+		} 
+		else {
+		  callback();
+		}
+	  };
+	  setTimeout(reentrant, 100);
+	}
+	
+	$scope.launchSerial = function(){
+		console.log("launch serial");
+		chrome.app.window.create(
+			'connect.html',
+			{
+			  id: 'connectWindow',
+			  bounds: {width: 500, height: 500}
+			},
+			function(createWindow){
+				console.log("created window");
+			}
+		);
+	}
+	
 
 }]);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

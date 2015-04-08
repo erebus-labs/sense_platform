@@ -1,0 +1,17 @@
+Current Time
+Per sensor
+	Sensor Name
+	Polling freq
+		number
+		per time
+		
+	comm type
+		ADC vs.  I2C
+		
+	transfer function
+		scaler
+		offset
+		
+	If I2C
+		Init sequence ?
+		Read Sequence ?
