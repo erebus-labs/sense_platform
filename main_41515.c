@@ -568,7 +568,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 	}
 	else{
 		rxString[rx_index] = rxBuffer;
-		ADC1_COUNTER = rxString[rx_index];
+		ADC1_SCHEDULE = rxString[rx_index];
 		rx_index++;
 		if(rx_index >= MAX_LEN){
 			return;
