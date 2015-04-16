@@ -90,20 +90,20 @@ typedef struct sensor{
 }SENS;
 SENS sensors[10];
 
-static uint8_t ACCEL_COUNTER;
-static uint8_t ACCEL_SCHEDULE=10;
+static uint32_t ACCEL_COUNTER;
+static uint32_t ACCEL_SCHEDULE=10;
 
-static uint8_t ADC1_COUNTER;
-static uint8_t ADC1_SCHEDULE=0;
+static uint32_t ADC1_COUNTER;
+static uint32_t ADC1_SCHEDULE=0;
 
-static uint8_t ADC2_COUNTER;
-static uint8_t ADC2_SCHEDULE=30;
+static uint32_t ADC2_COUNTER;
+static uint32_t ADC2_SCHEDULE=30;
 
-static uint8_t ADC3_COUNTER;
-static uint8_t ADC3_SCHEDULE=60;
+static uint32_t ADC3_COUNTER;
+static uint32_t ADC3_SCHEDULE=60;
 
-static uint8_t ADC4_COUNTER;
-static uint8_t ADC4_SCHEDULE=255;
+static uint32_t ADC4_COUNTER;
+static uint32_t ADC4_SCHEDULE=255;
 
 uint8_t data_to_read;
 
