@@ -45,19 +45,29 @@
 #include "usart.h"
 #include "gpio.h"
 #include "SENSORS.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 /* USER CODE BEGIN Includes */
 #define DEBUG
-#define MAX_LEN 100
+#define MAX_LEN 2//100
 #define __USE_IRQ
+
+#define ADC_TYPE 0
+#define I2C_TYPE 1
+#define UNUSED '\0'
+
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 uint8_t retSD;    /* Return value for SD */
 char SD_Path[4];  /* SD logical drive path */
+FATFS SDFatFs;  /* File system object for SD card logical drive */
+FIL MyFile;     /* File object */
+FRESULT res;                                          /* FatFs function common result code */
+uint32_t byteswritten, bytesread;                     /* File write/read counts */
+uint8_t wtext[] = "CAPSTONE SD Test1:"; /* File write buffer */
+uint8_t rtext[100];                                   /* File read buffer */
+
 volatile uint32_t adc1;
 volatile uint32_t I2C_value;
 
@@ -68,6 +78,17 @@ typedef struct t_settings{
 	uint8_t ADC3_SET;
 	uint8_t ADC4_SET;
 }T_SET;
+T_SET timers;
+
+typedef struct sensor{
+	char * name;
+	uint8_t type;
+	uint8_t array_index;
+	uint32_t alarm;
+	uint32_t data;
+	//need to add a "conversion factor" entry, may define as a macro...
+}SENS;
+SENS sensors[10];
 
 static uint8_t ACCEL_COUNTER;
 static uint8_t ACCEL_SCHEDULE=10;
@@ -93,36 +114,16 @@ static DMA_HandleTypeDef huart_tx;
 static DMA_HandleTypeDef hdma_adc;
 static DMA_HandleTypeDef hdma_i2c1;
 static DMA_HandleTypeDef hdma_sdio;
-/*
-extern ADC_HandleTypeDef hadc1;
-extern ADC_HandleTypeDef hadc2;
-extern ADC_HandleTypeDef hadc3;
-extern ADC_HandleTypeDef hadc4;
 
-extern UART_HandleTypeDef huart1;
-extern I2C_HandleTypeDef hi2c1;
+SD_HandleTypeDef SD_CARD;
 
-extern DMA_HandleTypeDef hdma_sdio;
-extern DMA_HandleTypeDef hdma_adc1;
-extern DMA_HandleTypeDef huart_rx;
-extern DMA_HandleTypeDef huart_tx;
-extern DMA_HandleTypeDef hdma_i2c1;
-*/
-SD_HandleTypeDef SD_CARD; 
 ADC_ChannelConfTypeDef sConfig;
-__IO uint16_t uhADCxConvertedValue = 0;
-volatile uint32_t ADC_TEMP;
-volatile uint32_t STAMPER=0;
 
 /*Variables for string receive over USART:*/
 uint8_t rxBuffer = '\000';
 uint8_t rxString[MAX_LEN];
 uint8_t txBuffer[] = "SERIAL PRINT\n";
 int rx_index=0;
-
-/*Functions to read from sensors:*/
-uint32_t READ_ADC(ADC_HandleTypeDef *);
-uint32_t READ_I2C(I2C_HandleTypeDef *);
 
 /*Peripheral functions:*/
 void SystemClock_Config(void);
@@ -131,13 +132,13 @@ void ADC_INIT(void);
 void I2C_INIT(void);
 void IRQ_INIT(void);
 void USART_INIT(void);
-void ARBITRATE(uint32_t);
+void ARBITRATE(void);
+void SD_write_test(void);
+void Error_Handler(void);
+void print(uint8_t string[]);
 
 void I2C_DEVICE_INIT(I2C_HandleTypeDef *, uint8_t dev_id);
-void SET_RTC_ALARM(RTC_HandleTypeDef *, uint32_t);
-
 void LIGHT_LEDS(uint32_t);
-void HAL_DMA_XferCpltCallback(void);
 
 int main(void)
 {
@@ -161,15 +162,15 @@ int main(void)
   /* USER CODE BEGIN 2 */
   ADC_INIT();
   I2C_INIT();
+  //HAL_UART_MspInit(&huart1);
   USART_INIT();
   GPIO_INIT();
-
+  //HAL_SD_Init(&SD_CARD, &SD_CardInfo);
   IRQ_INIT();
   //I2C_DEVICE_INIT(&hi2c1, ACCEL_ADDR);
-
+  SD_write_test();
   /*## FatFS: Link the SD driver ###########################*/
   retSD = FATFS_LinkDriver(&SD_Driver, SD_Path);
-
   /* Infinite loop */
   while (1)
   {     
@@ -223,12 +224,8 @@ void SystemClock_Config(void){
 void print(uint8_t string[]){
 	uint8_t index;
 	for(index=0; index < sizeof(uint8_t); index++){
-		//HAL_UART_Transmit_IT(&huart1, (uint8_t*)&string[index], 10);
-	HAL_UART_Transmit_DMA(&huart1, (uint8_t*)&string[index],1);	
+	HAL_UART_Transmit_IT(&huart1, (uint8_t*)&string[index],1);	
 	}	
-	//HAL_UART_Transmit(&huart1, (uint8_t *)string, strlen(string), 1);
-	//HAL_DMA_Start_IT(huart1.hdmatx, *(uint32_t*)string, (uint32_t)huart1.Instance->DR, sizeof(uint32_t*)); 
-	//HAL_DMA_Start_IT(huart1->hdmatx, *(uint32_t*)tmp, (uint32_t)&huart->Instance->DR, Size);
 }
 /******************************************************************************
 * @brief  ADC_INIT(void)
@@ -250,7 +247,7 @@ void ADC_INIT(void){
 	hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_T1_CC1;
 	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
 	hadc1.Init.NbrOfConversion = 1;
-	hadc1.Init.DMAContinuousRequests = DISABLE;//ENABLE;
+	hadc1.Init.DMAContinuousRequests = ENABLE;//ENABLE;
 	hadc1.Init.EOCSelection = EOC_SINGLE_CONV; //DISABLE;//
 	HAL_ADC_Init(&hadc1);
 
@@ -277,7 +274,6 @@ void ADC_INIT(void){
 	__HAL_LINKDMA(&hadc1, DMA_Handle, hdma_adc);
 
 	//HAL_DMA_Start_IT(&hdma_adc, (uint32_t)&hadc1.Instance->DR, (uint32_t)&uhADCxConvertedValue, sizeof(uint32_t));
-	//HAL_ADC_Start_DMA(&hadc1, (uint32_t *)&uhADCxConvertedValue, 1);
 }
 
 /******************************************************************************
@@ -391,6 +387,7 @@ void IRQ_INIT(void){
 void GPIO_INIT(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
 	__GPIOA_CLK_ENABLE();
+	__GPIOB_CLK_ENABLE();
 	__USART1_CLK_ENABLE();
 	/**USART1 GPIO Configuration    
 	PA9     ------> USART1_TX
@@ -435,6 +432,13 @@ void GPIO_INIT(void){
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	GPIO_InitStructure.Speed = GPIO_SPEED_LOW;
 	HAL_GPIO_Init(GPIOE, &GPIO_InitStructure);
+	
+	/*Initialize GPIO for FS LEDs:*/
+	GPIO_InitStructure.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;
+	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStructure.Pull = GPIO_NOPULL;
+	GPIO_InitStructure.Speed = GPIO_SPEED_LOW;
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
 }
 /******************************************************************************
 * @brief  USART_INIT(void)
@@ -494,7 +498,7 @@ void USART_INIT(void){
 	//print("Serial started!\n");
 	//__HAL_UART_ENABLE_IT(&huart1, HAL_UART_STATE_READY);
 
-	//HAL_UART_Receive_IT(&huart1, (uint8_t *)&rxString, 1);
+	HAL_UART_Receive_IT(&huart1, (uint8_t *)&rxString, 1);
 }/*END INIT USART*/
 
 /******************************************************************************
@@ -503,29 +507,20 @@ void USART_INIT(void){
 * @retval None
 ******************************************************************************/
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
-	ARBITRATE(++STAMPER);
+	ARBITRATE();
 }
 /******************************************************************************
-* @brief  Alarm A callback.
+* @brief  Arbitration function for the Alarm A:
+*	  -Determines which sensor to sample based on the timer counter
 * @param  hrtc: RTC handle
 * @retval None
 ******************************************************************************/
-void HAL_RTCEx_AlarmBEventCallback(RTC_HandleTypeDef *hrtc)
-{
-  /* NOTE : This function is defined in ..._hal_rtc.c, to not modify the
-	library file it has been implemented here:
-   */
-	//print("I2C Sample from Alarm B");
-	//READ_I2C(&hi2c1);
-		
-}
-
-void ARBITRATE(uint32_t CRAMPER){
+void ARBITRATE(void){
 	
 	if(ADC1_COUNTER == ADC1_SCHEDULE){
 		HAL_ADC_Start_IT(&hadc1);//WORKS!
-		ADC1_COUNTER=0;
 		//HAL_ADC_Start_DMA(&hadc1, (uint32_t *)&uhADCxConvertedValue, 1);//WORKS with DMA
+		ADC1_COUNTER=0;
 	}
 	else ++ADC1_COUNTER;
 	
@@ -537,12 +532,6 @@ void ARBITRATE(uint32_t CRAMPER){
 	}
 	else ++ACCEL_COUNTER;
 }
-
-
-
-void HAL_DMA_XferCpltCallback(void){
-	LIGHT_LEDS((uint32_t)data_to_read);
-}
 /******************************************************************************
 * @abstract HAL_ADC_ConvCpltCallback function reads from specific ADC device
 * @ref HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef * hadc1)
@@ -550,53 +539,13 @@ void HAL_DMA_XferCpltCallback(void){
 * @retval NONE
 ******************************************************************************/
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef * hadc){
-	__IO uint16_t adc_val=0;//WORKS with IT
+	__IO uint32_t adc_val=0;
+	__IO uint16_t adc_temp=0;//WORKS with IT
 	adc_val = HAL_ADC_GetValue(&hadc1);//WORKS with IT
 	LIGHT_LEDS(adc_val);//WORKS with IT
-	//HAL_UART_Transmit(&huart1, (uint8_t *)&adc_val, sizeof(adc_val), 1);
-	adc_val=(adc_val/100);
-	HAL_UART_Transmit_IT(&huart1, (uint8_t*)&adc_val, 1);//8);
-	//HAL_SD_WriteBlocks_DMA(&sdio
-}
-/******************************************************************************
-* @abstract READ_I2C function reads from I2C channel based on passed arg
-TODO: Pass device ADDRESS? Pass HandleType?
-* @ref READ_I2C(I2C_HandleTypeDef *I2C_device)
-* @param I2C_device - WHICH I2C device to read from...
-******************************************************************************/
-uint32_t READ_I2C(I2C_HandleTypeDef * I2C_device){		
-	//HAL_I2C_IsDeviceReady(&hi2c1, ACCEL_ADDR, PHY_FULLDUPLEX_100M, 10);
-	data_to_read=0;
-	HAL_I2C_Mem_Read_IT(&hi2c1, ACCEL_READ_ADDR, ACCEL_DATA_X0, sizeof(uint8_t), &data_to_read, sizeof(uint8_t)); 
-	//HAL_I2C_Master_Receive_IT(&hi2c1, ACCEL_ADDR, &data_to_read, sizeof(data_to_read));
-	//HAL_I2C_Mem_Read_IT(&hi2c1, ACCEL_ADDR, ACCEL_DATA_X0, sizeof(uint8_t), &data_to_read, sizeof(data_to_read));
-	return I2C_value;
-}
-/******************************************************************************
-* @abstract READ_ADC function reads from specific ADC channel
-* @ref ADC_READ(ADC_HandleTypeDef * adc_num)
-* @param ADC_HandleTypeDef * adc_num
-* @retval ADC value read from channel
-******************************************************************************/
-uint32_t READ_ADC(ADC_HandleTypeDef * adc_num){	
-	volatile uint32_t adc_value;
-	//uint32_t * pass_to_SD;
-	HAL_ADC_Start(&hadc1);
-	HAL_ADC_PollForConversion(&hadc1, 1);
-	adc_value=0;
-	adc_value = HAL_ADC_GetValue(&hadc1);
-	//*pass_to_SD = adc_value;
-	#ifdef DEBUG
-		LIGHT_LEDS(adc_value);
-	#endif
-	print("Lighting LEDs");
-	MX_RTC_Init();
-	/*TODO: THIS IS THE DEFINITION OF A KLUDGE, SHOULD SET IRQ PRIORITY DIFFERENTLY
-	OR SIMPLY RESET THE SINGLE TIMER, NOT THE ENTIRE ROUTINE, PLUS IT VERY WELL COULD F*CK UP THE
-	RTC ITSELF, THUS RUINING OUR TIMERS ALTOGETHER!*/
-	//HAL_SD_WriteBlocks_DMA(&hsd, pass_to_SD, SD_write_address, SDIO_DATABLOCK_SIZE_512B, 1);
-	//HAL_SD_CheckWriteOperation(&hsd, 1);
-return adc_value;
+	adc_temp=(adc_val/1000);
+	HAL_UART_Transmit_IT(&huart1, (uint8_t*)&adc_temp, 1);//8);
+	//HAL_SD_WriteBlocks_DMA(&SD_CARD, (uint32_t *)adc_val, 0x0, SDIO_DATABLOCK_SIZE_512B, 1);
 }
 /******************************************************************************
 * @brief  SD_SDIO_DMA_IRQHANDLER(void)
@@ -613,19 +562,18 @@ void SD_SDIO_DMA_IRQHANDLER(void){
 ******************************************************************************/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 	//HAL_NVIC_ClearPendingIRQ(DMA2_Stream2_IRQn);	
-	/*
-	if(rxBuffer =='\n' ||rxBuffer == '\r'){
-		print("User wrote: %s");
-		print((char *)&rxBuffer);
+	
+	if(rxBuffer =='\n' || rxBuffer == '\r'){
+		print((uint8_t*)&rxBuffer);
 	}
 	else{
 		rxString[rx_index] = rxBuffer;
+		ADC1_COUNTER = rxString[rx_index];
 		rx_index++;
-		if(rx_index > MAX_LEN){
-			
+		if(rx_index >= MAX_LEN){
+			return;
 		}	
 	}
-	*/
 	HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_8);
 }
 /******************************************************************************
@@ -646,7 +594,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
 	__HAL_UART_CLEAR_FLAG(huart, HAL_UART_STATE_ERROR);
 	HAL_NVIC_ClearPendingIRQ(USART1_IRQn);
-	//print("\n\nSERIAL ERROR!\n");
+	Error_Handler();
 }
 /******************************************************************************
 * @brief  HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef * hi2c)
@@ -669,26 +617,6 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef * hi2c){
 		HAL_UART_Transmit_IT(&huart1, (uint8_t*)&data_to_read, 1);
 	#endif
 }
-/******************************************************************************
-* @abstract SET_RTC_ALARM sets corresponding alarm based on passed args
-TODO: Pass device ADDRESS? Pass HandleType?
-* @ref SET_RTC_ALARM(RTC_HandleTypeDef *which_alarm)
-* @param which_alarm - WHICH alarm to set, A or B really...
-* @param alarm_time - 32 bit value packed as Alarm register format:
-TODO: ADD ASCII DIAGRAM/ ILLUSTRATION
-******************************************************************************/
-void SET_RTC_ALARMS(RTC_HandleTypeDef * which_alarm, uint32_t alarm_time){
-	/*Set Alarm-A and Alarm-B, TODO: SET REC CLOCK FROM DFU or HID mode, (programming)*/
-	/* RTC.C starting on line: 77 sets ALARMA--->MASKS DEFINED in AN3371.pdf, P. 12, Table 5!*/
-	/*        M3__M2__M1__M0_  
-	EXAMPLE: | 1 | 1 | 1 | 0 | -> 0xD would set off the alarm every minute...0xF every second...crontab!
-	AN3371.pdf P. 21, Table 11 shows RTC Timestamp based Interrupts Init , etc.
-	*/
-	//which_alarm.
-    
-	//HAL_RTC_SetAlarm(&hrtc, &which_alarm.AlarmA, FORMAT_BIN);
-}
-
 /******************************************************************************
 * @abstract LIGHT_LEDS function lights corresponding LEDS based on passed arg
 * @ref LIGHT_LEDS(uint32_t value)
@@ -748,6 +676,11 @@ void LIGHT_LEDS(uint32_t value){
                   and __HAL_SD_SDIO_CLEAR_IT()
     (#) At this stage, you can perform SD read/write/erase operations after SD card initialization  
 */
+/******************************************************************************
+* @abstract Initialize SD Card
+* @ref SD_CARD_INIT(void)
+* @param NONE
+******************************************************************************/
 void SD_CARD_INIT(void){
 	__SDIO_CLK_ENABLE();
 	__HAL_SD_SDIO_ENABLE();
@@ -756,105 +689,119 @@ void SD_CARD_INIT(void){
 	HAL_SD_CardInfoTypedef SD_info;
 	
 	SD_info.CardBlockSize = SDIO_DATABLOCK_SIZE_512B;
+	//if(HAL_GPIO_ReadPin(GPIO_PIN_, MICROPY_HW_SDCARD_DETECT_PIN.pin_mask))
+	//	return 1;
 	//SD_info.CardCapacity = SDIO_
 	
 	HAL_SD_Init(&SD_CARD, &SD_info);
 	
 }
-
 /******************************************************************************
-* @abstract I2C_INIT function initializes I2C Accelerometer sensor
-* @ref ADC_READ(I2C_HandleTypeDef * I2C_device, uint8_t dev_id)
-* @param I2C_HandleTypeDef * I2C_device
-* @retval NONE
+* @abstract Trap the error condition and blink the RED LED on 
+* @ref Error_Handler(void)
+* @param uint32_t value - determines which LED(s) to light, ADC debugging!
 ******************************************************************************/
-void I2C_DEVICE_INIT(I2C_HandleTypeDef * I2C_device, uint8_t dev_id){
-	uint8_t * to_send;//, to_receive;
-	uint8_t samples;
-	uint8_t * X_ST;
-	uint8_t * Y_ST;
-	uint8_t * Z_ST;
-	uint8_t * X_ST_ON;
-	uint8_t * Y_ST_ON;
-	uint8_t * Z_ST_ON;
-	uint8_t * X_SAMPLES;
-	uint8_t * Y_SAMPLES;
-	uint8_t * Z_SAMPLES;
-	uint8_t * X_SAMPLES_ON;
-	uint8_t * Y_SAMPLES_ON;
-	uint8_t * Z_SAMPLES_ON;
-
-	switch(dev_id){
-		case ACCEL_ADDR:
-			to_send = ACCEL_RATE_100KHZ;/*SET ACCEL TO 100KHZ CLOCK FREQUENCY, SAME AS IS I2C SET TO*/
-			HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-			HAL_I2C_Mem_Write(I2C_device, ACCEL_ADDR, ACCEL_BW_RATE, sizeof(uint8_t), to_send, sizeof(uint8_t), 10);
-		
-			to_send = SELF_TEST_OFF;
-			HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-			HAL_I2C_Mem_Write(I2C_device, ACCEL_ADDR, ACCEL_DATA_FMT, sizeof(uint8_t), to_send, sizeof(uint8_t), 10);
-			for(samples=0; samples<NUM_SAMPLES; samples++){
-				HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-				HAL_I2C_Mem_Read(I2C_device, ACCEL_ADDR, ACCEL_DATA_X0, sizeof(uint8_t), &X_SAMPLES[samples], sizeof(uint8_t), 10);
-				HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-				HAL_I2C_Mem_Read(I2C_device, ACCEL_ADDR, ACCEL_DATA_Y0, sizeof(uint8_t), &Y_SAMPLES[samples], sizeof(uint8_t), 10);
-				HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-				HAL_I2C_Mem_Read(I2C_device, ACCEL_ADDR, ACCEL_DATA_Z0, sizeof(uint8_t), &Z_SAMPLES[samples], sizeof(uint8_t), 10);
-			}//end for
-			for(samples=0;samples<NUM_SAMPLES; samples++){
-				X_ST += X_SAMPLES[samples]; 
-				Y_ST += Y_SAMPLES[samples];
-				Y_ST += Z_SAMPLES[samples];
-			}//end for
-			
-			*X_ST = *X_ST/NUM_SAMPLES; /*AVERAGE THE NON-SELF TEST VALUES*/
-			*Y_ST = *Y_ST/NUM_SAMPLES;
-			*Z_ST = *Z_ST/NUM_SAMPLES;
-			
-			to_send = SELF_TEST_ON; /*TURN ON SELF-TEST MODE:*/
-			HAL_Delay(1);
-			HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-			HAL_I2C_Mem_Write(I2C_device, ACCEL_ADDR, ACCEL_DATA_FMT, sizeof(uint8_t), to_send, sizeof(uint8_t), 100);
-			
-			for(samples=0; samples<NUM_SAMPLES; samples++){/*TAKE NUM_SAMPLES*/
-				HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-				HAL_I2C_Mem_Read(I2C_device, ACCEL_ADDR, ACCEL_DATA_X0, sizeof(uint8_t), &X_SAMPLES_ON[samples], sizeof(uint8_t), 10);
-				HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-				HAL_I2C_Mem_Read(I2C_device, ACCEL_ADDR, ACCEL_DATA_Y0, sizeof(uint8_t), &Y_SAMPLES_ON[samples], sizeof(uint8_t), 10);
-				HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-				HAL_I2C_Mem_Read(I2C_device, ACCEL_ADDR, ACCEL_DATA_Z0, sizeof(uint8_t), &Z_SAMPLES_ON[samples], sizeof(uint8_t), 10);
-			}//end for
-			for(samples=0;samples<NUM_SAMPLES; samples++){/*SUM SAMPLES, CURRENTLY 10*/
-				X_ST_ON += X_SAMPLES_ON[samples]; 
-				Y_ST_ON += Y_SAMPLES_ON[samples];
-				Z_ST_ON += Z_SAMPLES_ON[samples];
-			}//end for
-			*X_ST_ON = *X_ST_ON/NUM_SAMPLES; /*AVERAGE THE SAMPLES*/
-			*Y_ST_ON = *Y_ST_ON/NUM_SAMPLES;
-			*Z_ST_ON = *Z_ST_ON/NUM_SAMPLES;
-			
-			*X_ST_ON -= *X_ST; /*TAKE THE DIFFERENCE OF THE NORMAL ANDSELF TEST VALUES*/
-			*Y_ST_ON -= *Y_ST;
-			*Z_ST_ON -= *Z_ST;
-			//if()	/*IF THE CALIBRATION VALUE IS NO GOOD, RESET AND CALL INIT ROUTINE AGAIN*/		
-			to_send = ACCEL_FIFO_INIT;
-			HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-			HAL_I2C_Mem_Write(&hi2c1, ACCEL_ADDR, ACCEL_FIFO_CTRL, sizeof(uint8_t), to_send, sizeof(uint8_t), 100); 
-			HAL_I2C_IsDeviceReady(I2C_device, ACCEL_ADDR, 1, 10);
-			HAL_I2C_Mem_Read(I2C_device, ACCEL_ADDR, ACCEL_DATA_X0, sizeof(uint8_t), &Z_SAMPLES_ON[samples], sizeof(uint8_t), 100);
-
-		break;
-		case GYRO_ADDR:
-			
-		break;
-		case PRESSURE_ADDR:
-			
-		break;
-		
+void Error_Handler(void){
+	while(1){
+		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14);
+		HAL_Delay(10);
 	}
-
+}
+/******************************************************************************
+* @abstract Initialize the filesystem and do a test write to the card
+* @ref SD_write_test(void)
+* @param NONE
+******************************************************************************/
+void SD_write_test(void){
+	
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+  /*##-1- Link the micro SD disk I/O driver ##################################*/
+  if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
+  {
+    /*##-2- Register the file system object to the FatFs module ##############*/
+    if(f_mount(&SDFatFs, (TCHAR const*)SD_Path, 0) != FR_OK)
+    {
+      /* FatFs Initialization Error */
+      Error_Handler();
+    }
+    else
+    {
+      /*##-3- Create a FAT file system (format) on the logical drive #########*/
+      /* WARNING: Formatting the uSD card will delete all content on the device */
+      if(f_mkfs((TCHAR const*)SD_Path, 0, 0) != FR_OK)
+      {
+        /* FatFs Format Error */
+        Error_Handler();
+      }
+      else
+      {       
+        /*##-4- Create and Open a new text file object with write access #####*/
+        if(f_open(&MyFile, "STM32.TXT", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
+        {
+          /* 'STM32.TXT' file Open for write Error */
+          Error_Handler();
+        }
+        else
+        {
+          /*##-5- Write data to the text file ################################*/
+          res = f_write(&MyFile, wtext, sizeof(wtext), (void *)&byteswritten);
+          
+          if((byteswritten == 0) || (res != FR_OK))
+          {
+            /* 'STM32.TXT' file Write or EOF Error */
+            Error_Handler();
+          }
+          else
+          {
+            /*##-6- Close the open text file #################################*/
+            f_close(&MyFile);
+            
+            /*##-7- Open the text file object with read access ###############*/
+            if(f_open(&MyFile, "STM32.TXT", FA_READ) != FR_OK)
+            {
+              /* 'STM32.TXT' file Open for read Error */
+              Error_Handler();
+            }
+            else
+            {
+              /*##-8- Read data from the text file ###########################*/
+              res = f_read(&MyFile, rtext, sizeof(rtext), (UINT*)&bytesread);
+              
+              if((bytesread == 0) || (res != FR_OK))
+              {
+                /* 'STM32.TXT' file Read or EOF Error */
+                Error_Handler();
+              }
+              else
+              {
+                /*##-9- Close the open text file #############################*/
+                f_close(&MyFile);
+                
+                /*##-10- Compare read data with the expected data ############*/
+                if((bytesread != byteswritten))
+                {                
+                  /* Read data is different from the expected data */
+                  Error_Handler();
+                }
+                else
+                {
+                  /* Success of the demo: no error occurrence */
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /*##-11- Unlink the RAM disk I/O driver ####################################*/
+  FATFS_UnLinkDriver(SD_Path);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);//Turn LED off on card release
 
 }
+
 /* USER CODE END 4 */
 
 #ifdef USE_FULL_ASSERT
