@@ -1,55 +1,37 @@
 senseGui.controller("configController",['$scope',function($scope){
+  $scope.editing = false;
+  $scope.programming = false;
   $scope.maxAddress = 7;
   $scope.alerts = [];
   $scope.test = false;
-  $scope.portOptions = [
-      {
-        name:"A1",
-        type:"A"
-      },
-       {
-        name:"A2",
-        type:"A"
-      },
-       {
-        name:"A3",
-        type:"A"
-      },
-       {
-        name:"A4",
-        type:"A"
-      },
-       {
-        name:"D1",
-        type:"D"
-      },
-       {
-        name:"D2",
-        type:"D"
-      }
-    ]
+  $scope.portOptions = ["A1","A2","A3","A4"];
   $scope.intervalOptions = ["second", "minute", "hour", "day", "week"];
   $scope.types = sensorTypes;
-	
-  $scope.changePort = function(){
-    angular.forEach($scope.portOptions,function(v,i){
-      if($scope.sensor.type.connCode=="A" && v.name == "A1")
-        $scope.sensor.port = v;
-      if($scope.sensor.type.connCode == "D" && v.name == "D1")
-        $scope.sensor.port = v;
-    })
-  }
 
   $scope.sensor = {
-          id:null,
-        name:"",
-        type:$scope.types[0],
+			  id:null,
+			name:"",
+			type:$scope.types[0],
 		    port:$scope.portOptions[0],
 		 address:0,
-		 samples:0,
+		 samples:1,
 		interval:$scope.intervalOptions[0]
   }
   
+  $scope.cancel = function(){
+	  $scope.editing = false;
+	  $scope.programming = false;
+  }
+  
+  $scope.cancelProgramming = function(){
+	  $scope.programming = false;
+	  serial.Disconnect();
+  }
+  
+  	$scope.newSensor = function(){
+		$scope.editing = true;
+		$scope.resetSensor();
+	}
 	
 
   $scope.config = {
@@ -61,10 +43,12 @@ senseGui.controller("configController",['$scope',function($scope){
 
   /*
 	
-	$scope.config.sensors.push({id:0,name:"thing1",type:$scope.types[0],port:$scope.portOptions[4],address:0,samples:1,interval:$scope.intervalOptions[0]});
-	$scope.config.sensors.push({id:3,name:"thing49",type:$scope.types[0],port:$scope.portOptions[4],address:0,samples:1,interval:$scope.intervalOptions[0]});
-	$scope.config.sensors.push({id:2,name:"thing3",type:$scope.types[0],port:$scope.portOptions[4],address:0,samples:1,interval:$scope.intervalOptions[0]});
+	$scope.config.sensors.push({id:0,name:"thing1",type:$scope.types[0],port:$scope.portOptions[0],address:0,samples:1,interval:$scope.intervalOptions[0]});
+	$scope.config.sensors.push({id:3,name:"thing2",type:$scope.types[0],port:$scope.portOptions[1],address:0,samples:2,interval:$scope.intervalOptions[1]});
+	$scope.config.sensors.push({id:2,name:"thing3",type:$scope.types[1],port:$scope.portOptions[3],address:0,samples:3,interval:$scope.intervalOptions[2]});
+	
 	*/
+
 	
   $scope.addSensor = function(){
 	  // VALIDATION
@@ -80,6 +64,7 @@ senseGui.controller("configController",['$scope',function($scope){
 	// Address
     if($scope.sensor.type.connCode == "D")
     {
+      $scope.sensor.port = null;
 		// valid number
       if(!/^\d+$/.test($scope.sensor.address))
         $scope.alerts.push("Address must be a number.")
@@ -101,19 +86,20 @@ senseGui.controller("configController",['$scope',function($scope){
 			// No duplicate address / port combo
 			if($scope.sensor.type.connCode == "A")
 			{
-				if(v.port.name == $scope.sensor.port.name)
-				$scope.alerts.push("Analog port " + v.port.name + " occupied by sensor \"" + v.name + "\".");
+				if(v.port == $scope.sensor.port)
+				$scope.alerts.push("Analog port " + v.port + " occupied by sensor \"" + v.name + "\".");
 			}
 			else
 			{
-				if(v.port.name == $scope.sensor.port.name && v.address == $scope.sensor.address)
-				$scope.alerts.push("Port/address " + v.port.name + "." + v.address + " occupied by sensor \"" + v.name + "\".");
+				if(v.address == $scope.sensor.address)
+				$scope.alerts.push("Address " + v.address + " occupied by sensor \"" + v.name + "\".");
 			}
         }
     })
 
 	  // Passed validation, save sensor
     if($scope.alerts.length == 0){
+		$scope.editing = false;
       if($scope.sensor.id == null){
         $scope.sensor.id = $scope.config.sensors.length+1;
         $scope.config.sensors.push(angular.copy($scope.sensor));
@@ -136,6 +122,7 @@ senseGui.controller("configController",['$scope',function($scope){
   }
   
   $scope.editSensor = function(sensor){
+	  $scope.editing = true;
 	  var tmpName = sensor.name
 	  sensor.name = "*" + sensor.name;
     $scope.sensor = angular.copy(sensor);
@@ -189,6 +176,7 @@ senseGui.controller("configController",['$scope',function($scope){
 		  reader.onloadend = function(e) {
 			$scope.config = angular.fromJson(e.target.result);
 			console.log($scope.config);
+			$scope.$apply();
 		  };
 
 		  var arg = reader.readAsText(file);
@@ -217,19 +205,12 @@ senseGui.controller("configController",['$scope',function($scope){
 	}
 	
 	$scope.launchSerial = function(){
-		console.log("launch serial");
-		chrome.app.window.create(
-			'connect.html',
-			{
-			  id: 'connectWindow',
-			  bounds: {width: 500, height: 500}
-			},
-			function(createWindow){
-				console.log("created window");
-			}
-		);
+		$scope.programming = true;
 	}
 	
+	$scope.pushConfig = function(){
+		log("Pushing Config...");
+	}
 
 }]);
 

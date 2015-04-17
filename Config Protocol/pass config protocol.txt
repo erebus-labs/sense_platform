@@ -1,0 +1,5 @@
+time, overwrite, numsensors
+sensor
+	name, type, address, a, b, c, settle time, init, read
+
+* begin *

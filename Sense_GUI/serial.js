@@ -26,6 +26,7 @@ var SerialConnection = function() {
   this.boundOnReceive = this.onReceive.bind(this);
   this.boundOnReceiveError = this.onReceiveError.bind(this);
   this.onConnect = new chrome.Event();
+  this.onDisconnect = new chrome.Event();
   this.onReadLine = new chrome.Event();
   this.onError = new chrome.Event();
 };
@@ -39,6 +40,14 @@ SerialConnection.prototype.onConnectComplete = function(connectionInfo) {
   serial.onReceive.addListener(this.boundOnReceive);
   serial.onReceiveError.addListener(this.boundOnReceiveError);
   this.onConnect.dispatch();
+};
+
+SerialConnection.prototype.onDisconnectComplete = function(success) {
+  if (!success) {
+    log("Disconnect failed!");
+    return;
+  }
+  this.onDisconnect.dispatch();
 };
 
 SerialConnection.prototype.onReceive = function(receiveInfo) {
@@ -81,7 +90,7 @@ SerialConnection.prototype.disconnect = function() {
   if (this.connectionId < 0) {
     throw 'Invalid connection';
   }
-  
+  serial.disconnect(this.connectionId, this.onDisconnectComplete.bind(this));
 };
 
 ////////////////////////////////////////////////////////
@@ -102,19 +111,20 @@ var connection = new SerialConnection();
 
 connection.onConnect.addListener(function() {
   log('connected...');
+  status('Connected');
   // remove the connection drop-down
   document.querySelector('#port_list').style.display = 'none';
-  document.querySelector('#port_list').style.display = 'block';
-  // Simply send text to Espruino
-  connection.send('"Hello "+"Espruino"\n');
+});
+
+connection.onDisconnect.addListener(function() {
+  log('disconnected');
+  status('Disconnected');
+  // Add the connection drop-down
+  document.querySelector('#port_list').style.display = 'run-in';
 });
 
 connection.onReadLine.addListener(function(line) {
   log('read line: ' + line);
-  // if the line 'TEMPERATURE=' foo is returned, set the
-  // set the button's text
-  if (line.indexOf("TEMPERATURE=")==0)
-    document.querySelector('#get_temperature').innerHTML = "Temp = "+line.substr(12);
 });
 
 // Populate the list of available devices
@@ -141,28 +151,11 @@ document.querySelector('#connect_button').addEventListener('click', function() {
   var dropDown = document.querySelector('#port_list');
   var devicePath = dropDown.options[dropDown.selectedIndex].value;
   // connect
-  log("Connecting to "+devicePath);
+  log("connecting to "+devicePath + "...");
   connection.connect(devicePath);
 });
 
 ////////////////////////////////////////////////////////
 
-// Toggle LED state
-var is_on = false;
-document.querySelector('#toggle').addEventListener('click', function() {
-  is_on = !is_on;
-  connection.send("digitalWrite(LED1, "+(is_on ? '1' : '0')+");\n");
-});
-
-// Flash 3 times
-document.querySelector('#flash').addEventListener('click', function() {
-  connection.send("l=0; var interval = setInterval(function() { digitalWrite(LED2, l&1); if (++l>6) clearInterval(interval); }, 200);\n");
-});
-
-// Get temperature
-document.querySelector('#get_temperature').addEventListener('click', function() {
-  connection.send("console.log('TEMPERATURE='+E.getTemperature().toFixed(1));\n");
-});
-
-log("BOOOOOOOOOOM!!!");
+ // connection.send("digitalWrite(LED1, "+(is_on ? '1' : '0')+");\n");
 
