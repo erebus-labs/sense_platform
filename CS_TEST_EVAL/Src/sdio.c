@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : SDIO.c
-  * Date               : 26/02/2015 02:29:27
+  * Date               : 26/02/2015 14:35:04
   * Description        : This file provides code for the configuration
   *                      of the SDIO instances.
   ******************************************************************************
@@ -56,9 +56,9 @@ void MX_SDIO_SD_Init(void)
   hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
   hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
   hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
+  hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
   hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
   hsd.Init.ClockDiv = 0;
-  HAL_SD_Init(&hsd, &SDCardInfo);
 
 }
 
@@ -68,6 +68,9 @@ void HAL_SD_MspInit(SD_HandleTypeDef* hsd)
   GPIO_InitTypeDef GPIO_InitStruct;
   if(hsd->Instance==SDIO)
   {
+  /* USER CODE BEGIN SDIO_MspInit 0 */
+
+  /* USER CODE END SDIO_MspInit 0 */
     /* Peripheral clock enable */
     __SDIO_CLK_ENABLE();
   
@@ -113,9 +116,14 @@ void HAL_SD_MspInit(SD_HandleTypeDef* hsd)
 
     /* Several peripheral DMA handle pointers point to the same DMA handle.
      Be aware that there is only one stream to perform all the requested DMAs. */
+    /* Be sure to change transfer direction before calling
+     HAL_SD_ReadBlocks_DMA or HAL_SD_WriteBlocks_DMA. */
     __HAL_LINKDMA(hsd,hdmarx,hdma_sdio);
     __HAL_LINKDMA(hsd,hdmatx,hdma_sdio);
 
+  /* USER CODE BEGIN SDIO_MspInit 1 */
+
+  /* USER CODE END SDIO_MspInit 1 */
   }
 }
 
@@ -124,6 +132,9 @@ void HAL_SD_MspDeInit(SD_HandleTypeDef* hsd)
 
   if(hsd->Instance==SDIO)
   {
+  /* USER CODE BEGIN SDIO_MspDeInit 0 */
+
+  /* USER CODE END SDIO_MspDeInit 0 */
     /* Peripheral clock disable */
     __SDIO_CLK_DISABLE();
   
@@ -143,8 +154,15 @@ void HAL_SD_MspDeInit(SD_HandleTypeDef* hsd)
     /* Peripheral DMA DeInit*/
     HAL_DMA_DeInit(hsd->hdmarx);
     HAL_DMA_DeInit(hsd->hdmatx);
+  /* USER CODE BEGIN SDIO_MspDeInit 1 */
+
+  /* USER CODE END SDIO_MspDeInit 1 */
   }
 } 
+
+/* USER CODE BEGIN 1 */
+
+/* USER CODE END 1 */
 
 /**
   * @}

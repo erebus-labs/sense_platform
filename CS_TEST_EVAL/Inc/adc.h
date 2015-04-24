@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : ADC.h
-  * Date               : 26/02/2015 02:29:26
+  * Date               : 26/02/2015 14:35:03
   * Description        : This file provides code for the configuration
   *                      of the ADC instances.
   ******************************************************************************
@@ -44,9 +44,11 @@
 
 extern ADC_HandleTypeDef hadc1;
 extern ADC_HandleTypeDef hadc2;
+extern ADC_HandleTypeDef hadc3;
 
 void MX_ADC1_Init(void);
 void MX_ADC2_Init(void);
+void MX_ADC3_Init(void);
 
 #ifdef __cplusplus
 }

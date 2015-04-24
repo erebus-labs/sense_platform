@@ -155,7 +155,7 @@
   * @brief ADC driver modules
   * @{
   */ 
-
+	#define HAL_ADC_MODULE_ENABLED
 #ifdef HAL_ADC_MODULE_ENABLED
     
 /* Private typedef -----------------------------------------------------------*/

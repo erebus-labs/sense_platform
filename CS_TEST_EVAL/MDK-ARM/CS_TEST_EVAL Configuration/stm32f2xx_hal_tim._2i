@@ -1,0 +1,6 @@
+-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Inc -I..\Drivers\STM32F2xx_HAL_Driver\Inc -I..\Middlewares\Third_Party\FatFs\src\drivers -I..\Middlewares\Third_Party\FatFs\src -I..\Drivers\CMSIS\Include -I..\Drivers\CMSIS\Device\ST\STM32F2xx\Include --C99
+-I C:\Users\Euler1\Desktop\CAPSTONE_EVAL1\sense_platform\sense_platform\CS_TEST_EVAL\MDK-ARM\RTE
+-I C:\Keil_v5\ARM\PACK\Keil\STM32F2xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F2xx\Include
+-I C:\Keil_v5\ARM\CMSIS\Include
+-D__UVISION_VERSION="513" -DSTM32F207xx -DUSE_HAL_DRIVER -DSTM32F207xx
+-o ".\cs_test_eval configuration\stm32f2xx_hal_tim.o" --omf_browse ".\cs_test_eval configuration\stm32f2xx_hal_tim.crf" --depend ".\cs_test_eval configuration\stm32f2xx_hal_tim.d" --feedback ".\CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.fed" "..\Drivers\STM32F2xx_HAL_Driver\Src\stm32f2xx_hal_tim.c"

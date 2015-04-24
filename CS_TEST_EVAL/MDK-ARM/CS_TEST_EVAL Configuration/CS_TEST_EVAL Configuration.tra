@@ -1,0 +1,64 @@
+*** Creating Trace Output File 'CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '"cs_test_eval configuration\ff_gen_drv.o"'
+### List of Objects: adding '"cs_test_eval configuration\sd_diskio.o"'
+### List of Objects: adding '"cs_test_eval configuration\diskio.o"'
+### List of Objects: adding '"cs_test_eval configuration\ccsbcs.o"'
+### List of Objects: adding '"cs_test_eval configuration\syscall.o"'
+### List of Objects: adding '"cs_test_eval configuration\ff.o"'
+### List of Objects: adding '"cs_test_eval configuration\system_stm32f2xx.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_iwdg.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_rcc.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_wwdg.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_adc.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_rtc_ex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_dma_ex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_flash.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_pwr_ex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_i2c.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_tim_ex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_dma.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_spi.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_cortex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_ll_sdmmc.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_flash_ex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_sd.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_rtc.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_gpio.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_adc_ex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_tim.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_rcc_ex.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_pwr.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_it.o"'
+### List of Objects: adding '"cs_test_eval configuration\bsp_driver_sd.o"'
+### List of Objects: adding '"cs_test_eval configuration\i2c.o"'
+### List of Objects: adding '"cs_test_eval configuration\tim.o"'
+### List of Objects: adding '"cs_test_eval configuration\dma.o"'
+### List of Objects: adding '"cs_test_eval configuration\gpio.o"'
+### List of Objects: adding '"cs_test_eval configuration\rtc.o"'
+### List of Objects: adding '"cs_test_eval configuration\stm32f2xx_hal_msp.o"'
+### List of Objects: adding '"cs_test_eval configuration\sdio.o"'
+### List of Objects: adding '"cs_test_eval configuration\usb_otg.o"'
+### List of Objects: adding '"cs_test_eval configuration\iwdg.o"'
+### List of Objects: adding '"cs_test_eval configuration\main.o"'
+### List of Objects: adding '"cs_test_eval configuration\spi.o"'
+### List of Objects: adding '"cs_test_eval configuration\wwdg.o"'
+### List of Objects: adding '"cs_test_eval configuration\adc.o"'
+### List of Objects: adding '"cs_test_eval configuration\startup_stm32f207xx.o"'
+### ADS-LD Command completed:
+--cpu Cortex-M3 "cs_test_eval configuration\ff_gen_drv.o" "cs_test_eval configuration\sd_diskio.o" "cs_test_eval configuration\diskio.o" "cs_test_eval configuration\ccsbcs.o" "cs_test_eval configuration\syscall.o" "cs_test_eval configuration\ff.o" "cs_test_eval configuration\system_stm32f2xx.o" "cs_test_eval configuration\stm32f2xx_hal_iwdg.o" "cs_test_eval configuration\stm32f2xx_hal_rcc.o" "cs_test_eval configuration\stm32f2xx_hal_wwdg.o" "cs_test_eval configuration\stm32f2xx_hal_adc.o" "cs_test_eval configuration\stm32f2xx_hal_rtc_ex.o" "cs_test_eval configuration\stm32f2xx_hal_dma_ex.o" "cs_test_eval configuration\stm32f2xx_hal_flash.o" "cs_test_eval configuration\stm32f2xx_hal_pwr_ex.o" "cs_test_eval configuration\stm32f2xx_hal_i2c.o" "cs_test_eval configuration\stm32f2xx_hal_tim_ex.o" "cs_test_eval configuration\stm32f2xx_hal_dma.o" "cs_test_eval configuration\stm32f2xx_hal_spi.o" "cs_test_eval configuration\stm32f2xx_hal_cortex.o" "cs_test_eval configuration\stm32f2xx_ll_sdmmc.o" "cs_test_eval configuration\stm32f2xx_hal.o" "cs_test_eval configuration\stm32f2xx_hal_flash_ex.o" "cs_test_eval configuration\stm32f2xx_hal_sd.o" "cs_test_eval configuration\stm32f2xx_hal_rtc.o" "cs_test_eval configuration\stm32f2xx_hal_gpio.o" "cs_test_eval configuration\stm32f2xx_hal_adc_ex.o" "cs_test_eval configuration\stm32f2xx_hal_tim.o" "cs_test_eval configuration\stm32f2xx_hal_rcc_ex.o" "cs_test_eval configuration\stm32f2xx_hal_pwr.o" "cs_test_eval configuration\stm32f2xx_it.o" "cs_test_eval configuration\bsp_driver_sd.o" "cs_test_eval configuration\i2c.o" "cs_test_eval configuration\tim.o" "cs_test_eval configuration\dma.o" "cs_test_eval configuration\gpio.o" "cs_test_eval configuration\rtc.o" "cs_test_eval configuration\stm32f2xx_hal_msp.o" "cs_test_eval configuration\sdio.o" "cs_test_eval configuration\usb_otg.o" "cs_test_eval configuration\iwdg.o" "cs_test_eval configuration\main.o" "cs_test_eval configuration\spi.o" "cs_test_eval configuration\wwdg.o" "cs_test_eval configuration\adc.o" "cs_test_eval configuration\startup_stm32f207xx.o" --library_type=microlib --strict --scatter "CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.sct" 
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list "CS_TEST_EVAL Configuration.map" -o "CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.axf"### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: 'CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.axf'
+### ADS-LD Command File: 'CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.lnp'
+### Checking for dirty Components...
+### Creating CmdFile 'CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.lnp', Handle=0x000003C8
+### Writing '.lnp' file
+### ADS-LD Command file 'CS_TEST_EVAL Configuration\CS_TEST_EVAL Configuration.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 1 errors
+### Updating obj list
+### LDADS_file() completed.

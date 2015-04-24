@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : TIM.c
-  * Date               : 26/02/2015 02:29:28
+  * Date               : 26/02/2015 14:35:04
   * Description        : This file provides code for the configuration
   *                      of the TIM instances.
   ******************************************************************************
@@ -37,20 +37,21 @@
 #include "tim.h"
 
 #include "gpio.h"
+#include "dma.h"
 
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim1;
+DMA_HandleTypeDef hdma_tim1_ch1_ch2_ch3;
 
 /* TIM1 init function */
 void MX_TIM1_Init(void)
 {
-
-  TIM_IC_InitTypeDef sConfigIC;
   TIM_SlaveConfigTypeDef sSlaveConfig;
   TIM_MasterConfigTypeDef sMasterConfig;
+  TIM_IC_InitTypeDef sConfigIC;
 
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 0;
@@ -64,12 +65,6 @@ void MX_TIM1_Init(void)
 
   HAL_TIM_OnePulse_Init(&htim1, TIM_OPMODE_SINGLE);
 
-  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
-  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
-  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
-  sConfigIC.ICFilter = 0;
-  HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_1);
-
   sSlaveConfig.SlaveMode = TIM_SLAVEMODE_RESET;
   sSlaveConfig.InputTrigger = TIM_TS_ITR3;
   HAL_TIM_SlaveConfigSynchronization(&htim1, &sSlaveConfig);
@@ -77,6 +72,12 @@ void MX_TIM1_Init(void)
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig);
+
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_1);
 
 }
 
@@ -86,6 +87,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
   GPIO_InitTypeDef GPIO_InitStruct;
   if(htim_base->Instance==TIM1)
   {
+  /* USER CODE BEGIN TIM1_MspInit 0 */
+
+  /* USER CODE END TIM1_MspInit 0 */
     /* Peripheral clock enable */
     __TIM1_CLK_ENABLE();
   
@@ -99,6 +103,29 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* Peripheral DMA init*/
+  
+    hdma_tim1_ch1_ch2_ch3.Instance = DMA2_Stream6;
+    hdma_tim1_ch1_ch2_ch3.Init.Channel = DMA_CHANNEL_0;
+    hdma_tim1_ch1_ch2_ch3.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    hdma_tim1_ch1_ch2_ch3.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_tim1_ch1_ch2_ch3.Init.MemInc = DMA_MINC_DISABLE;
+    hdma_tim1_ch1_ch2_ch3.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_tim1_ch1_ch2_ch3.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_tim1_ch1_ch2_ch3.Init.Mode = DMA_NORMAL;
+    hdma_tim1_ch1_ch2_ch3.Init.Priority = DMA_PRIORITY_LOW;
+    hdma_tim1_ch1_ch2_ch3.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+    HAL_DMA_Init(&hdma_tim1_ch1_ch2_ch3);
+
+    /* Several peripheral DMA handle pointers point to the same DMA handle.
+     Be aware that there is only one stream to perform all the requested DMAs. */
+    __HAL_LINKDMA(htim_base,hdma[TIM_DMA_ID_CC1],hdma_tim1_ch1_ch2_ch3);
+    __HAL_LINKDMA(htim_base,hdma[TIM_DMA_ID_CC2],hdma_tim1_ch1_ch2_ch3);
+    __HAL_LINKDMA(htim_base,hdma[TIM_DMA_ID_CC3],hdma_tim1_ch1_ch2_ch3);
+
+  /* USER CODE BEGIN TIM1_MspInit 1 */
+
+  /* USER CODE END TIM1_MspInit 1 */
   }
 }
 
@@ -107,6 +134,9 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 
   if(htim_base->Instance==TIM1)
   {
+  /* USER CODE BEGIN TIM1_MspDeInit 0 */
+
+  /* USER CODE END TIM1_MspDeInit 0 */
     /* Peripheral clock disable */
     __TIM1_CLK_DISABLE();
   
@@ -115,8 +145,19 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_8);
 
+    /* Peripheral DMA DeInit*/
+    HAL_DMA_DeInit(htim_base->hdma[TIM_DMA_ID_CC1]);
+    HAL_DMA_DeInit(htim_base->hdma[TIM_DMA_ID_CC2]);
+    HAL_DMA_DeInit(htim_base->hdma[TIM_DMA_ID_CC3]);
+  /* USER CODE BEGIN TIM1_MspDeInit 1 */
+
+  /* USER CODE END TIM1_MspDeInit 1 */
   }
 } 
+
+/* USER CODE BEGIN 1 */
+
+/* USER CODE END 1 */
 
 /**
   * @}

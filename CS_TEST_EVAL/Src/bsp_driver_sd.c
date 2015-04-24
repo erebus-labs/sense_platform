@@ -3,7 +3,7 @@
   * @file    bsp_driver_sd.c (based on stm324x9i_eval_sd.c)
   * @author  MCD Teams
   * @version V1.0.0
-  * @date    26/02/2015 02:29:27
+  * @date    26/02/2015 14:35:03
   * @brief   This file includes a generic uSD card driver.
   ******************************************************************************
   *
@@ -34,6 +34,7 @@
   ******************************************************************************
   */
 
+#define BUS_4BITS 1
 /* USER CODE BEGIN 0 */
 /* Includes ------------------------------------------------------------------*/
 #include "bsp_driver_sd.h"

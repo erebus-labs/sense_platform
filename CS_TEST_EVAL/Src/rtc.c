@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : RTC.c
-  * Date               : 26/02/2015 02:29:27
+  * Date               : 26/02/2015 14:35:04
   * Description        : This file provides code for the configuration
   *                      of the RTC instances.
   ******************************************************************************
@@ -45,7 +45,6 @@ RTC_HandleTypeDef hrtc;
 /* RTC init function */
 void MX_RTC_Init(void)
 {
-
   RTC_TimeTypeDef sTime;
   RTC_DateTypeDef sDate;
   RTC_AlarmTypeDef sAlarm;
@@ -65,7 +64,7 @@ void MX_RTC_Init(void)
   sTime.Minutes = 0;
   sTime.Seconds = 0;
   sTime.TimeFormat = RTC_HOURFORMAT12_AM;
-  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_SUB1H;
+  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
   HAL_RTC_SetTime(&hrtc, &sTime, FORMAT_BCD);
 
@@ -75,40 +74,74 @@ void MX_RTC_Init(void)
   sDate.Year = 0;
   HAL_RTC_SetDate(&hrtc, &sDate, FORMAT_BCD);
 
-    /**Enable Calibrartion 
-    */
-  HAL_RTCEx_SetCalibrationOutPut(&hrtc);
-
     /**Enable the Alarm A 
     */
   sAlarm.AlarmTime.Hours = 0;
   sAlarm.AlarmTime.Minutes = 0;
   sAlarm.AlarmTime.Seconds = 0;
   sAlarm.AlarmTime.TimeFormat = RTC_HOURFORMAT12_AM;
-  sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_SUB1H;
+  sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
   sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
   sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
   sAlarm.AlarmDateWeekDay = 1;
   sAlarm.Alarm = RTC_ALARM_A;
-  HAL_RTC_SetAlarm(&hrtc, &sAlarm, FORMAT_BCD);
+  HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, FORMAT_BCD);
 
     /**Enable the Alarm B 
     */
   sAlarm.Alarm = RTC_ALARM_B;
-  HAL_RTC_SetAlarm(&hrtc, &sAlarm, FORMAT_BCD);
+  HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, FORMAT_BCD);
+
+    /**Enable Calibrartion 
+    */
+  HAL_RTCEx_SetCalibrationOutPut(&hrtc);
 
 }
 
 void HAL_RTC_MspInit(RTC_HandleTypeDef* hrtc)
 {
 
+  if(hrtc->Instance==RTC)
+  {
+  /* USER CODE BEGIN RTC_MspInit 0 */
+
+  /* USER CODE END RTC_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_RTC_ENABLE();
+
+    /* Peripheral interrupt init*/
+    HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
+  /* USER CODE BEGIN RTC_MspInit 1 */
+
+  /* USER CODE END RTC_MspInit 1 */
+  }
 }
 
 void HAL_RTC_MspDeInit(RTC_HandleTypeDef* hrtc)
 {
 
+  if(hrtc->Instance==RTC)
+  {
+  /* USER CODE BEGIN RTC_MspDeInit 0 */
+
+  /* USER CODE END RTC_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_RTC_DISABLE();
+
+    /* Peripheral interrupt Deinit*/
+    HAL_NVIC_DisableIRQ(RTC_Alarm_IRQn);
+
+  /* USER CODE BEGIN RTC_MspDeInit 1 */
+
+  /* USER CODE END RTC_MspDeInit 1 */
+  }
 } 
+
+/* USER CODE BEGIN 1 */
+
+/* USER CODE END 1 */
 
 /**
   * @}
