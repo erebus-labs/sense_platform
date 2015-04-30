@@ -3116,22 +3116,6 @@ Source: AVX .. aphvc.pdf</description>
 <rectangle x1="-1.0668" y1="-0.6985" x2="-0.4168" y2="0.7015" layer="51"/>
 <rectangle x1="-0.1999" y1="-0.5001" x2="0.1999" y2="0.5001" layer="35"/>
 </package>
-<package name="R1005">
-<description>&lt;b&gt;RESISTOR&lt;/b&gt;</description>
-<wire x1="-0.245" y1="0.224" x2="0.245" y2="0.224" width="0.1524" layer="51"/>
-<wire x1="0.245" y1="-0.224" x2="-0.245" y2="-0.224" width="0.1524" layer="51"/>
-<wire x1="-1.473" y1="0.483" x2="1.473" y2="0.483" width="0.0508" layer="39"/>
-<wire x1="1.473" y1="0.483" x2="1.473" y2="-0.483" width="0.0508" layer="39"/>
-<wire x1="1.473" y1="-0.483" x2="-1.473" y2="-0.483" width="0.0508" layer="39"/>
-<wire x1="-1.473" y1="-0.483" x2="-1.473" y2="0.483" width="0.0508" layer="39"/>
-<smd name="1" x="-0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
-<smd name="2" x="0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
-<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
-<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.554" y1="-0.3048" x2="-0.254" y2="0.2951" layer="51"/>
-<rectangle x1="0.2588" y1="-0.3048" x2="0.5588" y2="0.2951" layer="51"/>
-<rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
-</package>
 <package name="R1206">
 <description>&lt;b&gt;RESISTOR&lt;/b&gt;</description>
 <wire x1="0.9525" y1="-0.8128" x2="-0.9652" y2="-0.8128" width="0.1524" layer="51"/>
@@ -4605,6 +4589,16 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <rectangle x1="-1.4" y1="-1.6" x2="-1.1" y2="1.6" layer="51"/>
 <rectangle x1="1.1" y1="-1.6" x2="1.4" y2="1.6" layer="51" rot="R180"/>
 </package>
+<package name="R01005">
+<smd name="1" x="-0.1625" y="0" dx="0.2" dy="0.25" layer="1"/>
+<smd name="2" x="0.1625" y="0" dx="0.2" dy="0.25" layer="1"/>
+<text x="-0.4" y="0.3" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.4" y="-1.6" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.2" y1="-0.1" x2="-0.075" y2="0.1" layer="51"/>
+<rectangle x1="0.075" y1="-0.1" x2="0.2" y2="0.1" layer="51"/>
+<rectangle x1="-0.15" y1="0.05" x2="0.15" y2="0.1" layer="51"/>
+<rectangle x1="-0.15" y1="-0.1" x2="0.15" y2="-0.05" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="C-EU">
@@ -5395,15 +5389,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <technology name=""/>
 </technologies>
 </device>
-<device name="R1005" package="R1005">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
 <device name="R1206" package="R1206">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
@@ -6116,6 +6101,15 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </technologies>
 </device>
 <device name="1812X7R" package="1812X7R">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="01005" package="R01005">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -12027,7 +12021,6 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <part name="+3V5" library="supply1" deviceset="+3V3" device=""/>
 <part name="SUPPLY36" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY31" library="supply2" deviceset="GND" device=""/>
-<part name="SUPPLY32" library="supply2" deviceset="GND" device=""/>
 <part name="FRAME2" library="frames" deviceset="A3L-LOC" device=""/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
 <part name="SUPPLY29" library="supply2" deviceset="GND" device=""/>
@@ -12038,13 +12031,12 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <part name="EJECT" library="SparkFun-Electromechanical" deviceset="TAC_SWITCH" device="SMD" value="Eject"/>
 <part name="SUPPLY38" library="supply2" deviceset="GND" device=""/>
 <part name="GPIOS" library="con-lstb" deviceset="MA06-1" device=""/>
-<part name="TP11" library="testpad" deviceset="TP" device="B1,27"/>
-<part name="USB_FS" library="con-hirose" deviceset="MICRO-USB-SHIELD-" device="ZX62R-B-5P"/>
+<part name="USB_FS" library="con-hirose" deviceset="MICRO-USB-SHIELD-" device="ZX62R-B-5P" value="USB_Shield"/>
 <part name="T1" library="zetex" deviceset="PMOSSOT23" device="" value="NDS352AP"/>
 <part name="R11" library="rcl" deviceset="R-US_" device="R0805" value="47k"/>
 <part name="BOOT0" library="SparkFun-Electromechanical" deviceset="TAC_SWITCH" device="SMD" value="Boot0"/>
 <part name="406C35E" library="crystal" deviceset="CRYSTAL" device="CTS406" value="16meg"/>
-<part name="TPS73233DBVT" library="SparkFun-PowerIC" deviceset="V_REG_MIC5205" device="3.3V" value="3.3V"/>
+<part name="TPS73233" library="SparkFun-PowerIC" deviceset="V_REG_MIC5205" device="3.3V" value="3.3V"/>
 <part name="C14" library="rcl" deviceset="C-EU" device="C0805" value="0.01u"/>
 <part name="SUPPLY17" library="supply2" deviceset="GND" device=""/>
 <part name="HSMS-2824-BLKG" library="diode" deviceset="BAS70-05" device="" value="Schottky"/>
@@ -12062,8 +12054,6 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <part name="TP2" library="testpad" deviceset="TP" device="B1,27"/>
 <part name="TVS7" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
 <part name="SUPPLY26" library="supply2" deviceset="GND" device=""/>
-<part name="TVS8" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
-<part name="SUPPLY33" library="supply2" deviceset="GND" device=""/>
 <part name="TVS9" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
 <part name="SUPPLY34" library="supply2" deviceset="GND" device=""/>
 <part name="TVS10" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
@@ -12106,12 +12096,10 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <part name="BLUE" library="led" deviceset="LED" device="SML0805"/>
 <part name="+3V11" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V12" library="supply1" deviceset="+3V3" device=""/>
-<part name="+3V13" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V14" library="supply1" deviceset="+3V3" device=""/>
-<part name="ADC_SEN4" library="con-lstb" deviceset="MA03-1" device=""/>
+<part name="ADC_SEN3" library="con-lstb" deviceset="MA03-1" device=""/>
 <part name="ADC_SEN1" library="con-lstb" deviceset="MA03-1" device=""/>
 <part name="ADC_SEN2" library="con-lstb" deviceset="MA03-1" device=""/>
-<part name="ADC_SEN3" library="con-lstb" deviceset="MA03-1" device=""/>
 <part name="R5" library="rcl" deviceset="R-US_" device="R0805" value="10k"/>
 <part name="+3V15" library="supply1" deviceset="+3V3" device=""/>
 <part name="TVS13" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
@@ -12137,12 +12125,11 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <part name="TP1" library="testpad" deviceset="TP" device="B1,27"/>
 <part name="TP3" library="testpad" deviceset="TP" device="B1,27"/>
 <part name="TP4" library="testpad" deviceset="TP" device="B1,27"/>
-<part name="TP5" library="testpad" deviceset="TP" device="B1,27"/>
-<part name="RCLAMP0504S" library="microbuilder" deviceset="BREAKOUT_SOT23-6" device=""/>
+<part name="RCLAMP" library="microbuilder" deviceset="BREAKOUT_SOT23-6" device=""/>
 <part name="SUPPLY19" library="supply2" deviceset="GND" device=""/>
 <part name="R4" library="rcl" deviceset="R-US_" device="R0805" value="22"/>
 <part name="R26" library="rcl" deviceset="R-US_" device="R0805" value="22"/>
-<part name="STMPS2141STR" library="microbuilder" deviceset="NCP1400A_STEPUP" device=""/>
+<part name="2141" library="microbuilder" deviceset="NCP1400A_STEPUP" device=""/>
 <part name="IC1" library="ftdichip" deviceset="FT230X" device="S"/>
 <part name="C17" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="SUPPLY21" library="supply2" deviceset="GND" device=""/>
@@ -12155,40 +12142,43 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <part name="SUPPLY53" library="supply2" deviceset="GND" device=""/>
 <part name="R13" library="rcl" deviceset="R-US_" device="R0805" value="27"/>
 <part name="R14" library="rcl" deviceset="R-US_" device="R0805" value="27"/>
-<part name="R27" library="rcl" deviceset="R-US_" device="R0805" value="10k"/>
 <part name="R31" library="rcl" deviceset="R-US_" device="R0805" value="10k"/>
-<part name="R32" library="rcl" deviceset="R-US_" device="R0805" value="10k"/>
 <part name="R33" library="rcl" deviceset="R-US_" device="R0805" value="10k"/>
 <part name="+3V8" library="supply1" deviceset="+3V3" device=""/>
-<part name="TVS14" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
-<part name="SUPPLY54" library="supply2" deviceset="GND" device=""/>
-<part name="TVS15" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
-<part name="TVS16" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
-<part name="TVS17" library="SparkFun-DiscreteSemi" deviceset="TVS" device=""/>
-<part name="SUPPLY55" library="supply2" deviceset="GND" device=""/>
-<part name="SUPPLY56" library="supply2" deviceset="GND" device=""/>
-<part name="SUPPLY57" library="supply2" deviceset="GND" device=""/>
 <part name="R10" library="rcl" deviceset="R-US_" device="R0805" value="10k"/>
 <part name="+3V18" library="supply1" deviceset="+3V3" device=""/>
 <part name="R34" library="rcl" deviceset="R-US_" device="R0805" value="1k"/>
 <part name="SUPPLY8" library="supply2" deviceset="GND" device=""/>
+<part name="C21" library="rcl" deviceset="C-EU" device="C0805" value="10u"/>
+<part name="SUPPLY16" library="supply2" deviceset="GND" device=""/>
+<part name="SUPPLY20" library="supply2" deviceset="GND" device=""/>
+<part name="USBTOUART" library="con-hirose" deviceset="MICRO-USB-SHIELD-" device="ZX62R-B-5P" value="USB_Shield"/>
+<part name="RXLED" library="led" deviceset="LED" device="SML0805"/>
+<part name="TXLED" library="led" deviceset="LED" device="SML0805"/>
+<part name="R27" library="rcl" deviceset="R-US_" device="R0805" value="1k"/>
+<part name="R32" library="rcl" deviceset="R-US_" device="R0805" value="1k"/>
+<part name="+3V19" library="supply1" deviceset="+3V3" device=""/>
+<part name="+3V20" library="supply1" deviceset="+3V3" device=""/>
+<part name="PROGRAM" library="SparkFun-Electromechanical" deviceset="TAC_SWITCH" device="SMD" value="Program"/>
+<part name="SUPPLY32" library="supply2" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="289.56" y="15.24" size="2.54" layer="95">Colten Nye</text>
-<text x="276.86" y="226.06" size="1.778" layer="95">USB OTG FS Block</text>
-<text x="132.08" y="45.72" size="1.778" layer="95" rot="MR0">I2C Sensor Block</text>
-<text x="208.28" y="66.04" size="1.778" layer="95">ADC Sensor Block</text>
+<text x="271.78" y="243.84" size="1.778" layer="95">USB OTG FS Block</text>
+<text x="132.08" y="45.72" size="1.778" layer="95" rot="MR0">I2C Sensor Header</text>
+<text x="190.5" y="30.48" size="1.778" layer="95">ADC Sensor Headers</text>
 <text x="10.16" y="241.3" size="1.778" layer="95">SD Card Block</text>
 <text x="17.78" y="73.66" size="1.778" layer="95">Power Block</text>
 <text x="289.56" y="10.16" size="2.54" layer="95">Steve Peirce</text>
 <text x="289.56" y="5.08" size="2.54" layer="95">Golriz Sedaghat</text>
 <text x="289.56" y="20.32" size="2.54" layer="95">Open Sensor Platform Main Board</text>
-<text x="363.22" y="172.72" size="1.778" layer="95">GPIO OUT</text>
-<text x="322.58" y="43.18" size="1.778" layer="95">USB to UART Converter Block</text>
+<text x="330.2" y="187.96" size="1.778" layer="95">GPIO OUT</text>
+<text x="312.42" y="93.98" size="1.778" layer="95">USB to UART Converter Block</text>
 <text x="187.96" y="246.38" size="1.778" layer="95">USB Power Protection</text>
 <text x="190.5" y="187.96" size="1.778" layer="95">TVS array protection for USB data lines</text>
+<text x="365.76" y="139.7" size="1.778" layer="95">USB To UART</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="210.82" y="127"/>
@@ -12228,27 +12218,25 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <instance part="C15" gate="G$1" x="60.96" y="60.96"/>
 <instance part="SUPPLY27" gate="GND" x="60.96" y="53.34"/>
 <instance part="+3V5" gate="G$1" x="119.38" y="251.46"/>
-<instance part="SUPPLY36" gate="GND" x="289.56" y="190.5"/>
+<instance part="SUPPLY36" gate="GND" x="284.48" y="208.28"/>
 <instance part="SUPPLY31" gate="GND" x="129.54" y="17.78" rot="MR0"/>
-<instance part="SUPPLY32" gate="GND" x="233.68" y="12.7"/>
 <instance part="FRAME2" gate="G$1" x="0" y="0"/>
 <instance part="+3V1" gate="G$1" x="101.6" y="73.66"/>
 <instance part="SUPPLY29" gate="GND" x="43.18" y="185.42"/>
-<instance part="SUPPLY35" gate="GND" x="190.5" y="12.7"/>
-<instance part="SUPPLY40" gate="GND" x="233.68" y="40.64"/>
-<instance part="SUPPLY41" gate="GND" x="190.5" y="40.64"/>
+<instance part="SUPPLY35" gate="GND" x="228.6" y="43.18"/>
+<instance part="SUPPLY40" gate="GND" x="193.04" y="43.18"/>
+<instance part="SUPPLY41" gate="GND" x="231.14" y="12.7"/>
 <instance part="JP1" gate="G$1" x="116.84" y="20.32"/>
 <instance part="EJECT" gate="S" x="40.64" y="167.64"/>
 <instance part="SUPPLY38" gate="GND" x="50.8" y="160.02"/>
-<instance part="GPIOS" gate="1" x="370.84" y="144.78" rot="R180"/>
-<instance part="TP11" gate="G$1" x="33.02" y="170.18"/>
-<instance part="USB_FS" gate="G$1" x="299.72" y="200.66"/>
-<instance part="USB_FS" gate="G$2" x="294.64" y="210.82"/>
+<instance part="GPIOS" gate="1" x="337.82" y="160.02" rot="R180"/>
+<instance part="USB_FS" gate="G$1" x="294.64" y="218.44"/>
+<instance part="USB_FS" gate="G$2" x="289.56" y="228.6"/>
 <instance part="T1" gate="A" x="93.98" y="243.84" rot="R90"/>
 <instance part="R11" gate="G$1" x="66.04" y="228.6" rot="MR270"/>
 <instance part="BOOT0" gate="S" x="88.9" y="157.48"/>
 <instance part="406C35E" gate="G$1" x="119.38" y="134.62" rot="R270"/>
-<instance part="TPS73233DBVT" gate="G$1" x="78.74" y="60.96"/>
+<instance part="TPS73233" gate="G$1" x="78.74" y="60.96"/>
 <instance part="C14" gate="G$1" x="88.9" y="50.8"/>
 <instance part="SUPPLY17" gate="GND" x="88.9" y="43.18"/>
 <instance part="HSMS-2824-BLKG" gate="G$1" x="35.56" y="53.34" smashed="yes" rot="R270">
@@ -12262,41 +12250,39 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <instance part="SUPPLY22" gate="GND" x="185.42" y="223.52"/>
 <instance part="C16" gate="G$1" x="144.78" y="228.6"/>
 <instance part="SUPPLY24" gate="GND" x="144.78" y="220.98"/>
-<instance part="R15" gate="G$1" x="226.06" y="236.22" rot="R90"/>
-<instance part="+3V6" gate="G$1" x="226.06" y="243.84"/>
+<instance part="R15" gate="G$1" x="220.98" y="241.3" rot="R90"/>
+<instance part="+3V6" gate="G$1" x="220.98" y="251.46"/>
 <instance part="R16" gate="G$1" x="175.26" y="241.3" rot="R90"/>
 <instance part="+3V7" gate="G$1" x="175.26" y="251.46"/>
 <instance part="TP2" gate="G$1" x="177.8" y="231.14"/>
-<instance part="TVS7" gate="G$1" x="228.6" y="48.26" rot="R270"/>
-<instance part="SUPPLY26" gate="GND" x="228.6" y="40.64"/>
-<instance part="TVS8" gate="G$1" x="228.6" y="20.32" rot="R270"/>
-<instance part="SUPPLY33" gate="GND" x="228.6" y="12.7"/>
-<instance part="TVS9" gate="G$1" x="185.42" y="48.26" rot="R270"/>
-<instance part="SUPPLY34" gate="GND" x="185.42" y="40.64"/>
-<instance part="TVS10" gate="G$1" x="185.42" y="20.32" rot="R270"/>
-<instance part="SUPPLY37" gate="GND" x="185.42" y="12.7"/>
+<instance part="TVS7" gate="G$1" x="187.96" y="50.8" rot="R270"/>
+<instance part="SUPPLY26" gate="GND" x="187.96" y="43.18"/>
+<instance part="TVS9" gate="G$1" x="226.06" y="20.32" rot="R270"/>
+<instance part="SUPPLY34" gate="GND" x="226.06" y="12.7"/>
+<instance part="TVS10" gate="G$1" x="223.52" y="50.8" rot="R270"/>
+<instance part="SUPPLY37" gate="GND" x="223.52" y="43.18"/>
 <instance part="TVS12" gate="G$1" x="134.62" y="22.86" rot="R270"/>
 <instance part="TVS11" gate="G$1" x="144.78" y="20.32" rot="R270"/>
 <instance part="SUPPLY39" gate="GND" x="144.78" y="12.7"/>
 <instance part="SUPPLY42" gate="GND" x="134.62" y="15.24"/>
-<instance part="TP9" gate="G$1" x="327.66" y="185.42"/>
-<instance part="TP14" gate="G$1" x="325.12" y="172.72"/>
-<instance part="TP15" gate="G$1" x="322.58" y="160.02"/>
-<instance part="TP16" gate="G$1" x="320.04" y="144.78"/>
-<instance part="TP17" gate="G$1" x="317.5" y="132.08"/>
-<instance part="SUPPLY43" gate="GND" x="332.74" y="172.72"/>
-<instance part="SUPPLY44" gate="GND" x="325.12" y="147.32"/>
-<instance part="SUPPLY45" gate="GND" x="330.2" y="160.02"/>
-<instance part="SUPPLY46" gate="GND" x="330.2" y="132.08"/>
-<instance part="SUPPLY47" gate="GND" x="332.74" y="119.38"/>
-<instance part="TVS2" gate="G$1" x="330.2" y="167.64" rot="R270"/>
-<instance part="TVS3" gate="G$1" x="325.12" y="154.94" rot="R270"/>
-<instance part="TVS4" gate="G$1" x="330.2" y="139.7" rot="R270"/>
-<instance part="TVS5" gate="G$1" x="332.74" y="127" rot="R270"/>
-<instance part="TVS1" gate="G$1" x="332.74" y="180.34" rot="R270"/>
-<instance part="TVS6" gate="G$1" x="335.28" y="114.3" rot="R270"/>
-<instance part="SUPPLY48" gate="GND" x="335.28" y="106.68"/>
-<instance part="TP18" gate="G$1" x="322.58" y="119.38"/>
+<instance part="TP9" gate="G$1" x="294.64" y="200.66"/>
+<instance part="TP14" gate="G$1" x="292.1" y="187.96"/>
+<instance part="TP15" gate="G$1" x="289.56" y="175.26"/>
+<instance part="TP16" gate="G$1" x="287.02" y="160.02"/>
+<instance part="TP17" gate="G$1" x="284.48" y="147.32"/>
+<instance part="SUPPLY43" gate="GND" x="299.72" y="187.96"/>
+<instance part="SUPPLY44" gate="GND" x="292.1" y="162.56"/>
+<instance part="SUPPLY45" gate="GND" x="297.18" y="175.26"/>
+<instance part="SUPPLY46" gate="GND" x="297.18" y="147.32"/>
+<instance part="SUPPLY47" gate="GND" x="299.72" y="134.62"/>
+<instance part="TVS2" gate="G$1" x="297.18" y="182.88" rot="R270"/>
+<instance part="TVS3" gate="G$1" x="292.1" y="170.18" rot="R270"/>
+<instance part="TVS4" gate="G$1" x="297.18" y="154.94" rot="R270"/>
+<instance part="TVS5" gate="G$1" x="299.72" y="142.24" rot="R270"/>
+<instance part="TVS1" gate="G$1" x="299.72" y="195.58" rot="R270"/>
+<instance part="TVS6" gate="G$1" x="302.26" y="129.54" rot="R270"/>
+<instance part="SUPPLY48" gate="GND" x="302.26" y="121.92"/>
+<instance part="TP18" gate="G$1" x="289.56" y="134.62"/>
 <instance part="+3V9" gate="G$1" x="93.98" y="121.92"/>
 <instance part="R21" gate="G$1" x="73.66" y="218.44"/>
 <instance part="R22" gate="G$1" x="53.34" y="226.06" rot="MR270"/>
@@ -12311,15 +12297,13 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <instance part="R30" gate="G$1" x="259.08" y="152.4"/>
 <instance part="RED" gate="G$1" x="248.92" y="160.02" rot="R270"/>
 <instance part="BLUE" gate="G$1" x="248.92" y="152.4" rot="R270"/>
-<instance part="+3V11" gate="G$1" x="190.5" y="60.96"/>
-<instance part="+3V12" gate="G$1" x="190.5" y="33.02"/>
-<instance part="+3V13" gate="G$1" x="233.68" y="33.02"/>
-<instance part="+3V14" gate="G$1" x="233.68" y="60.96"/>
-<instance part="ADC_SEN4" gate="G$1" x="203.2" y="53.34" rot="R180"/>
-<instance part="ADC_SEN1" gate="G$1" x="246.38" y="53.34" rot="R180"/>
-<instance part="ADC_SEN2" gate="G$1" x="203.2" y="25.4" rot="R180"/>
-<instance part="ADC_SEN3" gate="G$1" x="246.38" y="25.4" rot="R180"/>
-<instance part="R5" gate="G$1" x="345.44" y="182.88"/>
+<instance part="+3V11" gate="G$1" x="231.14" y="33.02"/>
+<instance part="+3V12" gate="G$1" x="228.6" y="63.5"/>
+<instance part="+3V14" gate="G$1" x="193.04" y="63.5"/>
+<instance part="ADC_SEN3" gate="G$1" x="243.84" y="25.4" rot="R180"/>
+<instance part="ADC_SEN1" gate="G$1" x="205.74" y="55.88" rot="R180"/>
+<instance part="ADC_SEN2" gate="G$1" x="241.3" y="55.88" rot="R180"/>
+<instance part="R5" gate="G$1" x="312.42" y="198.12"/>
 <instance part="+3V15" gate="G$1" x="266.7" y="167.64"/>
 <instance part="TVS13" gate="G$1" x="40.64" y="40.64" rot="R270"/>
 <instance part="SUPPLY18" gate="GND" x="40.64" y="27.94"/>
@@ -12328,11 +12312,11 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <instance part="+3V16" gate="G$1" x="142.24" y="187.96"/>
 <instance part="R6" gate="G$1" x="355.6" y="233.68" rot="R90"/>
 <instance part="+3V17" gate="G$1" x="355.6" y="243.84"/>
-<instance part="R3" gate="G$1" x="340.36" y="170.18"/>
-<instance part="R7" gate="G$1" x="340.36" y="157.48"/>
-<instance part="R8" gate="G$1" x="345.44" y="142.24"/>
-<instance part="R17" gate="G$1" x="342.9" y="129.54"/>
-<instance part="R18" gate="G$1" x="345.44" y="116.84"/>
+<instance part="R3" gate="G$1" x="307.34" y="185.42"/>
+<instance part="R7" gate="G$1" x="307.34" y="172.72"/>
+<instance part="R8" gate="G$1" x="312.42" y="157.48"/>
+<instance part="R17" gate="G$1" x="309.88" y="144.78"/>
+<instance part="R18" gate="G$1" x="312.42" y="132.08"/>
 <instance part="U2" gate="G$1" x="20.32" y="205.74" rot="R180"/>
 <instance part="R19" gate="G$1" x="48.26" y="236.22" rot="MR270"/>
 <instance part="R20" gate="G$1" x="58.42" y="236.22" rot="MR270"/>
@@ -12344,15 +12328,14 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <instance part="TP1" gate="G$1" x="347.98" y="228.6"/>
 <instance part="TP3" gate="G$1" x="363.22" y="226.06"/>
 <instance part="TP4" gate="G$1" x="350.52" y="218.44"/>
-<instance part="TP5" gate="G$1" x="368.3" y="218.44" rot="R180"/>
-<instance part="RCLAMP0504S" gate="G$1" x="203.2" y="205.74"/>
+<instance part="RCLAMP" gate="G$1" x="203.2" y="205.74"/>
 <instance part="SUPPLY19" gate="GND" x="190.5" y="198.12"/>
 <instance part="R4" gate="G$1" x="220.98" y="195.58" rot="MR0"/>
 <instance part="R26" gate="G$1" x="177.8" y="203.2"/>
-<instance part="STMPS2141STR" gate="G$1" x="200.66" y="231.14"/>
+<instance part="2141" gate="G$1" x="200.66" y="231.14"/>
 <instance part="IC1" gate="G$1" x="330.2" y="76.2"/>
-<instance part="C17" gate="G$1" x="370.84" y="86.36"/>
-<instance part="SUPPLY21" gate="GND" x="370.84" y="78.74"/>
+<instance part="C17" gate="G$1" x="378.46" y="86.36"/>
+<instance part="SUPPLY21" gate="GND" x="378.46" y="78.74"/>
 <instance part="SUPPLY50" gate="GND" x="312.42" y="60.96"/>
 <instance part="C18" gate="G$1" x="292.1" y="48.26"/>
 <instance part="C19" gate="G$1" x="365.76" y="58.42"/>
@@ -12362,23 +12345,26 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <instance part="SUPPLY53" gate="GND" x="350.52" y="48.26"/>
 <instance part="R13" gate="G$1" x="302.26" y="53.34" rot="R180"/>
 <instance part="R14" gate="G$1" x="358.14" y="66.04" rot="R180"/>
-<instance part="R27" gate="G$1" x="297.18" y="91.44" rot="R90"/>
 <instance part="R31" gate="G$1" x="289.56" y="91.44" rot="R90"/>
-<instance part="R32" gate="G$1" x="281.94" y="91.44" rot="R90"/>
 <instance part="R33" gate="G$1" x="274.32" y="91.44" rot="R90"/>
 <instance part="+3V8" gate="G$1" x="276.86" y="109.22"/>
-<instance part="TVS14" gate="G$1" x="274.32" y="66.04" rot="R270"/>
-<instance part="SUPPLY54" gate="GND" x="266.7" y="58.42"/>
-<instance part="TVS15" gate="G$1" x="281.94" y="71.12" rot="R270"/>
-<instance part="TVS16" gate="G$1" x="266.7" y="66.04" rot="R270"/>
-<instance part="TVS17" gate="G$1" x="292.1" y="71.12" rot="R270"/>
-<instance part="SUPPLY55" gate="GND" x="274.32" y="58.42"/>
-<instance part="SUPPLY56" gate="GND" x="281.94" y="63.5"/>
-<instance part="SUPPLY57" gate="GND" x="292.1" y="63.5"/>
 <instance part="R10" gate="G$1" x="119.38" y="236.22" rot="MR270"/>
 <instance part="+3V18" gate="G$1" x="78.74" y="175.26"/>
 <instance part="R34" gate="G$1" x="78.74" y="165.1" rot="R90"/>
 <instance part="SUPPLY8" gate="GND" x="50.8" y="127"/>
+<instance part="C21" gate="G$1" x="233.68" y="228.6"/>
+<instance part="SUPPLY16" gate="GND" x="233.68" y="218.44"/>
+<instance part="SUPPLY20" gate="GND" x="347.98" y="104.14"/>
+<instance part="USBTOUART" gate="G$1" x="358.14" y="114.3"/>
+<instance part="USBTOUART" gate="G$2" x="353.06" y="124.46"/>
+<instance part="RXLED" gate="G$1" x="353.06" y="78.74" rot="R270"/>
+<instance part="TXLED" gate="G$1" x="304.8" y="68.58" rot="R90"/>
+<instance part="R27" gate="G$1" x="297.18" y="68.58"/>
+<instance part="R32" gate="G$1" x="363.22" y="78.74"/>
+<instance part="+3V19" gate="G$1" x="370.84" y="83.82"/>
+<instance part="+3V20" gate="G$1" x="289.56" y="73.66"/>
+<instance part="PROGRAM" gate="S" x="93.98" y="139.7"/>
+<instance part="SUPPLY32" gate="GND" x="104.14" y="132.08"/>
 </instances>
 <busses>
 </busses>
@@ -12463,31 +12449,25 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </segment>
 <segment>
 <pinref part="SUPPLY36" gate="GND" pin="GND"/>
-<wire x1="289.56" y1="193.04" x2="289.56" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="289.56" y1="195.58" x2="289.56" y2="205.74" width="0.1524" layer="91"/>
-<wire x1="299.72" y1="198.12" x2="299.72" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="299.72" y1="195.58" x2="297.18" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="297.18" y1="195.58" x2="294.64" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="294.64" y1="195.58" x2="292.1" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="198.12" x2="292.1" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="294.64" y1="198.12" x2="294.64" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="297.18" y1="198.12" x2="297.18" y2="195.58" width="0.1524" layer="91"/>
-<junction x="294.64" y="195.58"/>
-<junction x="297.18" y="195.58"/>
-<wire x1="292.1" y1="195.58" x2="289.56" y2="195.58" width="0.1524" layer="91"/>
-<junction x="292.1" y="195.58"/>
-<junction x="289.56" y="195.58"/>
+<wire x1="284.48" y1="210.82" x2="284.48" y2="213.36" width="0.1524" layer="91"/>
+<wire x1="284.48" y1="213.36" x2="284.48" y2="223.52" width="0.1524" layer="91"/>
+<wire x1="294.64" y1="215.9" x2="294.64" y2="213.36" width="0.1524" layer="91"/>
+<wire x1="294.64" y1="213.36" x2="292.1" y2="213.36" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="213.36" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="213.36" x2="287.02" y2="213.36" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="215.9" x2="287.02" y2="213.36" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="215.9" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="215.9" x2="292.1" y2="213.36" width="0.1524" layer="91"/>
+<junction x="289.56" y="213.36"/>
+<junction x="292.1" y="213.36"/>
+<wire x1="287.02" y1="213.36" x2="284.48" y2="213.36" width="0.1524" layer="91"/>
+<junction x="287.02" y="213.36"/>
+<junction x="284.48" y="213.36"/>
 <pinref part="USB_FS" gate="G$1" pin="S1"/>
 <pinref part="USB_FS" gate="G$1" pin="S2"/>
 <pinref part="USB_FS" gate="G$1" pin="S3"/>
 <pinref part="USB_FS" gate="G$1" pin="S4"/>
 <pinref part="USB_FS" gate="G$2" pin="5"/>
-</segment>
-<segment>
-<pinref part="SUPPLY32" gate="GND" pin="GND"/>
-<wire x1="233.68" y1="15.24" x2="233.68" y2="22.86" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="22.86" x2="233.68" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="ADC_SEN3" gate="G$1" pin="3"/>
 </segment>
 <segment>
 <wire x1="127" y1="22.86" x2="129.54" y2="22.86" width="0.1524" layer="91"/>
@@ -12497,21 +12477,21 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </segment>
 <segment>
 <pinref part="SUPPLY35" gate="GND" pin="GND"/>
-<wire x1="190.5" y1="15.24" x2="190.5" y2="22.86" width="0.1524" layer="91"/>
-<wire x1="195.58" y1="22.86" x2="190.5" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="45.72" x2="228.6" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="53.34" x2="228.6" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="ADC_SEN2" gate="G$1" pin="3"/>
 </segment>
 <segment>
 <pinref part="SUPPLY40" gate="GND" pin="GND"/>
-<wire x1="233.68" y1="43.18" x2="233.68" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="50.8" x2="233.68" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="45.72" x2="193.04" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="53.34" x2="193.04" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="ADC_SEN1" gate="G$1" pin="3"/>
 </segment>
 <segment>
 <pinref part="SUPPLY41" gate="GND" pin="GND"/>
-<wire x1="190.5" y1="43.18" x2="190.5" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="195.58" y1="50.8" x2="190.5" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="ADC_SEN4" gate="G$1" pin="3"/>
+<wire x1="231.14" y1="15.24" x2="231.14" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="22.86" x2="231.14" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="ADC_SEN3" gate="G$1" pin="3"/>
 </segment>
 <segment>
 <pinref part="EJECT" gate="S" pin="4"/>
@@ -12536,7 +12516,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="25.4" y1="142.24" x2="25.4" y2="134.62" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="TPS73233DBVT" gate="G$1" pin="GND"/>
+<pinref part="TPS73233" gate="G$1" pin="GND"/>
 <pinref part="SUPPLY25" gate="GND" pin="GND"/>
 <wire x1="68.58" y1="60.96" x2="66.04" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="66.04" y1="60.96" x2="66.04" y2="48.26" width="0.1524" layer="91"/>
@@ -12549,7 +12529,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="187.96" y1="231.14" x2="185.42" y2="231.14" width="0.1524" layer="91"/>
 <wire x1="185.42" y1="231.14" x2="185.42" y2="226.06" width="0.1524" layer="91"/>
 <pinref part="SUPPLY22" gate="GND" pin="GND"/>
-<pinref part="STMPS2141STR" gate="G$1" pin="GND"/>
+<pinref part="2141" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="C16" gate="G$1" pin="2"/>
@@ -12558,10 +12538,6 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <segment>
 <pinref part="TVS7" gate="G$1" pin="2"/>
 <pinref part="SUPPLY26" gate="GND" pin="GND"/>
-</segment>
-<segment>
-<pinref part="TVS8" gate="G$1" pin="2"/>
-<pinref part="SUPPLY33" gate="GND" pin="GND"/>
 </segment>
 <segment>
 <pinref part="TVS9" gate="G$1" pin="2"/>
@@ -12661,7 +12637,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <junction x="322.58" y="215.9"/>
 </segment>
 <segment>
-<pinref part="RCLAMP0504S" gate="G$1" pin="2"/>
+<pinref part="RCLAMP" gate="G$1" pin="2"/>
 <pinref part="SUPPLY19" gate="GND" pin="GND"/>
 <wire x1="193.04" y1="205.74" x2="190.5" y2="205.74" width="0.1524" layer="91"/>
 <wire x1="190.5" y1="205.74" x2="190.5" y2="200.66" width="0.1524" layer="91"/>
@@ -12696,25 +12672,47 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <junction x="350.52" y="53.34"/>
 </segment>
 <segment>
-<pinref part="TVS16" gate="G$1" pin="2"/>
-<pinref part="SUPPLY54" gate="GND" pin="GND"/>
-</segment>
-<segment>
-<pinref part="TVS14" gate="G$1" pin="2"/>
-<pinref part="SUPPLY55" gate="GND" pin="GND"/>
-</segment>
-<segment>
-<pinref part="TVS15" gate="G$1" pin="2"/>
-<pinref part="SUPPLY56" gate="GND" pin="GND"/>
-</segment>
-<segment>
-<pinref part="TVS17" gate="G$1" pin="2"/>
-<pinref part="SUPPLY57" gate="GND" pin="GND"/>
-</segment>
-<segment>
 <pinref part="C6" gate="G$1" pin="2"/>
 <pinref part="SUPPLY8" gate="GND" pin="GND"/>
 <wire x1="50.8" y1="129.54" x2="50.8" y2="132.08" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C21" gate="G$1" pin="2"/>
+<pinref part="SUPPLY16" gate="GND" pin="GND"/>
+<wire x1="233.68" y1="220.98" x2="233.68" y2="223.52" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="SUPPLY20" gate="GND" pin="GND"/>
+<wire x1="347.98" y1="106.68" x2="347.98" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="347.98" y1="109.22" x2="347.98" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="358.14" y1="111.76" x2="358.14" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="358.14" y1="109.22" x2="355.6" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="355.6" y1="109.22" x2="353.06" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="353.06" y1="109.22" x2="350.52" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="350.52" y1="111.76" x2="350.52" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="353.06" y1="111.76" x2="353.06" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="355.6" y1="111.76" x2="355.6" y2="109.22" width="0.1524" layer="91"/>
+<junction x="353.06" y="109.22"/>
+<junction x="355.6" y="109.22"/>
+<wire x1="350.52" y1="109.22" x2="347.98" y2="109.22" width="0.1524" layer="91"/>
+<junction x="350.52" y="109.22"/>
+<junction x="347.98" y="109.22"/>
+<pinref part="USBTOUART" gate="G$1" pin="S1"/>
+<pinref part="USBTOUART" gate="G$1" pin="S2"/>
+<pinref part="USBTOUART" gate="G$1" pin="S3"/>
+<pinref part="USBTOUART" gate="G$1" pin="S4"/>
+<pinref part="USBTOUART" gate="G$2" pin="5"/>
+</segment>
+<segment>
+<pinref part="PROGRAM" gate="S" pin="4"/>
+<wire x1="99.06" y1="137.16" x2="101.6" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="137.16" x2="101.6" y2="139.7" width="0.1524" layer="91"/>
+<pinref part="PROGRAM" gate="S" pin="3"/>
+<wire x1="101.6" y1="139.7" x2="99.06" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="139.7" x2="104.14" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="139.7" x2="104.14" y2="134.62" width="0.1524" layer="91"/>
+<pinref part="SUPPLY32" gate="GND" pin="GND"/>
+<junction x="101.6" y="139.7"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -12730,7 +12728,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="101.6" y1="66.04" x2="101.6" y2="63.5" width="0.1524" layer="91"/>
 <junction x="101.6" y="66.04"/>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
-<pinref part="TPS73233DBVT" gate="G$1" pin="OUT"/>
+<pinref part="TPS73233" gate="G$1" pin="OUT"/>
 <wire x1="101.6" y1="66.04" x2="86.36" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -12762,6 +12760,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <segment>
 <pinref part="R15" gate="G$1" pin="2"/>
 <pinref part="+3V6" gate="G$1" pin="+3V3"/>
+<wire x1="220.98" y1="246.38" x2="220.98" y2="248.92" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R16" gate="G$1" pin="2"/>
@@ -12818,26 +12817,20 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="109.22" y1="116.84" x2="109.22" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="190.5" y1="58.42" x2="190.5" y2="55.88" width="0.1524" layer="91"/>
-<wire x1="195.58" y1="55.88" x2="190.5" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="30.48" x2="231.14" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="27.94" x2="231.14" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="+3V11" gate="G$1" pin="+3V3"/>
-<pinref part="ADC_SEN4" gate="G$1" pin="1"/>
+<pinref part="ADC_SEN3" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<wire x1="233.68" y1="58.42" x2="233.68" y2="55.88" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="55.88" x2="233.68" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="60.96" x2="193.04" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="58.42" x2="193.04" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="+3V14" gate="G$1" pin="+3V3"/>
 <pinref part="ADC_SEN1" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<wire x1="233.68" y1="30.48" x2="233.68" y2="27.94" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="27.94" x2="233.68" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="+3V13" gate="G$1" pin="+3V3"/>
-<pinref part="ADC_SEN3" gate="G$1" pin="1"/>
-</segment>
-<segment>
-<wire x1="190.5" y1="30.48" x2="190.5" y2="27.94" width="0.1524" layer="91"/>
-<wire x1="195.58" y1="27.94" x2="190.5" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="60.96" x2="228.6" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="58.42" x2="228.6" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="+3V12" gate="G$1" pin="+3V3"/>
 <pinref part="ADC_SEN2" gate="G$1" pin="1"/>
 </segment>
@@ -12866,17 +12859,9 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <pinref part="R33" gate="G$1" pin="2"/>
 <wire x1="274.32" y1="96.52" x2="274.32" y2="101.6" width="0.1524" layer="91"/>
 <wire x1="274.32" y1="101.6" x2="276.86" y2="101.6" width="0.1524" layer="91"/>
-<pinref part="R27" gate="G$1" pin="2"/>
-<wire x1="276.86" y1="101.6" x2="281.94" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="281.94" y1="101.6" x2="289.56" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="289.56" y1="101.6" x2="297.18" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="297.18" y1="101.6" x2="297.18" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="276.86" y1="101.6" x2="289.56" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="R31" gate="G$1" pin="2"/>
 <wire x1="289.56" y1="96.52" x2="289.56" y2="101.6" width="0.1524" layer="91"/>
-<pinref part="R32" gate="G$1" pin="2"/>
-<wire x1="281.94" y1="96.52" x2="281.94" y2="101.6" width="0.1524" layer="91"/>
-<junction x="281.94" y="101.6"/>
-<junction x="289.56" y="101.6"/>
 <pinref part="+3V8" gate="G$1" pin="+3V3"/>
 <wire x1="276.86" y1="106.68" x2="276.86" y2="101.6" width="0.1524" layer="91"/>
 <junction x="276.86" y="101.6"/>
@@ -12885,6 +12870,18 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <pinref part="R34" gate="G$1" pin="2"/>
 <pinref part="+3V18" gate="G$1" pin="+3V3"/>
 <wire x1="78.74" y1="170.18" x2="78.74" y2="172.72" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R32" gate="G$1" pin="2"/>
+<wire x1="368.3" y1="78.74" x2="370.84" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="370.84" y1="78.74" x2="370.84" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="+3V19" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="R27" gate="G$1" pin="1"/>
+<pinref part="+3V20" gate="G$1" pin="+3V3"/>
+<wire x1="292.1" y1="68.58" x2="289.56" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="68.58" x2="289.56" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="OSC_IN" class="0">
@@ -12934,9 +12931,9 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="63.5" y1="66.04" x2="60.96" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="55.88" y1="66.04" x2="60.96" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="55.88" y1="66.04" x2="55.88" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="TPS73233DBVT" gate="G$1" pin="IN"/>
+<pinref part="TPS73233" gate="G$1" pin="IN"/>
 <wire x1="63.5" y1="66.04" x2="63.5" y2="55.88" width="0.1524" layer="91"/>
-<pinref part="TPS73233DBVT" gate="G$1" pin="EN"/>
+<pinref part="TPS73233" gate="G$1" pin="EN"/>
 <wire x1="63.5" y1="55.88" x2="68.58" y2="55.88" width="0.1524" layer="91"/>
 <junction x="63.5" y="66.04"/>
 <pinref part="S1" gate="1" pin="P"/>
@@ -13136,16 +13133,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="215.9" y1="195.58" x2="215.9" y2="203.2" width="0.1524" layer="91"/>
 <junction x="215.9" y="203.2"/>
 <wire x1="215.9" y1="203.2" x2="213.36" y2="203.2" width="0.1524" layer="91"/>
-<pinref part="RCLAMP0504S" gate="G$1" pin="4"/>
-</segment>
-<segment>
-<label x="368.3" y="66.04" size="1.27" layer="95" xref="yes"/>
-<pinref part="C19" gate="G$1" pin="1"/>
-<wire x1="365.76" y1="66.04" x2="368.3" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="365.76" y1="60.96" x2="365.76" y2="66.04" width="0.1524" layer="91"/>
-<pinref part="R14" gate="G$1" pin="1"/>
-<wire x1="363.22" y1="66.04" x2="365.76" y2="66.04" width="0.1524" layer="91"/>
-<junction x="365.76" y="66.04"/>
+<pinref part="RCLAMP" gate="G$1" pin="4"/>
 </segment>
 </net>
 <net name="DP_OUT/FS" class="0">
@@ -13161,16 +13149,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="182.88" y1="203.2" x2="185.42" y2="203.2" width="0.1524" layer="91"/>
 <junction x="185.42" y="203.2"/>
 <wire x1="185.42" y1="203.2" x2="193.04" y2="203.2" width="0.1524" layer="91"/>
-<pinref part="RCLAMP0504S" gate="G$1" pin="3"/>
-</segment>
-<segment>
-<label x="287.02" y="53.34" size="1.27" layer="95" rot="R180" xref="yes"/>
-<wire x1="297.18" y1="53.34" x2="292.1" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="R13" gate="G$1" pin="2"/>
-<pinref part="C18" gate="G$1" pin="1"/>
-<wire x1="292.1" y1="53.34" x2="287.02" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="50.8" x2="292.1" y2="53.34" width="0.1524" layer="91"/>
-<junction x="292.1" y="53.34"/>
+<pinref part="RCLAMP" gate="G$1" pin="3"/>
 </segment>
 </net>
 <net name="VBUS/FS" class="0">
@@ -13192,12 +13171,12 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="144.78" y1="233.68" x2="142.24" y2="233.68" width="0.1524" layer="91"/>
 <wire x1="144.78" y1="231.14" x2="144.78" y2="233.68" width="0.1524" layer="91"/>
 <junction x="144.78" y="233.68"/>
-<pinref part="STMPS2141STR" gate="G$1" pin="OUT"/>
+<pinref part="2141" gate="G$1" pin="OUT"/>
 </segment>
 <segment>
 <wire x1="213.36" y1="205.74" x2="218.44" y2="205.74" width="0.1524" layer="91"/>
 <label x="218.44" y="205.74" size="1.27" layer="95" rot="MR180" xref="yes"/>
-<pinref part="RCLAMP0504S" gate="G$1" pin="5"/>
+<pinref part="RCLAMP" gate="G$1" pin="5"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="VCC"/>
@@ -13209,130 +13188,92 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <junction x="350.52" y="73.66"/>
 </segment>
 </net>
-<net name="USART3_RTS" class="0">
-<segment>
-<pinref part="U1" gate="G$1" pin="PB14"/>
-<wire x1="220.98" y1="139.7" x2="226.06" y2="139.7" width="0.1524" layer="91"/>
-<label x="226.06" y="139.7" size="1.27" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="G$1" pin="!RTS"/>
-<wire x1="314.96" y1="81.28" x2="292.1" y2="81.28" width="0.1524" layer="91"/>
-<label x="264.16" y="81.28" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="R32" gate="G$1" pin="1"/>
-<wire x1="292.1" y1="81.28" x2="281.94" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="281.94" y1="81.28" x2="264.16" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="281.94" y1="86.36" x2="281.94" y2="81.28" width="0.1524" layer="91"/>
-<junction x="281.94" y="81.28"/>
-<pinref part="TVS17" gate="G$1" pin="1"/>
-<wire x1="292.1" y1="73.66" x2="292.1" y2="81.28" width="0.1524" layer="91"/>
-<junction x="292.1" y="81.28"/>
-</segment>
-</net>
 <net name="GPIO2" class="0">
 <segment>
 <pinref part="TP14" gate="G$1" pin="TP"/>
-<junction x="325.12" y="170.18"/>
+<junction x="292.1" y="185.42"/>
 <pinref part="TVS2" gate="G$1" pin="1"/>
-<wire x1="330.2" y1="170.18" x2="325.12" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="297.18" y1="185.42" x2="292.1" y2="185.42" width="0.1524" layer="91"/>
 <pinref part="R3" gate="G$1" pin="1"/>
-<wire x1="330.2" y1="170.18" x2="335.28" y2="170.18" width="0.1524" layer="91"/>
-<junction x="330.2" y="170.18"/>
-<wire x1="325.12" y1="170.18" x2="317.5" y2="170.18" width="0.1524" layer="91"/>
-<label x="317.5" y="170.18" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="297.18" y1="185.42" x2="302.26" y2="185.42" width="0.1524" layer="91"/>
+<junction x="297.18" y="185.42"/>
+<wire x1="292.1" y1="185.42" x2="284.48" y2="185.42" width="0.1524" layer="91"/>
+<label x="284.48" y="185.42" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="PB0"/>
-<wire x1="220.98" y1="175.26" x2="226.06" y2="175.26" width="0.1524" layer="91"/>
-<label x="226.06" y="175.26" size="1.27" layer="95" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="PA8"/>
+<wire x1="220.98" y1="109.22" x2="226.06" y2="109.22" width="0.1524" layer="91"/>
+<label x="226.06" y="109.22" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="GPIO3" class="0">
 <segment>
 <pinref part="TVS3" gate="G$1" pin="1"/>
-<wire x1="322.58" y1="157.48" x2="325.12" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="172.72" x2="292.1" y2="172.72" width="0.1524" layer="91"/>
 <pinref part="TP15" gate="G$1" pin="TP"/>
-<junction x="322.58" y="157.48"/>
-<wire x1="317.5" y1="157.48" x2="322.58" y2="157.48" width="0.1524" layer="91"/>
+<junction x="289.56" y="172.72"/>
+<wire x1="284.48" y1="172.72" x2="289.56" y2="172.72" width="0.1524" layer="91"/>
 <pinref part="R7" gate="G$1" pin="1"/>
-<wire x1="335.28" y1="157.48" x2="325.12" y2="157.48" width="0.1524" layer="91"/>
-<junction x="325.12" y="157.48"/>
-<label x="317.5" y="157.48" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="302.26" y1="172.72" x2="292.1" y2="172.72" width="0.1524" layer="91"/>
+<junction x="292.1" y="172.72"/>
+<label x="284.48" y="172.72" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="PB1"/>
-<wire x1="220.98" y1="172.72" x2="226.06" y2="172.72" width="0.1524" layer="91"/>
-<label x="226.06" y="172.72" size="1.27" layer="95" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="PA10"/>
+<wire x1="220.98" y1="104.14" x2="226.06" y2="104.14" width="0.1524" layer="91"/>
+<label x="226.06" y="104.14" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="GPIO4" class="0">
 <segment>
-<wire x1="317.5" y1="142.24" x2="320.04" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="320.04" y1="142.24" x2="330.2" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="284.48" y1="157.48" x2="287.02" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="157.48" x2="297.18" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="TP16" gate="G$1" pin="TP"/>
-<junction x="320.04" y="142.24"/>
+<junction x="287.02" y="157.48"/>
 <pinref part="TVS4" gate="G$1" pin="1"/>
 <pinref part="R8" gate="G$1" pin="1"/>
-<wire x1="340.36" y1="142.24" x2="330.2" y2="142.24" width="0.1524" layer="91"/>
-<junction x="330.2" y="142.24"/>
-<label x="317.5" y="142.24" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="307.34" y1="157.48" x2="297.18" y2="157.48" width="0.1524" layer="91"/>
+<junction x="297.18" y="157.48"/>
+<label x="284.48" y="157.48" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="PC13"/>
-<wire x1="170.18" y1="170.18" x2="165.1" y2="170.18" width="0.1524" layer="91"/>
-<label x="165.1" y="170.18" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="PC0"/>
+<wire x1="170.18" y1="137.16" x2="165.1" y2="137.16" width="0.1524" layer="91"/>
+<label x="165.1" y="137.16" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="DEBUG_LED/NP1" class="0">
 <segment>
 <pinref part="GPIOS" gate="1" pin="1"/>
-<wire x1="355.6" y1="182.88" x2="363.22" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="355.6" y1="182.88" x2="350.52" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="322.58" y1="198.12" x2="330.2" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="322.58" y1="198.12" x2="317.5" y2="198.12" width="0.1524" layer="91"/>
 <pinref part="R5" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="DEBUG_LED/NP2" class="0">
 <segment>
 <pinref part="GPIOS" gate="1" pin="2"/>
-<wire x1="363.22" y1="149.86" x2="358.14" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="358.14" y1="149.86" x2="350.52" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="165.1" x2="325.12" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="325.12" y1="165.1" x2="317.5" y2="185.42" width="0.1524" layer="91"/>
 <pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="350.52" y1="170.18" x2="345.44" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="317.5" y1="185.42" x2="312.42" y2="185.42" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="DEBUG_LED/NP3" class="0">
 <segment>
 <pinref part="GPIOS" gate="1" pin="3"/>
-<wire x1="353.06" y1="157.48" x2="353.06" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="353.06" y1="147.32" x2="363.22" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="320.04" y1="172.72" x2="320.04" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="320.04" y1="162.56" x2="330.2" y2="162.56" width="0.1524" layer="91"/>
 <pinref part="R7" gate="G$1" pin="2"/>
-<wire x1="353.06" y1="157.48" x2="345.44" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="320.04" y1="172.72" x2="312.42" y2="172.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="DEBUG_LED/NP4" class="0">
 <segment>
 <pinref part="GPIOS" gate="1" pin="4"/>
-<wire x1="363.22" y1="144.78" x2="355.6" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="160.02" x2="322.58" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="R8" gate="G$1" pin="2"/>
-<wire x1="355.6" y1="142.24" x2="350.52" y2="142.24" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="ADC1_IN0" class="0">
-<segment>
-<pinref part="U1" gate="G$1" pin="WKUP/PA0"/>
-<wire x1="220.98" y1="129.54" x2="226.06" y2="129.54" width="0.1524" layer="91"/>
-<label x="226.06" y="129.54" size="1.27" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="TVS6" gate="G$1" pin="1"/>
-<wire x1="335.28" y1="116.84" x2="322.58" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="TP18" gate="G$1" pin="TP"/>
-<junction x="322.58" y="116.84"/>
-<wire x1="320.04" y1="116.84" x2="322.58" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="R18" gate="G$1" pin="1"/>
-<wire x1="340.36" y1="116.84" x2="335.28" y2="116.84" width="0.1524" layer="91"/>
-<junction x="335.28" y="116.84"/>
-<label x="320.04" y="116.84" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="322.58" y1="157.48" x2="317.5" y2="157.48" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -13346,27 +13287,27 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <net name="GPIO5" class="0">
 <segment>
 <pinref part="TP17" gate="G$1" pin="TP"/>
-<wire x1="332.74" y1="129.54" x2="317.5" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="317.5" y1="129.54" x2="325.12" y2="129.54" width="0.1524" layer="91"/>
-<junction x="317.5" y="129.54"/>
+<wire x1="299.72" y1="144.78" x2="284.48" y2="144.78" width="0.1524" layer="91"/>
+<wire x1="284.48" y1="144.78" x2="292.1" y2="144.78" width="0.1524" layer="91"/>
+<junction x="284.48" y="144.78"/>
 <pinref part="TVS5" gate="G$1" pin="1"/>
 <pinref part="R17" gate="G$1" pin="1"/>
-<wire x1="337.82" y1="129.54" x2="332.74" y2="129.54" width="0.1524" layer="91"/>
-<junction x="332.74" y="129.54"/>
-<label x="317.5" y="129.54" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="304.8" y1="144.78" x2="299.72" y2="144.78" width="0.1524" layer="91"/>
+<junction x="299.72" y="144.78"/>
+<label x="284.48" y="144.78" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="PC14"/>
-<wire x1="170.18" y1="172.72" x2="165.1" y2="172.72" width="0.1524" layer="91"/>
-<label x="165.1" y="172.72" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="U1" gate="G$1" pin="PB13"/>
+<wire x1="220.98" y1="142.24" x2="226.06" y2="142.24" width="0.1524" layer="91"/>
+<label x="226.06" y="142.24" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="DEBUG_LED/NP5" class="0">
 <segment>
 <pinref part="GPIOS" gate="1" pin="5"/>
-<wire x1="363.22" y1="142.24" x2="353.06" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="157.48" x2="320.04" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="R17" gate="G$1" pin="2"/>
-<wire x1="353.06" y1="129.54" x2="347.98" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="320.04" y1="144.78" x2="314.96" y2="144.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$26" class="0">
@@ -13419,7 +13360,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </net>
 <net name="N$10" class="0">
 <segment>
-<pinref part="TPS73233DBVT" gate="G$1" pin="BP"/>
+<pinref part="TPS73233" gate="G$1" pin="BP"/>
 <pinref part="C14" gate="G$1" pin="1"/>
 <wire x1="86.36" y1="55.88" x2="88.9" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="55.88" x2="88.9" y2="53.34" width="0.1524" layer="91"/>
@@ -13427,8 +13368,8 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </net>
 <net name="DM_IN/FS" class="0">
 <segment>
-<wire x1="281.94" y1="213.36" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
-<label x="281.94" y="213.36" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="276.86" y1="231.14" x2="284.48" y2="231.14" width="0.1524" layer="91"/>
+<label x="276.86" y="231.14" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="USB_FS" gate="G$2" pin="2"/>
 </segment>
 <segment>
@@ -13439,8 +13380,8 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </net>
 <net name="DP_IN/FS" class="0">
 <segment>
-<wire x1="281.94" y1="210.82" x2="289.56" y2="210.82" width="0.1524" layer="91"/>
-<label x="281.94" y="210.82" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="276.86" y1="228.6" x2="284.48" y2="228.6" width="0.1524" layer="91"/>
+<label x="276.86" y="228.6" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="USB_FS" gate="G$2" pin="3"/>
 </segment>
 <segment>
@@ -13460,7 +13401,7 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <junction x="175.26" y="228.6"/>
 <pinref part="TP2" gate="G$1" pin="TP"/>
 <junction x="177.8" y="228.6"/>
-<pinref part="STMPS2141STR" gate="G$1" pin="FAULT"/>
+<pinref part="2141" gate="G$1" pin="FAULT"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="PC2"/>
@@ -13470,13 +13411,13 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </net>
 <net name="USB/FS_POWERSWITCHON" class="0">
 <segment>
-<wire x1="213.36" y1="228.6" x2="226.06" y2="228.6" width="0.1524" layer="91"/>
-<label x="228.6" y="228.6" size="1.27" layer="95" xref="yes"/>
+<wire x1="213.36" y1="228.6" x2="220.98" y2="228.6" width="0.1524" layer="91"/>
+<label x="223.52" y="228.6" size="1.27" layer="95" xref="yes"/>
 <pinref part="R15" gate="G$1" pin="1"/>
-<wire x1="226.06" y1="228.6" x2="228.6" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="226.06" y1="231.14" x2="226.06" y2="228.6" width="0.1524" layer="91"/>
-<junction x="226.06" y="228.6"/>
-<pinref part="STMPS2141STR" gate="G$1" pin="EN"/>
+<wire x1="220.98" y1="228.6" x2="223.52" y2="228.6" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="236.22" x2="220.98" y2="228.6" width="0.1524" layer="91"/>
+<junction x="220.98" y="228.6"/>
+<pinref part="2141" gate="G$1" pin="EN"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="PB5"/>
@@ -13487,9 +13428,9 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <net name="DEBUG_LED/NP6" class="0">
 <segment>
 <pinref part="GPIOS" gate="1" pin="6"/>
-<wire x1="363.22" y1="139.7" x2="355.6" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="154.94" x2="322.58" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="R18" gate="G$1" pin="2"/>
-<wire x1="350.52" y1="116.84" x2="355.6" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="317.5" y1="132.08" x2="322.58" y2="132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SD_EJECT" class="0">
@@ -13505,7 +13446,6 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <wire x1="35.56" y1="165.1" x2="33.02" y2="165.1" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="165.1" x2="33.02" y2="167.64" width="0.1524" layer="91"/>
 <junction x="33.02" y="167.64"/>
-<pinref part="TP11" gate="G$1" pin="TP"/>
 <wire x1="33.02" y1="167.64" x2="30.48" y2="167.64" width="0.1524" layer="91"/>
 <label x="30.48" y="167.64" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
@@ -13645,30 +13585,15 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <junction x="363.22" y="223.52"/>
 </segment>
 </net>
-<net name="TRACESWO" class="0">
-<segment>
-<wire x1="370.84" y1="220.98" x2="368.3" y2="220.98" width="0.1524" layer="91"/>
-<label x="370.84" y="220.98" size="1.27" layer="95" xref="yes"/>
-<pinref part="SWD_DEBUG_PORT" gate="G$1" pin="6"/>
-<pinref part="TP5" gate="G$1" pin="TP"/>
-<wire x1="368.3" y1="220.98" x2="345.44" y2="220.98" width="0.1524" layer="91"/>
-<junction x="368.3" y="220.98"/>
-</segment>
-<segment>
-<pinref part="U1" gate="G$1" pin="JTDO/TRACESSW0/PB3"/>
-<wire x1="226.06" y1="167.64" x2="220.98" y2="167.64" width="0.1524" layer="91"/>
-<label x="226.06" y="167.64" size="1.27" layer="95" xref="yes"/>
-</segment>
-</net>
 <net name="RED" class="0">
 <segment>
-<wire x1="195.58" y1="53.34" x2="185.42" y2="53.34" width="0.1524" layer="91"/>
-<label x="182.88" y="53.34" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="236.22" y1="25.4" x2="226.06" y2="25.4" width="0.1524" layer="91"/>
+<label x="223.52" y="25.4" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="TVS9" gate="G$1" pin="1"/>
-<wire x1="185.42" y1="53.34" x2="182.88" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="185.42" y1="50.8" x2="185.42" y2="53.34" width="0.1524" layer="91"/>
-<junction x="185.42" y="53.34"/>
-<pinref part="ADC_SEN4" gate="G$1" pin="2"/>
+<wire x1="226.06" y1="25.4" x2="223.52" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="226.06" y1="22.86" x2="226.06" y2="25.4" width="0.1524" layer="91"/>
+<junction x="226.06" y="25.4"/>
+<pinref part="ADC_SEN3" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="PA1"/>
@@ -13678,12 +13603,12 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </net>
 <net name="BLUE" class="0">
 <segment>
-<wire x1="238.76" y1="53.34" x2="228.6" y2="53.34" width="0.1524" layer="91"/>
-<label x="226.06" y="53.34" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="198.12" y1="55.88" x2="187.96" y2="55.88" width="0.1524" layer="91"/>
+<label x="185.42" y="55.88" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="TVS7" gate="G$1" pin="1"/>
-<wire x1="228.6" y1="53.34" x2="226.06" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="228.6" y1="50.8" x2="228.6" y2="53.34" width="0.1524" layer="91"/>
-<junction x="228.6" y="53.34"/>
+<wire x1="187.96" y1="55.88" x2="185.42" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="53.34" x2="187.96" y2="55.88" width="0.1524" layer="91"/>
+<junction x="187.96" y="55.88"/>
 <pinref part="ADC_SEN1" gate="G$1" pin="2"/>
 </segment>
 <segment>
@@ -13692,14 +13617,14 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <label x="226.06" y="121.92" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="PINK" class="0">
+<net name="GREEN" class="0">
 <segment>
-<wire x1="195.58" y1="25.4" x2="185.42" y2="25.4" width="0.1524" layer="91"/>
-<label x="182.88" y="25.4" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="233.68" y1="55.88" x2="223.52" y2="55.88" width="0.1524" layer="91"/>
+<label x="220.98" y="55.88" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="TVS10" gate="G$1" pin="1"/>
-<wire x1="185.42" y1="25.4" x2="182.88" y2="25.4" width="0.1524" layer="91"/>
-<wire x1="185.42" y1="22.86" x2="185.42" y2="25.4" width="0.1524" layer="91"/>
-<junction x="185.42" y="25.4"/>
+<wire x1="223.52" y1="55.88" x2="220.98" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="223.52" y1="53.34" x2="223.52" y2="55.88" width="0.1524" layer="91"/>
+<junction x="223.52" y="55.88"/>
 <pinref part="ADC_SEN2" gate="G$1" pin="2"/>
 </segment>
 <segment>
@@ -13708,79 +13633,55 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <label x="226.06" y="124.46" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="GREEN" class="0">
-<segment>
-<wire x1="238.76" y1="25.4" x2="228.6" y2="25.4" width="0.1524" layer="91"/>
-<label x="226.06" y="25.4" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="TVS8" gate="G$1" pin="1"/>
-<wire x1="228.6" y1="25.4" x2="226.06" y2="25.4" width="0.1524" layer="91"/>
-<wire x1="228.6" y1="22.86" x2="228.6" y2="25.4" width="0.1524" layer="91"/>
-<junction x="228.6" y="25.4"/>
-<pinref part="ADC_SEN3" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="U1" gate="G$1" pin="PA4"/>
-<wire x1="220.98" y1="119.38" x2="226.06" y2="119.38" width="0.1524" layer="91"/>
-<label x="226.06" y="119.38" size="1.27" layer="95" xref="yes"/>
-</segment>
-</net>
 <net name="N$7" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="VCCIO"/>
 <wire x1="314.96" y1="78.74" x2="309.88" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="309.88" y1="78.74" x2="309.88" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="309.88" y1="91.44" x2="363.22" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="363.22" y1="91.44" x2="363.22" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="91.44" x2="373.38" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="373.38" y1="91.44" x2="373.38" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="!RESET"/>
-<wire x1="363.22" y1="71.12" x2="345.44" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="373.38" y1="71.12" x2="345.44" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="3V3OUT"/>
-<wire x1="345.44" y1="68.58" x2="363.22" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="363.22" y1="68.58" x2="363.22" y2="71.12" width="0.1524" layer="91"/>
-<junction x="363.22" y="71.12"/>
+<wire x1="345.44" y1="68.58" x2="373.38" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="373.38" y1="68.58" x2="373.38" y2="71.12" width="0.1524" layer="91"/>
+<junction x="373.38" y="71.12"/>
 <pinref part="C17" gate="G$1" pin="1"/>
-<wire x1="370.84" y1="88.9" x2="370.84" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="370.84" y1="91.44" x2="363.22" y2="91.44" width="0.1524" layer="91"/>
-<junction x="363.22" y="91.44"/>
+<wire x1="378.46" y1="88.9" x2="378.46" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="378.46" y1="91.44" x2="373.38" y2="91.44" width="0.1524" layer="91"/>
+<junction x="373.38" y="91.44"/>
 </segment>
 </net>
 <net name="USART3_TX" class="0">
-<segment>
-<pinref part="U1" gate="G$1" pin="PB10"/>
-<wire x1="220.98" y1="149.86" x2="226.06" y2="149.86" width="0.1524" layer="91"/>
-<label x="226.06" y="149.86" size="1.27" layer="95" xref="yes"/>
-</segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="TXD"/>
 <wire x1="314.96" y1="83.82" x2="274.32" y2="83.82" width="0.1524" layer="91"/>
 <label x="264.16" y="83.82" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="R33" gate="G$1" pin="1"/>
-<wire x1="274.32" y1="83.82" x2="266.7" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="266.7" y1="83.82" x2="264.16" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="83.82" x2="264.16" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="274.32" y1="86.36" x2="274.32" y2="83.82" width="0.1524" layer="91"/>
 <junction x="274.32" y="83.82"/>
-<pinref part="TVS16" gate="G$1" pin="1"/>
-<wire x1="266.7" y1="68.58" x2="266.7" y2="83.82" width="0.1524" layer="91"/>
-<junction x="266.7" y="83.82"/>
 </segment>
-</net>
-<net name="USART3_RX" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="PB11"/>
 <wire x1="220.98" y1="147.32" x2="226.06" y2="147.32" width="0.1524" layer="91"/>
 <label x="226.06" y="147.32" size="1.27" layer="95" xref="yes"/>
 </segment>
+</net>
+<net name="USART3_RX" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="RXD"/>
 <wire x1="314.96" y1="76.2" x2="289.56" y2="76.2" width="0.1524" layer="91"/>
 <label x="264.16" y="76.2" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="R31" gate="G$1" pin="1"/>
-<wire x1="289.56" y1="76.2" x2="281.94" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="281.94" y1="76.2" x2="264.16" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="76.2" x2="264.16" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="86.36" x2="289.56" y2="76.2" width="0.1524" layer="91"/>
 <junction x="289.56" y="76.2"/>
-<pinref part="TVS15" gate="G$1" pin="1"/>
-<wire x1="281.94" y1="73.66" x2="281.94" y2="76.2" width="0.1524" layer="91"/>
-<junction x="281.94" y="76.2"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="PB10"/>
+<wire x1="220.98" y1="149.86" x2="226.06" y2="149.86" width="0.1524" layer="91"/>
+<label x="226.06" y="149.86" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -13788,26 +13689,6 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 <pinref part="IC1" gate="G$1" pin="USBDM"/>
 <pinref part="R14" gate="G$1" pin="2"/>
 <wire x1="353.06" y1="66.04" x2="345.44" y2="66.04" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="USART3_CTS" class="0">
-<segment>
-<pinref part="U1" gate="G$1" pin="PB13"/>
-<wire x1="220.98" y1="142.24" x2="226.06" y2="142.24" width="0.1524" layer="91"/>
-<label x="226.06" y="142.24" size="1.27" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="G$1" pin="!CTS"/>
-<wire x1="314.96" y1="71.12" x2="297.18" y2="71.12" width="0.1524" layer="91"/>
-<label x="264.16" y="71.12" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="R27" gate="G$1" pin="1"/>
-<wire x1="297.18" y1="71.12" x2="274.32" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="71.12" x2="264.16" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="297.18" y1="86.36" x2="297.18" y2="71.12" width="0.1524" layer="91"/>
-<junction x="297.18" y="71.12"/>
-<pinref part="TVS14" gate="G$1" pin="1"/>
-<wire x1="274.32" y1="68.58" x2="274.32" y2="71.12" width="0.1524" layer="91"/>
-<junction x="274.32" y="71.12"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -13821,20 +13702,20 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </net>
 <net name="GPIO1" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="PB2"/>
-<wire x1="220.98" y1="170.18" x2="226.06" y2="170.18" width="0.1524" layer="91"/>
-<label x="226.06" y="170.18" size="1.27" layer="95" xref="yes"/>
-</segment>
-<segment>
 <pinref part="TVS1" gate="G$1" pin="1"/>
-<wire x1="327.66" y1="182.88" x2="332.74" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="294.64" y1="198.12" x2="299.72" y2="198.12" width="0.1524" layer="91"/>
 <pinref part="TP9" gate="G$1" pin="TP"/>
 <pinref part="R5" gate="G$1" pin="1"/>
-<wire x1="340.36" y1="182.88" x2="332.74" y2="182.88" width="0.1524" layer="91"/>
-<junction x="332.74" y="182.88"/>
-<wire x1="327.66" y1="182.88" x2="317.5" y2="182.88" width="0.1524" layer="91"/>
-<junction x="327.66" y="182.88"/>
-<label x="317.5" y="182.88" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="307.34" y1="198.12" x2="299.72" y2="198.12" width="0.1524" layer="91"/>
+<junction x="299.72" y="198.12"/>
+<wire x1="294.64" y1="198.12" x2="284.48" y2="198.12" width="0.1524" layer="91"/>
+<junction x="294.64" y="198.12"/>
+<label x="284.48" y="198.12" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="PA6"/>
+<wire x1="220.98" y1="114.3" x2="226.06" y2="114.3" width="0.1524" layer="91"/>
+<label x="226.06" y="114.3" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$11" class="0">
@@ -13851,15 +13732,118 @@ Source: &lt;a href="http://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_
 </net>
 <net name="VBUS/FS_IN" class="0">
 <segment>
-<wire x1="289.56" y1="215.9" x2="281.94" y2="215.9" width="0.1524" layer="91"/>
-<label x="281.94" y="215.9" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="284.48" y1="233.68" x2="276.86" y2="233.68" width="0.1524" layer="91"/>
+<label x="276.86" y="233.68" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="USB_FS" gate="G$2" pin="1"/>
 </segment>
 <segment>
-<wire x1="213.36" y1="233.68" x2="215.9" y2="233.68" width="0.1524" layer="91"/>
-<wire x1="215.9" y1="233.68" x2="215.9" y2="238.76" width="0.1524" layer="91"/>
-<label x="215.9" y="238.76" size="1.27" layer="95" rot="R90" xref="yes"/>
-<pinref part="STMPS2141STR" gate="G$1" pin="IN"/>
+<wire x1="213.36" y1="233.68" x2="233.68" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="233.68" x2="238.76" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="238.76" y1="233.68" x2="238.76" y2="241.3" width="0.1524" layer="91"/>
+<label x="238.76" y="241.3" size="1.27" layer="95" rot="R90" xref="yes"/>
+<pinref part="2141" gate="G$1" pin="IN"/>
+<pinref part="C21" gate="G$1" pin="1"/>
+<wire x1="233.68" y1="231.14" x2="233.68" y2="233.68" width="0.1524" layer="91"/>
+<junction x="233.68" y="233.68"/>
+</segment>
+<segment>
+<wire x1="347.98" y1="129.54" x2="340.36" y2="129.54" width="0.1524" layer="91"/>
+<label x="340.36" y="129.54" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="USBTOUART" gate="G$2" pin="1"/>
+</segment>
+</net>
+<net name="DM" class="0">
+<segment>
+<wire x1="340.36" y1="127" x2="347.98" y2="127" width="0.1524" layer="91"/>
+<label x="340.36" y="127" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="USBTOUART" gate="G$2" pin="2"/>
+</segment>
+<segment>
+<label x="368.3" y="66.04" size="1.27" layer="95" xref="yes"/>
+<pinref part="C19" gate="G$1" pin="1"/>
+<wire x1="365.76" y1="66.04" x2="368.3" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="365.76" y1="60.96" x2="365.76" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="R14" gate="G$1" pin="1"/>
+<wire x1="363.22" y1="66.04" x2="365.76" y2="66.04" width="0.1524" layer="91"/>
+<junction x="365.76" y="66.04"/>
+</segment>
+</net>
+<net name="DP" class="0">
+<segment>
+<wire x1="340.36" y1="124.46" x2="347.98" y2="124.46" width="0.1524" layer="91"/>
+<label x="340.36" y="124.46" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="USBTOUART" gate="G$2" pin="3"/>
+</segment>
+<segment>
+<label x="287.02" y="53.34" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="297.18" y1="53.34" x2="292.1" y2="53.34" width="0.1524" layer="91"/>
+<pinref part="R13" gate="G$1" pin="2"/>
+<pinref part="C18" gate="G$1" pin="1"/>
+<wire x1="292.1" y1="53.34" x2="287.02" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="50.8" x2="292.1" y2="53.34" width="0.1524" layer="91"/>
+<junction x="292.1" y="53.34"/>
+</segment>
+</net>
+<net name="N$12" class="0">
+<segment>
+<pinref part="TXLED" gate="G$1" pin="A"/>
+<pinref part="R27" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="RXLED" gate="G$1" pin="A"/>
+<pinref part="R32" gate="G$1" pin="1"/>
+<wire x1="358.14" y1="78.74" x2="355.6" y2="78.74" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$22" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="CBUS1"/>
+<pinref part="RXLED" gate="G$1" pin="C"/>
+<wire x1="347.98" y1="78.74" x2="345.44" y2="78.74" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$23" class="0">
+<segment>
+<pinref part="TXLED" gate="G$1" pin="C"/>
+<pinref part="IC1" gate="G$1" pin="CBUS2"/>
+<wire x1="309.88" y1="68.58" x2="314.96" y2="68.58" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="GPIO6" class="0">
+<segment>
+<pinref part="TVS6" gate="G$1" pin="1"/>
+<wire x1="302.26" y1="132.08" x2="289.56" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="TP18" gate="G$1" pin="TP"/>
+<junction x="289.56" y="132.08"/>
+<wire x1="287.02" y1="132.08" x2="289.56" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="R18" gate="G$1" pin="1"/>
+<wire x1="307.34" y1="132.08" x2="302.26" y2="132.08" width="0.1524" layer="91"/>
+<junction x="302.26" y="132.08"/>
+<label x="287.02" y="132.08" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="PB14"/>
+<wire x1="220.98" y1="139.7" x2="226.06" y2="139.7" width="0.1524" layer="91"/>
+<label x="226.06" y="139.7" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="PROGRAMMING_EN" class="0">
+<segment>
+<pinref part="PROGRAM" gate="S" pin="1"/>
+<pinref part="PROGRAM" gate="S" pin="2"/>
+<wire x1="86.36" y1="139.7" x2="88.9" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="137.16" x2="86.36" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="137.16" x2="86.36" y2="139.7" width="0.1524" layer="91"/>
+<junction x="86.36" y="139.7"/>
+<wire x1="86.36" y1="139.7" x2="83.82" y2="139.7" width="0.1524" layer="91"/>
+<label x="83.82" y="139.7" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="PB12"/>
+<wire x1="220.98" y1="144.78" x2="226.06" y2="144.78" width="0.1524" layer="91"/>
+<label x="226.06" y="144.78" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
