@@ -72,7 +72,7 @@
 
   /* #define STM32F205xx */   /*!< STM32Fxx    Devices */
   /* #define STM32F215xx */   /*!< STM32Fxx    Devices */
-  /* #define STM32F207xx */   /*!< STM32Fxx    Devices */
+  #define STM32F207xx    /*!< STM32Fxx    Devices */
   /* #define STM32F217xx */   /*!< STM32Fxx    Devices */
     
 #endif
@@ -108,6 +108,8 @@
 /** @addtogroup Device_Included
   * @{
   */
+
+
   #include "stm32f207xx.h"
 
 /**

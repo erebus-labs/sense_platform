@@ -1,0 +1,2 @@
+-Crystal oscillator and caps should be placed as close as possible to the chip pins (datasheet page 89)
+-Recommended oscillator CSTCE16M0V53-R0 (page 28 of AN2867)

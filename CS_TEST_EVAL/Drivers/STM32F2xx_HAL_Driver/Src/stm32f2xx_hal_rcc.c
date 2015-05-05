@@ -77,7 +77,7 @@
   * @brief RCC HAL module driver
   * @{
   */
-
+#define HAL_RCC_MODULE_ENABLED
 #ifdef HAL_RCC_MODULE_ENABLED
 
 /* Private typedef -----------------------------------------------------------*/

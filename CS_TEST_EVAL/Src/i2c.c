@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : I2C.c
-  * Date               : 26/02/2015 02:29:27
+  * Date               : 26/02/2015 14:35:03
   * Description        : This file provides code for the configuration
   *                      of the I2C instances.
   ******************************************************************************
@@ -43,27 +43,10 @@
 
 /* USER CODE END 0 */
 
-I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c2;
-DMA_HandleTypeDef hdma_i2c1_rx;
+I2C_HandleTypeDef hi2c3;
 DMA_HandleTypeDef hdma_i2c2_rx;
 
-/* I2C1 init function */
-void MX_I2C1_Init(void)
-{
-
-  hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 100000;
-  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
-  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLED;
-  hi2c1.Init.OwnAddress2 = 0;
-  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLED;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLED;
-  HAL_I2C_Init(&hi2c1);
-
-}
 /* I2C2 init function */
 void MX_I2C2_Init(void)
 {
@@ -80,46 +63,32 @@ void MX_I2C2_Init(void)
   HAL_I2C_Init(&hi2c2);
 
 }
+/* I2C3 init function */
+void MX_I2C3_Init(void)
+{
+
+  hi2c3.Instance = I2C3;
+  hi2c3.Init.ClockSpeed = 100000;
+  hi2c3.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c3.Init.OwnAddress1 = 0;
+  hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLED;
+  hi2c3.Init.OwnAddress2 = 0;
+  hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLED;
+  hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLED;
+  HAL_I2C_Init(&hi2c3);
+
+}
 
 void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
-  if(hi2c->Instance==I2C1)
+  if(hi2c->Instance==I2C2)
   {
-    /* Peripheral clock enable */
-    __I2C1_CLK_ENABLE();
-  
-    /**I2C1 GPIO Configuration    
-    PB8     ------> I2C1_SCL
-    PB9     ------> I2C1_SDA 
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  /* USER CODE BEGIN I2C2_MspInit 0 */
 
-    /* Peripheral DMA init*/
-  
-    hdma_i2c1_rx.Instance = DMA1_Stream0;
-    hdma_i2c1_rx.Init.Channel = DMA_CHANNEL_1;
-    hdma_i2c1_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
-    hdma_i2c1_rx.Init.PeriphInc = DMA_PINC_ENABLE;
-    hdma_i2c1_rx.Init.MemInc = DMA_MINC_DISABLE;
-    hdma_i2c1_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-    hdma_i2c1_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-    hdma_i2c1_rx.Init.Mode = DMA_NORMAL;
-    hdma_i2c1_rx.Init.Priority = DMA_PRIORITY_LOW;
-    hdma_i2c1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
-    HAL_DMA_Init(&hdma_i2c1_rx);
-
-    __HAL_LINKDMA(hi2c,hdmarx,hdma_i2c1_rx);
-
-  }
-  else if(hi2c->Instance==I2C2)
-  {
+  /* USER CODE END I2C2_MspInit 0 */
     /* Peripheral clock enable */
     __I2C2_CLK_ENABLE();
   
@@ -129,7 +98,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     */
     GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
     HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
@@ -150,28 +119,43 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 
     __HAL_LINKDMA(hi2c,hdmarx,hdma_i2c2_rx);
 
+  /* USER CODE BEGIN I2C2_MspInit 1 */
+
+  /* USER CODE END I2C2_MspInit 1 */
+  }
+  else if(hi2c->Instance==I2C3)
+  {
+  /* USER CODE BEGIN I2C3_MspInit 0 */
+
+  /* USER CODE END I2C3_MspInit 0 */
+    /* Peripheral clock enable */
+    __I2C3_CLK_ENABLE();
+  
+    /**I2C3 GPIO Configuration    
+    PH8     ------> I2C3_SDA
+    PH7     ------> I2C3_SCL 
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_7;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C3;
+    HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN I2C3_MspInit 1 */
+
+  /* USER CODE END I2C3_MspInit 1 */
   }
 }
 
 void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 {
 
-  if(hi2c->Instance==I2C1)
+  if(hi2c->Instance==I2C2)
   {
-    /* Peripheral clock disable */
-    __I2C1_CLK_DISABLE();
-  
-    /**I2C1 GPIO Configuration    
-    PB8     ------> I2C1_SCL
-    PB9     ------> I2C1_SDA 
-    */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8|GPIO_PIN_9);
+  /* USER CODE BEGIN I2C2_MspDeInit 0 */
 
-    /* Peripheral DMA DeInit*/
-    HAL_DMA_DeInit(hi2c->hdmarx);
-  }
-  else if(hi2c->Instance==I2C2)
-  {
+  /* USER CODE END I2C2_MspDeInit 0 */
     /* Peripheral clock disable */
     __I2C2_CLK_DISABLE();
   
@@ -183,8 +167,33 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 
     /* Peripheral DMA DeInit*/
     HAL_DMA_DeInit(hi2c->hdmarx);
+  /* USER CODE BEGIN I2C2_MspDeInit 1 */
+
+  /* USER CODE END I2C2_MspDeInit 1 */
+  }
+  else if(hi2c->Instance==I2C3)
+  {
+  /* USER CODE BEGIN I2C3_MspDeInit 0 */
+
+  /* USER CODE END I2C3_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __I2C3_CLK_DISABLE();
+  
+    /**I2C3 GPIO Configuration    
+    PH8     ------> I2C3_SDA
+    PH7     ------> I2C3_SCL 
+    */
+    HAL_GPIO_DeInit(GPIOH, GPIO_PIN_8|GPIO_PIN_7);
+
+  /* USER CODE BEGIN I2C3_MspDeInit 1 */
+
+  /* USER CODE END I2C3_MspDeInit 1 */
   }
 } 
+
+/* USER CODE BEGIN 1 */
+
+/* USER CODE END 1 */
 
 /**
   * @}
