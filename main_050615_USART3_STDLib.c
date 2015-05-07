@@ -30,6 +30,7 @@
 #include <string.h>
 
 #define DEBUG
+#define ACCEL_ADDR 0x53
 
 volatile char tx_buffer[] = "USART3 ACTIVE\n";
 volatile char rx_buffer[100];
@@ -61,15 +62,21 @@ uint32_t I2C4_COUNTER=0;
 
 /* Private function prototypes -----------------------------------------------*/
   void GPIO_INIT(void);/*GPIO Initialization*/
-  void I2C_INIT(void);/*I2C System Initialization*/
   void USART3_INIT(void);/*USART3 System Initialization*/
   void EXTI_INIT(void);/*External Interrupt Initialization*/
   void DMA_INIT(void);/*DMA System Initialization*/
   void SDIO_INIT(void);/*SD Card System Initialization*/
-  void ADC_INIT(void);/*ADC System Initialization*/
+  void ADC_INIT(void);/*ADC System Initialization*/  
+  void I2C_INIT(void);/*I2C System Initialization*/
+  
+  void I2C_DEVICE_INIT(uint16_t address);//TODO: add handle and sensor struct args
+  void I2C_WRITE(uint16_t address, uint8_t offset, uint8_t to_write);
+  uint8_t I2C_READ(uint16_t address, uint8_t offset, uint8_t to_read);
+  
   void RCC_Config(void);/*RCC (Restet and Clock Controller) Initialization*/
   void NVIC_Config(void);/*Non-Vectored Interrupt Controller Initialization*/
   void RTC_Config(void);/*Real Time Clock Initialization*/
+  
   void ARBITRATE(void);/*Keeps track of sensor sampling, called by RTC Alarm*/
 /********************************************************************************
   * @brief  Main program.
@@ -110,9 +117,11 @@ int main(void)
 /********************************************************************************
 ********************************************************************************/
 void RCC_Config(void){
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB | RCC_AHB1Periph_GPIOC, ENABLE);
+  /*ENABLE CLOCKS FOR GPIO[A,B,C]*/
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB | RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOA, ENABLE);
+  /*ENABLE CLOCKS FOR USART3, I2C1:*/
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3 | RCC_APB1Periph_I2C1, ENABLE);
-
+  /*ENABLE CLOCKS FOR ADC[1,2,3]*/
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1|RCC_APB2Periph_ADC2|RCC_APB2Periph_ADC3, ENABLE);
 }
 /********************************************************************************
@@ -160,16 +169,18 @@ void GPIO_INIT(void){
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
-  
+    
+  /*USART RX PIN CONFIG:*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
-  
+  /*SET USART3 PINS TO Alternate Function (AF)*/
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_USART3);
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_USART3);
 
+  /*LED RED0 and RED1, RESPECTIVELY*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
@@ -177,6 +188,7 @@ void GPIO_INIT(void){
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
   
+  /*GREEN LED:*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
@@ -184,10 +196,65 @@ void GPIO_INIT(void){
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
   GPIO_Init(GPIOC, &GPIO_InitStructure);
   
+  /*EXTI PROGRAM BUTTON INPUT:*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
+  
+  /*I2C1 AF PIN CONFIG: PIN[6] --> SCL*/
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
+  
+  /*I2C1 AF PIN CONFIG: PIN[7] --> SDA*/
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
+  
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_I2C1);
+  GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_I2C1);
+  
+  /*ADC1: PA1*/
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  
+  /*ADC2: PA2*/
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  
+  /*ADC3: PA3*/
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  
+}
+/********************************************************************************
+********************************************************************************/
+void I2C_INIT(void){//TODO: set to pass in sensor struct!
+  I2C_InitTypeDef I2C_InitStructure;
+  
+  I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
+  I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
+  I2C_InitStructure.I2C_OwnAddress1 = 0x0;
+  I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
+  I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+  I2C_InitStructure.I2C_ClockSpeed = 100000;
+  I2C_Init(I2C1, &I2C_InitStructure);
+  I2C_Cmd(I2C1, ENABLE);
+  
 }
 /********************************************************************************
 ********************************************************************************/
