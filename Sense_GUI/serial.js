@@ -76,7 +76,8 @@ SerialConnection.prototype.getDevices = function(callback) {
 };
 
 SerialConnection.prototype.connect = function(path) {
-  serial.connect(path, this.onConnectComplete.bind(this))
+	var options = {persistent:false, name:"sensor_platform_serial_connection", bitrate:9600};
+  serial.connect(path, options, this.onConnectComplete.bind(this))
 };
 
 SerialConnection.prototype.send = function(msg) {
@@ -102,50 +103,24 @@ function log(msg) {
   buffer.innerHTML += msg + '<br/>';
 }
 
-function status(msg) {
-  var buffer = document.querySelector('#status');
-  buffer.innerHTML = msg;
-}
-
 var connection = new SerialConnection();
 
 connection.onConnect.addListener(function() {
-  log('connected...');
-  status('Connected');
-  // remove the connection drop-down
-  document.querySelector('#port_list').style.display = 'none';
+  log('connected');
+	$scope.connected = true;
 });
 
 connection.onDisconnect.addListener(function() {
   log('disconnected');
-  status('Disconnected');
-  // Add the connection drop-down
-  document.querySelector('#port_list').style.display = 'run-in';
+	$scope.connected = false;
 });
 
 connection.onReadLine.addListener(function(line) {
   log('read line: ' + line);
 });
 
-// Populate the list of available devices
-connection.getDevices(function(ports) {
-  // get drop-down port selector
-  var dropDown = document.querySelector('#port_list');
-  // clear existing options
-  dropDown.innerHTML = "";
-  // add new options
-  ports.forEach(function (port) {
-    var displayName = port["displayName"] + "("+port.path+")";
-    if (!displayName) displayName = port.path;
-    
-    var newOption = document.createElement("option");
-    newOption.text = displayName;
-    newOption.value = port.path;
-    dropDown.appendChild(newOption);
-  });
-});
 
-// Handle the 'Connect' button
+/*/ Handle the 'Connect' button
 document.querySelector('#connect_button').addEventListener('click', function() {
   // get the device to connect to
   var dropDown = document.querySelector('#port_list');
@@ -159,3 +134,4 @@ document.querySelector('#connect_button').addEventListener('click', function() {
 
  // connection.send("digitalWrite(LED1, "+(is_on ? '1' : '0')+");\n");
 
+*/

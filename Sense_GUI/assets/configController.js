@@ -1,12 +1,22 @@
 senseGui.controller("configController",['$scope',function($scope){
-  $scope.editing = false;
-  $scope.programming = false;
+	// Constants
   $scope.maxAddress = 7;
-  $scope.alerts = [];
-  $scope.test = false;
   $scope.portOptions = ["A1","A2","A3","A4"];
   $scope.intervalOptions = ["second", "minute", "hour", "day", "week"];
+  
+	// States
+  $scope.editing = false;
+  $scope.programming = false;
+  $scope.connected = false;
+  
+	// Misc
+  $scope.alerts = [];
+  $scope.test = false;
   $scope.types = sensorTypes;
+  
+	// Serial
+  $scope.devicePath;
+  $scope.serialPorts = [];
 
   $scope.sensor = {
 			  id:null,
@@ -212,6 +222,30 @@ senseGui.controller("configController",['$scope',function($scope){
 		log("Pushing Config...");
 	}
 
+	$scope.doConnection = function(){
+		if($scope.connected)
+		{
+			log("Disconnecting...");
+			connection.disconnect();
+		}
+		else
+		{			
+			log("connecting to "+$scope.devicePath + "...");
+			connection.connect($scope.devicePath);
+		}
+	}
+	
+	
+	
+	
+	// Populate the list of available devices
+	connection.getDevices(function(ports) {
+	  ports.forEach(function (port) {
+		$scope.serialPorts.push(port.path);
+	  });
+		$scope.$apply();
+	});
+	
 }]);
 
 

@@ -102,7 +102,7 @@
 							<select name="drpPort" class="form-control" ng-model="sensor.port" ng-options="port for port in portOptions">
 							</select>
 						</div>
-						<div ng-show="sensor.type.connCode=='D'" class="col-xs-9 col-lg-10">
+						<div type="number" ng-show="sensor.type.connCode=='D'" class="col-xs-9 col-lg-10">
 							<input type="text" class="form-control" ng-model="sensor.address" />
 						</div>
 					</div>
@@ -139,13 +139,13 @@
 		</div>
 		<div class="panel-body">		
 			<div id="connect_box">
-			  <select id="port_list"><option>Please Wait...</option></select>
-			  <button id="connect_button">Connect</button>
-			  <div id="status"></div>
+			  <select id="port_list" ng-model="devicePath" ng-options="port for port in serialPorts" ng-hide="connected"><option>Please Wait...</option></select>
+			  <button id="connect_button" ng-click='doConnection()'>{{connected?"Disconnect":"Connect"}}</button>
 			</div>
 			
 			<!-- Box for log messages -->
-			<div id="buffer" border="1px solid black" style="width:100%;height:50%;overflow:auto;margin:5px">
+			<div id="buffer" border="1px solid black" style="width:90%;height:50%;overflow:auto;margin:5px" background="blue">
+				test
 			</div>			
 			<div class="pull-right">
 				<div class="btn btn-success" ng-click='pushConfig()' style="min-width:70px">Push Config</div>
@@ -166,3 +166,4 @@
 </body>
 	<script src="serial.js"></script>
 </html>
+
