@@ -4,7 +4,7 @@ sense-platform
 + *Title:* A low-cost,  low-power sensor platform with modular sensor addition and base station reprogramming/configuration
 + *Project Short Name:* Open Sensor Platform
 + *Sponsors:* 
-  + [Dr. Mike Borowczak](https://www.linkedin.com/in/mborowczak) @ [Erebus Labs](www.erebuslabs.com)
+  + [Dr. Mike Borowczak](https://www.linkedin.com/in/mborowczak) @ [Erebus Labs](http://www.erebuslabs.com)
   + [Dr. Andrea Burrows] (http://uwyo.academia.edu/AndreaBurrows) @ [University of Wyoming](http://www.uwyo.edu/seced/faculty-staff/andrea-burrows.html)
 + *Senior Design Team:* 
     + Colten Nye
