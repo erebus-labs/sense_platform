@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.001" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
+<grid distance="0.01" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -139,7 +139,10 @@
 <wire x1="20.0714" y1="20.292259375" x2="0" y2="20.292259375" width="0" layer="20"/>
 <wire x1="0" y1="20.292259375" x2="0" y2="0" width="0" layer="20"/>
 <text x="0.66801875" y="18.521678125" size="0.6096" layer="25">VOC Sensor Board </text>
-<text x="0.66548125" y="17.0053" size="0.6096" layer="25">Colten Nye, Steve Peirce, Golriz Sedaghat</text>
+<text x="0.66548125" y="17.0053" size="0.6096" layer="25">Colten Nye,Steve Peirce,Golriz Sedaghat</text>
+<text x="11.63828125" y="0.5715" size="0.6096" layer="25">GND</text>
+<text x="5.69468125" y="0.5969" size="0.6096" layer="25">VCC</text>
+<text x="8.13308125" y="0.5715" size="0.6096" layer="25">Analog</text>
 </plain>
 <libraries>
 <library name="rcl">
@@ -1506,16 +1509,15 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="12.207240625" y1="2.872740625" x2="12.19708125" y2="2.86258125" width="0.4064" layer="1"/>
 <polygon width="0.4064" layer="1">
 <vertex x="0" y="20.32"/>
-<vertex x="20.32" y="20.32"/>
-<vertex x="20.32" y="0"/>
+<vertex x="20.066" y="20.32"/>
+<vertex x="20.066" y="0"/>
 <vertex x="0" y="0"/>
-<vertex x="0" y="1.27"/>
 </polygon>
 <polygon width="0.4064" layer="16">
-<vertex x="0" y="20.32"/>
-<vertex x="20.32" y="20.32"/>
-<vertex x="20.32" y="0"/>
-<vertex x="0" y="0"/>
+<vertex x="0.0254" y="20.32"/>
+<vertex x="20.1168" y="20.3454"/>
+<vertex x="20.066" y="0"/>
+<vertex x="0.0254" y="0"/>
 </polygon>
 <via x="1.4986" y="18.3896" extent="1-16" drill="0.5" diameter="0.254"/>
 <via x="4.445" y="14.8844" extent="1-16" drill="0.6"/>
